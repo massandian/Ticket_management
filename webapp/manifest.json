@@ -1,0 +1,203 @@
+{
+	"_version": "1.1.0",
+	"sap.app": {
+		"_version": "1.2.0",
+		"id": "com.sap.build.standard.ticketManagement",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"dataSources": {
+			"local": {
+				"uri": "/here/goes/your/serviceUrl/local/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/metadata.xml"
+				}
+			}
+		},
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"ach": "ach",
+		"resources": "resources.json",
+		"sourceTemplate": {
+			"id": "ui5template.basicSAPUI5ApplicationProject",
+			"version": "1.32.0"
+		}
+	},
+	"sap.ui": {
+		"_version": "1.2.0",
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		}
+	},
+	"sap.ui5": {
+		"_version": "1.1.0",
+		"rootView": {
+			"viewName": "generated.app.view.ListaTicketEspansa2",
+			"type": "XML"
+		},
+		"dependencies": {
+			"minUI5Version": "1.32.0",
+			"libs": {
+				"sap.ui.core": {},
+				"sap.m": {},
+				"sap.ui.layout": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"uri": "i18n/i18n.properties"
+			},
+			"": {
+				"dataSource": "local",
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"loadMetadataAsync": false,
+					"json": true,
+					"bJSON": true,
+					"defaultBindingMode": "TwoWay",
+					"useBatch": true,
+					"refreshAfterChange": false,
+					"disableHeadRequestForToken": true
+				}
+			}
+		},
+		"resources": {
+			"css": []
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "com.sap.build.standard.ticketManagement.view",
+				"controlId": "App",
+				"clearTarget": false,
+				"controlAggregation": "pages",
+				"bypassed": {
+					"target": [
+						"HomeUser"
+					]
+				}
+			},
+			"targets": {
+				"HomeUser": {
+					"controlAggregation": "pages",
+					"viewName": "HomeUser",
+					"viewId": "HomeUser",
+					"viewLevel": 1,
+					"transition": "slide"
+				},
+				"NewTicket": {
+					"controlAggregation": "pages",
+					"viewName": "NewTicket",
+					"viewId": "NewTicket",
+					"viewLevel": 7,
+					"transition": "slide"
+				},
+				"ListaTicketEspansa": {
+					"controlAggregation": "pages",
+					"viewName": "ListaTicketEspansa",
+					"viewId": "ListaTicketEspansa",
+					"viewLevel": 3,
+					"transition": "slide"
+				},
+				"TicketDetail": {
+					"controlAggregation": "pages",
+					"viewName": "TicketDetail",
+					"viewId": "TicketDetail",
+					"viewLevel": 5,
+					"transition": "slide"
+				},
+				"StatisticheTicket": {
+					"controlAggregation": "pages",
+					"viewName": "StatisticheTicket",
+					"viewId": "StatisticheTicket",
+					"viewLevel": 6,
+					"transition": "slide"
+				},
+				"ListaTicket": {
+					"controlAggregation": "pages",
+					"viewName": "ListaTicket",
+					"viewId": "ListaTicket",
+					"viewLevel": 2,
+					"transition": "slide"
+				},
+				"ListaTicketEspansa2": {
+					"controlAggregation": "pages",
+					"viewName": "ListaTicketEspansa2",
+					"viewId": "ListaTicketEspansa2",
+					"viewLevel": 4,
+					"transition": "slide"
+				}
+			},
+			"routes": [{
+				"pattern": "HomeUser/:context:",
+				"name": "HomeUser",
+				"target": [
+					"HomeUser"
+				]
+			}, {
+				"pattern": "",
+				"name": "default",
+				"target": [
+					"HomeUser"
+				]
+			}, {
+				"pattern": "NewTicket/:context:",
+				"name": "NewTicket",
+				"target": [
+					"NewTicket"
+				]
+			}, {
+				"pattern": "ListaTicketEspansa/:context:",
+				"name": "ListaTicketEspansa",
+				"target": [
+					"ListaTicketEspansa"
+				]
+			}, {
+				"pattern": "TicketDetail/:context:",
+				"name": "TicketDetail",
+				"target": [
+					"TicketDetail"
+				]
+			}, {
+				"pattern": "StatisticheTicket/:context:",
+				"name": "StatisticheTicket",
+				"target": [
+					"StatisticheTicket"
+				]
+			}, {
+				"pattern": "ListaTicket/:context:",
+				"name": "ListaTicket",
+				"target": [
+					"ListaTicket"
+				]
+			}, {
+				"pattern": "ListaTicketEspansa2/:context:",
+				"name": "ListaTicketEspansa2",
+				"target": [
+					"ListaTicketEspansa2"
+				]
+			}]
+		}
+	}
+}

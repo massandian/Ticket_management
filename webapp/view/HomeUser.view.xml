@@ -1,0 +1,174 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" controllerName="com.sap.build.standard.ticketManagement.controller.HomeUser" xmlns="sap.m"
+	xmlns:layout="sap.ui.layout" xmlns:microchart="sap.suite.ui.microchart">
+	<Page showHeader="true" title="" showFooter="true" showNavButton="false">
+		<content>
+			<layout:BlockLayout background="Default">
+				<layout:content>
+					<layout:BlockLayoutRow scrollable="false">
+						<layout:content>
+							<layout:BlockLayoutCell width="1" title="" titleAlignment="Center" titleLevel="Auto">
+								<layout:content>
+									<Image src="/webapp/resources/logo-De-cecco.png" height="auto" width="auto" densityAware="false" press="_onImagePress"/>
+								</layout:content>
+							</layout:BlockLayoutCell>
+							<layout:BlockLayoutCell width="3" title="" titleAlignment="Center" titleLevel="Auto">
+								<layout:content>
+									<layout:BlockLayoutCell width="1" title="HELP DESK TICKETING TOOL" titleAlignment="Center" titleLevel="Auto">
+										<layout:content/>
+									</layout:BlockLayoutCell>
+								</layout:content>
+							</layout:BlockLayoutCell>
+						</layout:content>
+					</layout:BlockLayoutRow>
+				</layout:content>
+			</layout:BlockLayout>
+			<layout:BlockLayout background="Default">
+				<layout:content>
+					<layout:BlockLayoutRow scrollable="false">
+						<layout:content>
+							<layout:BlockLayoutCell width="1" title="" titleAlignment="Center" titleLevel="Auto">
+								<layout:content>
+									<StandardTile title="ticket in lavorazione" number="" numberUnit="" info="Information" infoState="None" icon="sap-icon://settings"
+										press="_onStandardTilePress"/>
+									<Title text="" titleStyle="H1" width="auto" textAlign="Begin" visible="true"/>
+								</layout:content>
+							</layout:BlockLayoutCell>
+							<layout:BlockLayoutCell width="1" title="" titleAlignment="Center" titleLevel="Auto">
+								<layout:content>
+									<StandardTile title="creazione nuovo ticket" number="" numberUnit="" info="Information" infoState="None"
+										icon="sap-icon://write-new-document" press="_onStandardTilePress1"/>
+								</layout:content>
+							</layout:BlockLayoutCell>
+							<layout:BlockLayoutCell width="1" title="" titleAlignment="Begin" titleLevel="Auto">
+								<layout:content>
+									<StandardTile title="terminati da verificare" number="6" numberUnit="NUM" info="Information" infoState="None"
+										icon="sap-icon://status-completed" press="_onStandardTilePress2"/>
+								</layout:content>
+							</layout:BlockLayoutCell>
+						</layout:content>
+					</layout:BlockLayoutRow>
+				</layout:content>
+			</layout:BlockLayout>
+			<layout:BlockLayout background="Default">
+				<layout:content>
+					<layout:BlockLayoutRow scrollable="false">
+						<layout:content>
+							<layout:BlockLayoutCell width="2" title="Statistiche ticket:" titleAlignment="Begin" titleLevel="Auto">
+								<layout:content>
+									<layout:BlockLayout background="Default">
+										<layout:content>
+											<layout:BlockLayoutRow scrollable="false">
+												<layout:content>
+													<layout:BlockLayoutCell width="1" title="" titleAlignment="Begin" titleLevel="Auto">
+														<layout:content>
+															<GenericTile header="TICKET IN LAVORAZIONE" subheader="totale 15" frameType="TwoThirds" press="_onGenericTilePress">
+																<tileContent>
+																	<TileContent footer="" unit="">
+																		<content>
+																			<microchart:ColumnMicroChart width="201.625px" height="98px">
+																				<microchart:columns>
+																					<microchart:ColumnMicroChartData value="2" color="Critical"/>
+																					<microchart:ColumnMicroChartData value="4" color="Error"/>
+																					<microchart:ColumnMicroChartData value="3" color="Neutral"/>
+																					<microchart:ColumnMicroChartData value="6" color="Good"/>
+																				</microchart:columns>
+																				<microchart:leftTopLabel>
+																					<microchart:ColumnMicroChartLabel label="high-priority"/>
+																				</microchart:leftTopLabel>
+																				<microchart:rightTopLabel>
+																					<microchart:ColumnMicroChartLabel label="low-priority"/>
+																				</microchart:rightTopLabel>
+																				<microchart:leftBottomLabel>
+																					<microchart:ColumnMicroChartLabel label="0M"/>
+																				</microchart:leftBottomLabel>
+																				<microchart:rightBottomLabel>
+																					<microchart:ColumnMicroChartLabel label="80M"/>
+																				</microchart:rightBottomLabel>
+																			</microchart:ColumnMicroChart>
+																		</content>
+																	</TileContent>
+																</tileContent>
+															</GenericTile>
+														</layout:content>
+													</layout:BlockLayoutCell>
+													<layout:BlockLayoutCell width="1" title="" titleAlignment="Begin" titleLevel="Auto">
+														<layout:content>
+															<GenericTile header="TICKET IN APPROVAZIONE" subheader="totale 10" frameType="TwoThirds" press="_onGenericTilePress1">
+																<tileContent>
+																	<TileContent footer="" unit="">
+																		<content>
+																			<microchart:ColumnMicroChart width="205.25px" height="90px">
+																				<microchart:columns>
+																					<microchart:ColumnMicroChartData value="0" color="Critical"/>
+																					<microchart:ColumnMicroChartData value="2" color="Error"/>
+																					<microchart:ColumnMicroChartData value="5" color="Neutral"/>
+																					<microchart:ColumnMicroChartData value="3" color="Good"/>
+																				</microchart:columns>
+																				<microchart:leftTopLabel>
+																					<microchart:ColumnMicroChartLabel label="high-priority"/>
+																				</microchart:leftTopLabel>
+																				<microchart:rightTopLabel>
+																					<microchart:ColumnMicroChartLabel label="low-priority"/>
+																				</microchart:rightTopLabel>
+																				<microchart:leftBottomLabel>
+																					<microchart:ColumnMicroChartLabel label="0M"/>
+																				</microchart:leftBottomLabel>
+																				<microchart:rightBottomLabel>
+																					<microchart:ColumnMicroChartLabel label="80M"/>
+																				</microchart:rightBottomLabel>
+																			</microchart:ColumnMicroChart>
+																		</content>
+																	</TileContent>
+																</tileContent>
+															</GenericTile>
+														</layout:content>
+													</layout:BlockLayoutCell>
+													<layout:BlockLayoutCell width="1" title="" titleAlignment="Begin" titleLevel="Auto">
+														<layout:content>
+															<GenericTile header="TICKET CHIUSI" subheader="totale 10" frameType="TwoThirds" press="_onGenericTilePress2">
+																<tileContent>
+																	<TileContent footer="" unit="">
+																		<content>
+																			<microchart:ColumnMicroChart width="208.6750030517578px" height="90px">
+																				<microchart:columns>
+																					<microchart:ColumnMicroChartData value="0" color="Critical"/>
+																					<microchart:ColumnMicroChartData value="2" color="Error"/>
+																					<microchart:ColumnMicroChartData value="5" color="Neutral"/>
+																					<microchart:ColumnMicroChartData value="3" color="Good"/>
+																				</microchart:columns>
+																				<microchart:leftTopLabel>
+																					<microchart:ColumnMicroChartLabel label="high-priority"/>
+																				</microchart:leftTopLabel>
+																				<microchart:rightTopLabel>
+																					<microchart:ColumnMicroChartLabel label="low-priority"/>
+																				</microchart:rightTopLabel>
+																				<microchart:leftBottomLabel>
+																					<microchart:ColumnMicroChartLabel label="0M"/>
+																				</microchart:leftBottomLabel>
+																				<microchart:rightBottomLabel>
+																					<microchart:ColumnMicroChartLabel label="80M"/>
+																				</microchart:rightBottomLabel>
+																			</microchart:ColumnMicroChart>
+																		</content>
+																	</TileContent>
+																</tileContent>
+															</GenericTile>
+														</layout:content>
+													</layout:BlockLayoutCell>
+												</layout:content>
+											</layout:BlockLayoutRow>
+										</layout:content>
+									</layout:BlockLayout>
+								</layout:content>
+							</layout:BlockLayoutCell>
+						</layout:content>
+					</layout:BlockLayoutRow>
+				</layout:content>
+			</layout:BlockLayout>
+		</content>
+		<footer/>
+		<headerContent/>
+		<subHeader/>
+		<customHeader/>
+	</Page>
+</mvc:View>

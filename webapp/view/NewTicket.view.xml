@@ -1,0 +1,128 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" controllerName="com.sap.build.standard.ticketManagement.controller.NewTicket" xmlns="sap.m"
+	xmlns:form="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<Page id="NewTicket" showHeader="true" title="Gestione ticket" showFooter="true" showNavButton="true" navButtonPress="_onPageNavButtonPress">
+		<content>
+			<form:Form width="100%" editable="true" visible="true">
+				<form:title>
+					<core:Title text="Nuovo ticket" level="Auto"/>
+				</form:title>
+				<form:formContainers>
+					<form:FormContainer visible="true">
+						<form:formElements>
+							<form:FormElement visible="true">
+								<form:label>
+									<Label text="Titolo" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
+								</form:label>
+								<form:fields>
+									<Input type="Text" showValueHelp="false" enabled="true" visible="true" width="auto" valueHelpOnly="false" maxLength="0"/>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement visible="true">
+								<form:label>
+									<Label text="Categoria" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
+								</form:label>
+								<form:fields>
+									<ComboBox editable="true" enabled="true" visible="true" width="auto" valueState="None" maxWidth="100%">
+										<items>
+											<core:Item text="Hardware" enabled="true" key="Hardware"/>
+											<core:Item text="Software" enabled="true" key="Software"/>
+											<core:Item text="Altro" enabled="true" key="Altro"/>
+										</items>
+									</ComboBox>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement visible="true">
+								<form:label>
+									<Label text="Descrizione" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
+								</form:label>
+								<form:fields>
+									<TextArea value="" rows="3" placeholder="Inserisci una breve descrizione della problematica (max 300 caratteri)" cols="20" maxLength="300"
+										wrapping="None" visible="true"/>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement visible="true">
+								<form:label>
+									<Label text="Priorità di risoluzione" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
+								</form:label>
+								<form:fields>
+									<ComboBox editable="true" enabled="true" visible="true" width="auto" valueState="None" maxWidth="100%">
+										<items>
+											<core:Item text="Bassa" enabled="true" key="Bassa"/>
+											<core:Item text="Media" enabled="true" key="Media"/>
+											<core:Item text="Alta" enabled="true" key="Alta"/>
+											<core:Item text="Massima" enabled="true" key="Massima"/>
+										</items>
+									</ComboBox>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement visible="true">
+								<form:label>
+									<Label text="" design="Standard" width="1224.199951171875px" required="false" textAlign="Begin" textDirection="LTR"/>
+								</form:label>
+								<form:fields/>
+							</form:FormElement>
+							<form:FormElement visible="true">
+								<form:label>
+									<Label text="*Owner" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
+								</form:label>
+								<form:fields>
+									<Input type="Email" showValueHelp="false" enabled="true" visible="true" width="auto" valueHelpOnly="false" maxLength="0"/>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement visible="true">
+								<form:label>
+									<Label text="" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
+								</form:label>
+								<form:fields>
+									<Text text="* Solo nel caso in cui è l'utente esperto ad aprire il ticket per conto dell'utente" width="auto" maxLines="1" wrapping="false"
+										textAlign="Begin" textDirection="Inherit"/>
+								</form:fields>
+							</form:FormElement>
+						</form:formElements>
+						<form:title/>
+					</form:FormContainer>
+				</form:formContainers>
+				<form:layout>
+					<form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
+				</form:layout>
+			</form:Form>
+					<UploadCollection 
+					id="UploadCollection" 
+					showSeparators="All"
+					noDataText="No images" 
+					maximumFileSize="10" 
+					maximumFilenameLength="60" 
+					instantUpload="false"
+					mimeType="image/jpeg,image/gif,image/png,text/plain,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+					multiple="true" 
+					uploadUrl="" 
+					sameFilenameAllowed="true" 
+					uploadComplete="onUploadComplete" 
+					filenameLengthExceed="onFilenameLengthExceed"
+					change="onChange"
+					typeMissmatch="onTypeMissmatch" 
+					fileSizeExceed="onFileSizeExceed"
+					beforeUploadStarts="onBeforeUploadStarts">
+				<headerParameters/>
+				<items/>
+				<parameters/>
+				<toolbar/>
+			</UploadCollection>
+		</content>
+		<footer>
+			<Bar design="Auto">
+				<contentLeft/>
+				<contentMiddle/>
+				<contentRight>
+					<Button text="Invia" type="Accept" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"
+						press="onStartUpload"/>
+					<Button text="Annulla" type="Reject" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"
+						press="_onButtonPress6"/>
+				</contentRight>
+			</Bar>
+		</footer>
+		<headerContent/>
+		<subHeader/>
+		<customHeader/>
+	</Page>
+</mvc:View>

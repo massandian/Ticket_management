@@ -1,0 +1,67 @@
+[{
+	"ID": "1",
+	"Titolo": "problema hardware",
+	"Categoria": "hardware",
+	"Descrizione": "lo schermo non si accende",
+	"Priorita": "massima",
+	"Owner": "davide",
+	"Stato": "assegnato",
+	"Assigned_to": "mario",
+	"Screenshot": "",
+	"Valutazione": ""
+}, {
+	"ID": "2",
+	"Titolo": "problema software",
+	"Categoria": "software",
+	"Descrizione": "non riesco ad accedere alla mia area personale",
+	"Priorita": "massima",
+	"Owner": "marco",
+	"Stato": "creato",
+	"Assigned_to": "gianni",
+	"Screenshot": "",
+	"Valutazione": ""
+}, {
+	"ID": "3",
+	"Titolo": "problema sul caricamento di documenti pdf",
+	"Categoria": "varie",
+	"Descrizione": "non riesco a fare l'upload dei miei documenti pdf",
+	"Priorita": "alta",
+	"Owner": "gianni",
+	"Stato": "rigettato",
+	"Assigned_to": "francesco",
+	"Screenshot": "",
+	"Valutazione": ""
+}, {
+	"Valutazione": "",
+	"Screenshot": "",
+	"Assigned_to": "mario",
+	"Stato": "creato",
+	"Owner": "gianni",
+	"Priorita": "bassa",
+	"Descrizione": "nsknnkn",
+	"Categoria": "varie",
+	"Titolo": "problema5",
+	"ID": "4"
+}, {
+	"Valutazione": "",
+	"Screenshot": "",
+	"Assigned_to": "davide",
+	"Stato": "assegnato",
+	"Owner": "gianni",
+	"Priorita": "media",
+	"Descrizione": "osidnsjnd",
+	"Categoria": "varie",
+	"Titolo": "problema6",
+	"ID": "5"
+}, {
+	"ID": "6",
+	"Titolo": "problema7",
+	"Categoria": "varie",
+	"Descrizione": "djn jkln",
+	"Priorita": "bassa",
+	"Owner": "mario",
+	"Stato": "da verificare",
+	"Assigned_to": "davide",
+	"Screenshot": "",
+	"Valutazione": ""
+}]

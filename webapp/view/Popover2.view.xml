@@ -1,0 +1,171 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" controllerName="com.sap.build.standard.ticketManagement.controller.Popover2" xmlns="sap.m"
+	xmlns:layout="sap.ui.layout" xmlns:form="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<Popover bounce="true" contentHeight="53%" contentWidth="70%" horizontalScrolling="true" modal="true" offsetX="0" offsetY="0"
+		placement="Right" showHeader="true" title="" verticalScrolling="true" visible="true">
+		<content>
+			<layout:BlockLayout background="Default">
+				<layout:content>
+					<layout:BlockLayoutRow scrollable="false">
+						<layout:content>
+							<layout:BlockLayoutCell width="2" title="" titleAlignment="Begin" titleLevel="Auto">
+								<layout:content>
+									<form:Form width="auto" editable="true" visible="true">
+										<form:title>
+											<core:Title text="Regole di creazione filtro" level="Auto"/>
+										</form:title>
+										<form:formContainers>
+											<form:FormContainer visible="true">
+												<form:formElements>
+													<form:FormElement visible="true">
+														<form:label>
+															<Label text="Campo da filtrare" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
+														</form:label>
+														<form:fields>
+															<ComboBox placeholder="Seleziona il campo" editable="true" enabled="true" visible="true" width="auto" valueState="None" maxWidth="100%">
+																<items>
+																	<core:Item text="ID" enabled="true" key="ID"/>
+																	<core:Item text="Owner" enabled="true" key="Owner"/>
+																	<core:Item text="Stato" enabled="true" key="Stato"/>
+																	<core:Item text="Descrizione" enabled="true" key="Descrizione"/>
+																	<core:Item text="Assigned to" enabled="true" key="Assigned to"/>
+																	<core:Item text="Priorità" enabled="true" key="Priorità"/>
+																	<core:Item text="Assigned to" enabled="true" key="Assigned to"/>
+																</items>
+															</ComboBox>
+														</form:fields>
+													</form:FormElement>
+													<form:FormElement visible="true">
+														<form:label>
+															<Label text="Tipologia di filtro" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
+														</form:label>
+														<form:fields>
+															<ComboBox placeholder="Seleziona la tipologia" editable="true" enabled="true" visible="true" width="auto" valueState="None" maxWidth="100%">
+																<items>
+																	<core:Item text="EQUAL" enabled="true" key="EQUAL"/>
+																	<core:Item text="BETWEEN" enabled="true" key="BETWEEN"/>
+																	<core:Item text="DIFFERENT FROM" enabled="true" key="DIFFERENT FROM"/>
+																	<core:Item text="CONTAIN" enabled="true" key="CONTAIN"/>
+																</items>
+															</ComboBox>
+														</form:fields>
+													</form:FormElement>
+													<form:FormElement visible="true">
+														<form:label>
+															<Label text="Estendi" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
+														</form:label>
+														<form:fields>
+															<ComboBox placeholder="Seleziona l'operando logico" editable="true" enabled="true" visible="true" width="auto" valueState="None"
+																maxWidth="100%">
+																<items>
+																	<core:Item text="AND" enabled="true" key="AND"/>
+																	<core:Item text="OR" enabled="true" key="OR"/>
+																</items>
+															</ComboBox>
+														</form:fields>
+													</form:FormElement>
+												</form:formElements>
+												<form:title/>
+											</form:FormContainer>
+										</form:formContainers>
+										<form:layout>
+											<form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
+										</form:layout>
+									</form:Form>
+								</layout:content>
+							</layout:BlockLayoutCell>
+							<layout:BlockLayoutCell width="2" title="" titleAlignment="Begin" titleLevel="Auto">
+								<layout:content>
+									<form:Form width="auto" editable="true" visible="true">
+										<form:title>
+											<core:Title text="Valore filtro/i" level="Auto"/>
+										</form:title>
+										<form:formContainers>
+											<form:FormContainer visible="true">
+												<form:formElements>
+													<form:FormElement visible="true">
+														<form:label>
+															<Label text="valore 1" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
+														</form:label>
+														<form:fields>
+															<Input type="Text" showValueHelp="false" enabled="true" visible="true" width="auto" valueHelpOnly="false" maxLength="0"/>
+														</form:fields>
+													</form:FormElement>
+													<form:FormElement visible="true">
+														<form:label>
+															<Label text="valore 2" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
+														</form:label>
+														<form:fields>
+															<Input type="Text" showValueHelp="false" enabled="true" visible="true" width="auto" valueHelpOnly="false" maxLength="0"/>
+														</form:fields>
+													</form:FormElement>
+												</form:formElements>
+												<form:title/>
+											</form:FormContainer>
+										</form:formContainers>
+										<form:layout>
+											<form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
+										</form:layout>
+									</form:Form>
+								</layout:content>
+							</layout:BlockLayoutCell>
+						</layout:content>
+					</layout:BlockLayoutRow>
+				</layout:content>
+			</layout:BlockLayout>
+			<layout:BlockLayout background="Default">
+				<layout:content>
+					<layout:BlockLayoutRow scrollable="false">
+						<layout:content>
+							<layout:BlockLayoutCell width="4" title="" titleAlignment="Begin" titleLevel="Auto">
+								<layout:content>
+									<form:Form width="auto" editable="true" visible="true">
+										<form:title>
+											<core:Title text="Nome filtro personale" level="Auto"/>
+										</form:title>
+										<form:formContainers>
+											<form:FormContainer visible="true">
+												<form:formElements>
+													<form:FormElement visible="true">
+														<form:label>
+															<Label text="Nome" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
+														</form:label>
+														<form:fields>
+															<Input type="Text" showValueHelp="false" enabled="true" visible="true" width="auto" valueHelpOnly="false" maxLength="0"/>
+														</form:fields>
+													</form:FormElement>
+													<form:FormElement visible="true">
+														<form:label>
+															<Label text="preferiti" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
+														</form:label>
+														<form:fields>
+															<CheckBox text="" selected="true" editable="true" enabled="true" visible="true" width="auto" textDirection="Inherit"/>
+														</form:fields>
+													</form:FormElement>
+												</form:formElements>
+												<form:title/>
+											</form:FormContainer>
+										</form:formContainers>
+										<form:layout>
+											<form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
+										</form:layout>
+									</form:Form>
+								</layout:content>
+							</layout:BlockLayoutCell>
+						</layout:content>
+					</layout:BlockLayoutRow>
+				</layout:content>
+			</layout:BlockLayout>
+		</content>
+		<beginButton>
+			<Button text="Conferma e salva" type="Accept" icon="sap-icon://save" iconFirst="true" width="auto" enabled="true" visible="true"
+				iconDensityAware="false" press="_onButtonPress4"/>
+		</beginButton>
+		<customHeader/>
+		<endButton>
+			<Button text="Annulla" type="Reject" icon="sap-icon://decline" iconFirst="true" width="auto" enabled="true" visible="true"
+				iconDensityAware="false" press="_onButtonPress5"/>
+		</endButton>
+		<footer/>
+		<subHeader/>
+	</Popover>
+</mvc:View>

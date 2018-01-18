@@ -1,0 +1,36 @@
+{
+  "dataBinding": {
+    "/webapp/view/Popover2.view.xml": {
+      "entitySet": ""
+    },
+    "/webapp/view/HomeUser.view.xml": {
+      "entitySet": ""
+    },
+    "/webapp/view/NewTicket.view.xml": {
+      "entitySet": ""
+    },
+    "/webapp/view/TicketDetail.view.xml": {
+      "entitySet": ""
+    },
+    "/webapp/view/StatisticheTicket.view.xml": {
+      "entitySet": ""
+    },
+    "/webapp/view/ListaTicket.view.xml": {
+      "entitySet": ""
+    }
+  },
+  "generation": [
+    {
+      "templateId": "build_import_prototype",
+      "templateVersion": "1.0.0",
+      "dateTimeStamp": "Tue, 16 Jan 2018 15:04:38 GMT"
+    }
+  ],
+  "translation": {
+    "translationDomain": "",
+    "supportedLanguages": "en,fr,de",
+    "defaultLanguage": "en",
+    "defaultI18NPropertyFile": "i18n.properties",
+    "resourceModelName": "i18n"
+  }
+}

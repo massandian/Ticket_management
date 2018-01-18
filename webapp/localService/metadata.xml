@@ -1,0 +1,39 @@
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+	xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+	<edmx:DataServices m:DataServiceVersion="2.0">
+		<Schema Namespace="6f59264c7ad7cd610ebcd581" xml:lang="en" sap:schema-version="0000" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+			<EntityContainer Name="6f59264c7ad7cd610ebcd581_Entities" m:IsDefaultEntityContainer="true">
+				<EntitySet Name="TicketSet" EntityType="6f59264c7ad7cd610ebcd581.Ticket" sap:creatable="true" sap:updatable="true" sap:deletable="true"/>
+				<EntitySet Name="FiltroSet" EntityType="6f59264c7ad7cd610ebcd581.Filtro" sap:creatable="true" sap:updatable="true" sap:deletable="true"/>
+			</EntityContainer>
+			<EntityType Name="Ticket">
+				<Key>
+					<PropertyRef Name="ID"/>
+				</Key>
+				<Property Name="ID" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="ID"/>
+				<Property Name="Titolo" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="DefaultName"/>
+				<Property Name="Categoria" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="DefaultName1"/>
+				<Property Name="Descrizione" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="DefaultName2"/>
+				<Property Name="Priorita" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="DefaultName3"/>
+				<Property Name="Owner" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="DefaultName4"/>
+				<Property Name="Stato" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="DefaultName5"/>
+				<Property Name="Assigned_to" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="DefaultName6"/>
+				<Property Name="Screenshot" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="DefaultName7"/>
+				<Property Name="Valutazione" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="Valutazione"/>
+			</EntityType>
+			<EntityType Name="Filtro">
+				<Key>
+					<PropertyRef Name="ID"/>
+				</Key>
+				<Property Name="ID" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="ID"/>
+				<Property Name="Nome" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="Nome"/>
+				<Property Name="Campo" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="Campo"/>
+				<Property Name="Tipologia" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="Tipologia"/>
+				<Property Name="Estensione" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="Estensione"/>
+				<Property Name="valore1" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="valore1"/>
+				<Property Name="valore2" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="valore2"/>
+				<Property Name="preferiti" Type="Edm.Boolean" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="preferiti"/>
+			</EntityType>
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

@@ -1,0 +1,53 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" controllerName="com.sap.build.standard.ticketManagement.controller.StatisticheTicket" xmlns="sap.m"
+	xmlns:layout="sap.ui.layout" xmlns:chart="sap.chart" xmlns:data="sap.chart.data">
+	<Page showHeader="true" title="Statistiche ticket" showFooter="true" showNavButton="true" navButtonPress="_onPageNavButtonPress">
+		<content>
+			<layout:BlockLayout background="Default">
+				<layout:content>
+					<layout:BlockLayoutRow scrollable="false">
+						<layout:content>
+							<layout:BlockLayoutCell width="2" title="Numero dei ticket per priorità:" titleAlignment="Begin" titleLevel="Auto">
+								<layout:content>
+									<chart:Chart
+										id="sap_Responsive_Page_0-content-sap_ui_layout_BlockLayout-1513604393273-content-sap_ui_layout_BlockLayoutRow-1-content-sap_ui_layout_BlockLayoutCell-1-content-sap_chart_ColumnChart-1515512310109"
+										width="100%" height="450px" visibleDimensions="Priorita" visibleMeasures="ID" chartType="column" isAnalytical="false" selectionMode="Single"
+										uiConfig="{}" vizProperties="{plotArea:{dataLabel:{visible: true,hideWhenOverlap:true}}}">
+										<chart:dimensions>
+											<data:Dimension name="Priorita" label="Priorità" role="category"/>
+										</chart:dimensions>
+										<chart:measures>
+											<data:Measure name="ID" label="Numero di ticket" role="axis2"/>
+										</chart:measures>
+									</chart:Chart>
+								</layout:content>
+							</layout:BlockLayoutCell>
+						</layout:content>
+					</layout:BlockLayoutRow>
+					<layout:BlockLayoutRow scrollable="false">
+						<layout:content>
+							<layout:BlockLayoutCell width="2" title="Totale % dei ticket lavorati (per categoria):" titleAlignment="Begin" titleLevel="Auto">
+								<layout:content>
+									<chart:Chart
+										id="sap_Responsive_Page_0-content-sap_ui_layout_BlockLayout-1513604393273-content-sap_ui_layout_BlockLayoutRow-2-content-sap_ui_layout_BlockLayoutCell-1-content-sap_chart_PieChart-1513604475519"
+										width="100%" height="450px" visibleDimensions="Categoria" visibleMeasures="ID" chartType="pie" isAnalytical="false" selectionMode="Single"
+										uiConfig="{}" vizProperties="{plotArea:{dataLabel:{visible: true,hideWhenOverlap:true}}}">
+										<chart:dimensions>
+											<data:Dimension name="Categoria" label="Categoria" role="series"/>
+										</chart:dimensions>
+										<chart:measures>
+											<data:Measure name="ID" label="% sul totale ticket" role="axis2"/>
+										</chart:measures>
+									</chart:Chart>
+								</layout:content>
+							</layout:BlockLayoutCell>
+						</layout:content>
+					</layout:BlockLayoutRow>
+				</layout:content>
+			</layout:BlockLayout>
+		</content>
+		<footer/>
+		<headerContent/>
+		<subHeader/>
+		<customHeader/>
+	</Page>
+</mvc:View>

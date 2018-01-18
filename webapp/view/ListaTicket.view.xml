@@ -1,0 +1,153 @@
+<mvc:View id="ListaTicket" xmlns:mvc="sap.ui.core.mvc" 
+			controllerName="com.sap.build.standard.ticketManagement.controller.ListaTicket" 
+			xmlns="sap.m"
+			xmlns:l="sap.ui.layout"
+			xmlns:u="sap.ui.unified">
+	<Page showHeader="true" title="lista ticket" showFooter="true" showNavButton="true" navButtonPress="_onPageNavButtonPress">
+		<content>
+			<Toolbar width="auto" height="auto" design="Solid" visible="true" enabled="true">
+				<content>
+					<Button text="" type="Default" icon="sap-icon://menu2" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"
+						press="handleToggleSecondaryContent"/>
+					<Title text="Tickets" titleStyle="Auto" width="auto" textAlign="Begin" visible="true"/>
+					<ToolbarSpacer width=""/>
+					<SearchField placeholder="Search" showSearchButton="true" visible="true" width="auto" liveChange="_onSearchFieldLiveChange2"/>
+					<Button text="" type="Default" icon="sap-icon://clear-filter" iconFirst="true" width="auto" enabled="true" visible="true"
+						iconDensityAware="false" press="_onButtonPress13"/>
+					<Button text="" type="Default" icon="sap-icon://add-filter" iconFirst="true" width="auto" enabled="true" visible="true"
+						iconDensityAware="false" press="_onButtonPress14"/>
+					<Button text="" type="Default" icon="sap-icon://drop-down-list" iconFirst="true" width="auto" enabled="true" visible="true"
+						iconDensityAware="false" press="_onButtonPress15"/>
+					<l:VerticalLayout class="sapUiContentPadding" width="auto">	
+							<Button text="" type="Default" icon="sap-icon://settings" iconFirst="true" width="auto" enabled="true" visible="true"
+								iconDensityAware="false" press="handleOpenDialogSingleCustomTab"/>
+					</l:VerticalLayout>	
+				</content>
+				<tooltip/>
+			</Toolbar>
+			<u:SplitContainer id="mySplitContainer" showSecondaryContent="true">
+				<u:secondaryContent>
+					<Panel expandable="true" expanded="false" headerText="Personalizza" width="auto" class="sapUiResponsiveMargin">
+						<List mode="MultiSelect" width="auto" headerText="" footerText="" backgroundDesign="Solid" showSeparators="All"
+							growing="true" growingThreshold="20" growingScrollToLoad="true">
+							<infoToolbar>
+								<Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
+								<content>
+									<Label text="Label" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
+								</content>
+							</Toolbar>
+							</infoToolbar>
+							<headerToolbar/>
+							<items>
+								<ObjectListItem intro="" title="Titolo" number="" numberUnit="" numberState="None" type="Active" selected="true" showMarkers="false"/>
+								<ObjectListItem intro="" title="Categoria" number="" numberUnit="" numberState="None" type="Active" selected="false" showMarkers="false"/>  
+								<ObjectListItem intro="" title="Descrizione" number="" numberUnit="" numberState="None" type="Active" selected="false" showMarkers="false"/>
+								<ObjectListItem intro="" title="Priorità" number="" numberUnit="" numberState="None" type="Active" selected="false" showMarkers="false"/>
+								<ObjectListItem intro="" title="Owner" number="" numberUnit="" numberState="None" type="Active" selected="false" showMarkers="false"/>
+								<ObjectListItem intro="" title="Stato" number="" numberUnit="" numberState="None" type="Active" selected="false" showMarkers="false"/>
+								<ObjectListItem intro="" title="Assigned to" number="" numberUnit="" numberState="None" type="Active" selected="false" showMarkers="false"/>
+								<ObjectListItem intro="" title="Valutazione" number="" numberUnit="" numberState="None" type="Active" selected="false" showMarkers="false"/>
+							</items>
+						</List>
+					</Panel>
+					<Panel expandable="true" expanded="false" headerText="Filtri preferiti" width="auto" class="sapUiResponsiveMargin">
+						 <List mode="SingleSelectLeft" width="auto" headerText="" footerText="" backgroundDesign="Solid" showSeparators="All"
+							growing="true" growingThreshold="30" growingScrollToLoad="true" items="{/FiltroSet}">
+							<infoToolbar>
+								<Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
+									<content>
+										<Label text="Label" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
+									</content>
+								</Toolbar>
+							</infoToolbar>
+							<headerToolbar/>
+								<items>
+									<ObjectListItem intro="" title="{Nome}" number="" numberUnit="" numberState="None" type="Active" selected="false" showMarkers="false">
+										<attributes/>
+										<firstStatus/>
+										<secondStatus/>
+									</ObjectListItem>
+								</items>
+						</List>
+					</Panel>
+				</u:secondaryContent>
+			<Table
+				id="sap_Responsive_Page_0-content-sap_ui_layout_BlockLayout-1515407526987-content-sap_ui_layout_BlockLayoutRow-2-content-sap_ui_layout_BlockLayoutCell-1-content-build_simple_Table-1515407548335"
+				width="100%" noDataText="No data" mode="MultiSelect" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true"
+				itemPress="_onTableItemPress2" items="{/TicketSet}">
+				<infoToolbar>
+					<Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
+						<content>
+							<Label text="Label" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
+						</content>
+					</Toolbar>
+				</infoToolbar>
+				<headerToolbar/>
+				<columns>
+					<Column width="70px" hAlign="Left" vAlign="Middle" minScreenWidth="Phone" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+						<header>
+							<Text text="ID Ticket" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+						</header>
+						<footer/>
+					</Column>
+					<Column width="300px" hAlign="Left" vAlign="Middle" minScreenWidth="Phone" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+						<header>
+							<Text text="Titolo" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+						</header>
+						<footer/>
+					</Column>
+					<Column width="100px" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+						<header>
+							<Text text="Priorità" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+						</header>
+						<footer/>
+					</Column>
+					<Column width="auto" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+						<header>
+							<Text text="Stato" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+						</header>
+						<footer/>
+					</Column>
+					<Column width="auto" hAlign="Left" vAlign="Middle" minScreenWidth="Desktop" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+						<header>
+							<Text text="Owner" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+						</header>
+						<footer/>
+					</Column>
+					<Column width="auto" hAlign="Left" vAlign="Middle" minScreenWidth="Desktop" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+						<header>
+							<Text text="Assigned to" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+						</header>
+						<footer/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem type="Navigation" press="_onRowPress2">
+						<cells>
+							<ObjectIdentifier title="{ID}" text="" titleActive="false" visible="true"/>
+							<Text text="{Titolo}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+							<Text text="{Priorita}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+							<ObjectStatus title="" text="{Stato}" state="None"/>
+							<Text text="{Owner}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+							<Text text="{Assigned_to}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+			</u:SplitContainer>
+		</content>
+		<footer>
+			<Bar design="Auto">
+				<contentLeft/>
+				<contentMiddle/>
+				<contentRight>
+					<Button text="Segna come verificato" type="Accept" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"
+						press="_onButtonPress16"/>
+				</contentRight>
+			</Bar>
+		</footer>
+		<headerContent/>
+		<subHeader/>
+		<customHeader/>
+	</Page>
+</mvc:View>
