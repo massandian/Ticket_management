@@ -28,27 +28,16 @@
 			<u:SplitContainer id="mySplitContainer" showSecondaryContent="true">
 				<u:secondaryContent>
 					<Panel expandable="true" expanded="false" headerText="Personalizza" width="auto" class="sapUiResponsiveMargin">
-						<List mode="MultiSelect" width="auto" headerText="" footerText="" backgroundDesign="Solid" showSeparators="All"
-							growing="true" growingThreshold="20" growingScrollToLoad="true">
-							<infoToolbar>
-								<Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
-								<content>
-									<Label text="Label" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
-								</content>
-							</Toolbar>
-							</infoToolbar>
-							<headerToolbar/>
-							<items>
-								<ObjectListItem intro="" title="Titolo" number="" numberUnit="" numberState="None" type="Active" selected="true" showMarkers="false"/>
-								<ObjectListItem intro="" title="Categoria" number="" numberUnit="" numberState="None" type="Active" selected="false" showMarkers="false"/>  
-								<ObjectListItem intro="" title="Descrizione" number="" numberUnit="" numberState="None" type="Active" selected="false" showMarkers="false"/>
-								<ObjectListItem intro="" title="Priorità" number="" numberUnit="" numberState="None" type="Active" selected="false" showMarkers="false"/>
-								<ObjectListItem intro="" title="Owner" number="" numberUnit="" numberState="None" type="Active" selected="false" showMarkers="false"/>
-								<ObjectListItem intro="" title="Stato" number="" numberUnit="" numberState="None" type="Active" selected="false" showMarkers="false"/>
-								<ObjectListItem intro="" title="Assigned to" number="" numberUnit="" numberState="None" type="Active" selected="false" showMarkers="false"/>
-								<ObjectListItem intro="" title="Valutazione" number="" numberUnit="" numberState="None" type="Active" selected="false" showMarkers="false"/>
-							</items>
-						</List>
+						<Title text="Ticket" level="H2"/>
+							<ToolbarSpacer/>
+							<!-- Aggiunge la checkbox per il ragruppamento dei campi in tabella -->
+							<CheckBox text="Raggruppa" select="onTableGrouping" width="100%"/>
+							<!-- Aggiunge il bottone per la personalizzazione della visualizzazione della tabella dei ticket -->
+							<Button icon="sap-icon://table-chart" press="onPersoButtonPressed" text="Edita tabella" >
+								<layoutData>
+									<OverflowToolbarLayoutData priority="NeverOverflow" />
+								</layoutData>
+							</Button>
 					</Panel>
 					<Panel expandable="true" expanded="false" headerText="Filtri preferiti" width="auto" class="sapUiResponsiveMargin">
 						 <List mode="SingleSelectLeft" width="auto" headerText="" footerText="" backgroundDesign="Solid" showSeparators="All"
@@ -84,37 +73,37 @@
 				</infoToolbar>
 				<headerToolbar/>
 				<columns>
-					<Column width="70px" hAlign="Left" vAlign="Middle" minScreenWidth="Phone" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+					<Column id="idcol" width="70px" hAlign="Left" vAlign="Middle" minScreenWidth="Phone" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
 						<header>
 							<Text text="ID Ticket" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
 						</header>
 						<footer/>
 					</Column>
-					<Column width="300px" hAlign="Left" vAlign="Middle" minScreenWidth="Phone" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+					<Column id="titolocol" width="300px" hAlign="Left" vAlign="Middle" minScreenWidth="Phone" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
 						<header>
 							<Text text="Titolo" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
 						</header>
 						<footer/>
 					</Column>
-					<Column width="100px" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+					<Column id="prioritacol" width="100px" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
 						<header>
 							<Text text="Priorità" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
 						</header>
 						<footer/>
 					</Column>
-					<Column width="auto" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+					<Column id="statocol" width="auto" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
 						<header>
 							<Text text="Stato" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
 						</header>
 						<footer/>
 					</Column>
-					<Column width="auto" hAlign="Left" vAlign="Middle" minScreenWidth="Desktop" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+					<Column id="ownercol" width="auto" hAlign="Left" vAlign="Middle" minScreenWidth="Desktop" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
 						<header>
 							<Text text="Owner" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
 						</header>
 						<footer/>
 					</Column>
-					<Column width="auto" hAlign="Left" vAlign="Middle" minScreenWidth="Desktop" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+					<Column id="assignedcol" width="auto" hAlign="Left" vAlign="Middle" minScreenWidth="Desktop" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
 						<header>
 							<Text text="Assigned to" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
 						</header>
@@ -124,7 +113,7 @@
 				<items>
 					<ColumnListItem type="Navigation" press="_onRowPress2">
 						<cells>
-							<ObjectIdentifier title="{ID}" text="" titleActive="false" visible="true"/>
+							<ObjectIdentifier class="sapMTableContentMargin" title="{ID}" text="" titleActive="false" visible="true"/>
 							<Text text="{Titolo}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
 							<Text text="{Priorita}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
 							<ObjectStatus title="" text="{Stato}" state="None"/>

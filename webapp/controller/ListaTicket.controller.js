@@ -3,11 +3,49 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 	"./utilities",
 	"sap/ui/core/routing/History",
 	"jquery.sap.global",
-	"sap/ui/model/json/JSONModel"
-], function(BaseController, MessageBox, Utilities, History, jQuery, JSONModel) {
+	"sap/ui/model/json/JSONModel",
+	"./DemoPersoService",
+	"./Formatter",
+	"sap/m/TablePersoController"
+], function(BaseController, MessageBox, Utilities, History, jQuery, JSONModel, DemoPersoService, Formatter, TablePersoController) {
 	"use strict";
 	
 	return BaseController.extend("com.sap.build.standard.ticketManagement.controller.ListaTicket", {
+		
+		onInit: function() {
+
+			this.mBindingOptions = {};
+			this.oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			this.oRouter.getTarget("ListaTicket").attachDisplay(jQuery.proxy(this.handleRouteMatched, this));
+			
+			// set explored app's demo model on this sample
+			//var oModel = new JSONModel(jQuery.sap.getModulePath("localService", "/TicketSet.json"));
+			var oGroupingModel = new JSONModel({ hasGrouping: false});
+			//this.getView().setModel(oModel);
+			this.getView().setModel(oGroupingModel, 'Grouping'); 
+
+			// init and activate controller
+			this._oTPC = new TablePersoController({
+				table: this.getView().byId("sap_Responsive_Page_0-content-sap_ui_layout_BlockLayout-1515407526987-content-sap_ui_layout_BlockLayoutRow-2-content-sap_ui_layout_BlockLayoutCell-1-content-build_simple_Table-1515407548335"),
+				//specify the first part of persistence ids e.g. 'demoApp-productsTable-dimensionsCol'
+				componentName: "demoApp",
+				persoService: DemoPersoService
+			}).activate();
+    
+		},
+		
+		onPersoButtonPressed: function (oEvent) {
+			this._oTPC.openDialog();
+		},
+
+		onTablePersoRefresh : function() {
+			DemoPersoService.resetPersData();
+			this._oTPC.refresh();
+		},
+
+		onTableGrouping : function(oEvent) {
+			this._oTPC.setHasGrouping(oEvent.getSource().getSelected());
+		},
 		
 		onExit: function () {
 			if (this._oDialog) {
@@ -513,21 +551,6 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 				}
 			});
 
-		},
-		
-		onInit: function() {
-
-			this.mBindingOptions = {};
-			this.oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-			this.oRouter.getTarget("ListaTicket").attachDisplay(jQuery.proxy(this.handleRouteMatched, this));
-			
-      /*	// load product data
-			this._productCount = 0;
-			jQuery.getJSON(jQuery.sap.getModulePath("com.sap.build.standard.ticketManagement.localService", "/TicketSet.json"), function (oData) {
-				this._productData = oData;
-				this._pushNewProduct();
-			}.bind(this));*/
-			
 		}
 	});
 }, /* bExport= */ true);
