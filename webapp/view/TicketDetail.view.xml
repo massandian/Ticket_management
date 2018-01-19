@@ -19,21 +19,15 @@
 											<Image src="/build/uilibraries/content/static/image-canvas.svg" height="auto" width="50px" densityAware="false"/>
 										</pages>
 									</Carousel>
-									<List width="auto" growing="true" growingThreshold="20" growingScrollToLoad="false" backgroundDesign="Solid">
+									<FeedInput showIcon="true" icon="" value="" placeholder="Post something here" enabled="true" visible="true" maxLength="0"
+										buttonTooltip="Submit" post="onPost"/>
+									<List items="{/EntryCollection}" width="auto" growing="true" growingThreshold="20" growingScrollToLoad="false" backgroundDesign="Solid">
 										<items>
-											<FeedListItem icon="" sender="Alexandrina Victoria"
-												text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat"
-												info="Request" timestamp="March 03 2016"/>
-											<FeedListItem icon="" sender="George Washington"
-												text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat"
-												info="Request" timestamp="March 04 2016"/>
-											<FeedListItem icon="" sender="Alexandrina Victoria"
-												text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat"
-												info="Request" timestamp="March 07 2016"/>
+											<FeedListItem icon="{AuthorPicUrl}" sender="{Author}"
+												text="{Text}" info="{Type}" timestamp="{Date}"
+												senderPress="onSenderPress" iconPress="onIconPress"/>
 										</items>
 									</List>
-									<FeedInput showIcon="true" icon="" value="" placeholder="Post something here" enabled="true" visible="true" maxLength="0"
-										buttonTooltip="Submit" post="_onFeedInputPost"/>
 								</content>
 							</ScrollContainer>
 						</content>

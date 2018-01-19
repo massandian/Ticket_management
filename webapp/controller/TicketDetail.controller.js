@@ -1,11 +1,65 @@
 sap.ui.define(["sap/ui/core/mvc/Controller",
 	"sap/m/MessageBox",
 	"./utilities",
-	"sap/ui/core/routing/History"
-], function(BaseController, MessageBox, Utilities, History) {
+	"sap/ui/core/routing/History",
+	"sap/ui/model/json/JSONModel",
+	"sap/m/MessageToast",
+	"sap/ui/core/format/DateFormat"
+], function(BaseController, MessageBox, Utilities, History, JSONModel, MessageToast, DateFormat) {
 	"use strict";
 
 	return BaseController.extend("com.sap.build.standard.ticketManagement.controller.TicketDetail", {
+	
+		onInit: function() {
+
+			this.mBindingOptions = {};
+			this.oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			this.oRouter.getTarget("TicketDetail").attachDisplay(jQuery.proxy(this.handleRouteMatched, this));
+
+			this.oModel = this.getOwnerComponent().getModel();
+			
+			// set mock model
+			var sPath = jQuery.sap.getModulePath("com.sap.build.standard.ticketManagement.localService", "/feed.json");
+			var oModel = new JSONModel(sPath);
+			this.getView().setModel(oModel);
+
+		},
+		
+		onPost: function (oEvent) {
+			var oFormat = DateFormat.getDateTimeInstance({style: "medium"});
+			var oDate = new Date();
+			var sDate = oFormat.format(oDate);
+			// create new entry
+			var sValue = oEvent.getParameter("value");
+			var oEntry = {
+				Author : "Davide Massa",
+				AuthorPicUrl : "",
+				Type : "Reply",
+				Date : "" + sDate,
+				Text : sValue
+			};
+
+			// update model
+			var oModel = this.getView().getModel();
+			var aEntries = oModel.getData().EntryCollection;
+			aEntries.unshift(oEntry);
+			oModel.setData({
+				EntryCollection : aEntries
+			});
+			
+			//Toast message invio	
+			MessageToast.show("Messaggio inviato");
+		},
+
+		onSenderPress: function (oEvent) {
+			MessageToast.show("Clicked on Link: " + oEvent.getSource().getSender());
+		},
+
+		onIconPress: function (oEvent) {
+			MessageToast.show("Clicked on Image: " + oEvent.getSource().getSender());
+		},
+		
+	
 		handleRouteMatched: function(oEvent) {
 
 			var oParams = {};
@@ -207,15 +261,6 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			if (typeof fnPromiseResolve === "function") {
 				fnPromiseResolve();
 			}
-		},
-		onInit: function() {
-
-			this.mBindingOptions = {};
-			this.oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-			this.oRouter.getTarget("TicketDetail").attachDisplay(jQuery.proxy(this.handleRouteMatched, this));
-
-			this.oModel = this.getOwnerComponent().getModel();
-
 		}
 	});
 }, /* bExport= */ true);
