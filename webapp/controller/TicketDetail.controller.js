@@ -19,7 +19,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			this.oModel = this.getOwnerComponent().getModel();
 			
 			// set mock model
-			var sPath = jQuery.sap.getModulePath("com.sap.build.standard.ticketManagement.localService", "/feed.json");
+			var sPath = jQuery.sap.getModulePath("com.sap.build.standard.ticketManagement.localService", "/detail.json");
 			var oModel = new JSONModel(sPath);
 			this.getView().setModel(oModel);
 
@@ -41,10 +41,10 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 
 			// update model
 			var oModel = this.getView().getModel();
-			var aEntries = oModel.getData().EntryCollection;
+			var aEntries = oModel.getData().ChatCollection;
 			aEntries.unshift(oEntry);
 			oModel.setData({
-				EntryCollection : aEntries
+				ChatCollection : aEntries
 			});
 			
 			//Toast message invio	
@@ -77,6 +77,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			}
 
 		},
+		
 		_onPageNavButtonPress: function() {
 
 			var oHistory = History.getInstance();
@@ -90,6 +91,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 				oRouter.navTo("default", true);
 			}
 		},
+		
 		getQueryParameters: function(oLocation) {
 
 			var oQuery = {};

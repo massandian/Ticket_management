@@ -11,17 +11,14 @@
 							<ScrollContainer horizontal="true" vertical="true" width="auto" height="auto" visible="true">
 								<content>
 									<Carousel height="auto" width="auto" loop="true" showPageIndicator="true" pageIndicatorPlacement="Bottom" visible="true"
-										class="sapUiContentPadding">
+										class="sapUiContentPadding" pages="{/TicketCollection}">
 										<pages>
-											<Image src="/build/uilibraries/content/static/image-canvas.svg" height="auto" width="50px" densityAware="false"/>
-											<Image src="/build/uilibraries/content/static/image-canvas.svg" height="auto" width="50px" densityAware="false"/>
-											<Image src="/build/uilibraries/content/static/image-canvas.svg" height="auto" width="50px" densityAware="false"/>
-											<Image src="/build/uilibraries/content/static/image-canvas.svg" height="auto" width="50px" densityAware="false"/>
+											<Image src="{Screenshot}" height="auto" width="auto" densityAware="false"/>
 										</pages>
 									</Carousel>
 									<FeedInput showIcon="true" icon="" value="" placeholder="Post something here" enabled="true" visible="true" maxLength="0"
 										buttonTooltip="Submit" post="onPost"/>
-									<List items="{/EntryCollection}" width="auto" growing="true" growingThreshold="20" growingScrollToLoad="false" backgroundDesign="Solid">
+									<List items="{/ChatCollection}" width="auto" growing="true" growingThreshold="20" growingScrollToLoad="false" backgroundDesign="Solid">
 										<items>
 											<FeedListItem icon="{AuthorPicUrl}" sender="{Author}"
 												text="{Text}" info="{Type}" timestamp="{Date}"
@@ -39,118 +36,25 @@
 							<ScrollContainer horizontal="true" vertical="true" width="auto" height="auto" visible="true">
 								<content>
 									<Carousel height="auto" width="auto" loop="true" showPageIndicator="true" pageIndicatorPlacement="Bottom" visible="true"
-										class="sapUiContentPadding">
+										class="sapUiContentPadding" pages="{/TicketCollection}">
 										<pages>
-											<Image height="auto" width="50px" densityAware="false"/>
-											<Image src="/build/uilibraries/content/static/image-canvas.svg" height="auto" width="50px" densityAware="false"/>
-											<Image src="/build/uilibraries/content/static/image-canvas.svg" height="auto" width="50px" densityAware="false"/>
-											<Image src="/build/uilibraries/content/static/image-canvas.svg" height="auto" width="50px" densityAware="false"/>
+											<Image src="{Screenshot}" height="auto" width="auto" densityAware="false"/>
 										</pages>
 									</Carousel>
-									<layout:BlockLayout background="Default">
-										<layout:content>
-											<layout:BlockLayoutRow scrollable="false">
-												<layout:content>
-													<layout:BlockLayoutCell width="3" title="" titleAlignment="Begin" titleLevel="Auto">
-														<layout:content>
-															<Text text="" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
-															<form:Form width="auto" editable="true" visible="true">
-																<form:title>
-																	<core:Title text="Dettaglio ticket" level="Auto"/>
-																</form:title>
-																<form:formContainers>
-																	<form:FormContainer visible="true">
-																		<form:formElements>
-																			<form:FormElement visible="true">
-																				<form:label>
-																					<Label text="Titolo" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
-																				</form:label>
-																				<form:fields>
-																					<Text text="Text" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
-																				</form:fields>
-																			</form:FormElement>
-																			<form:FormElement visible="true">
-																				<form:label>
-																					<Label text="Categoria" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
-																				</form:label>
-																				<form:fields>
-																					<ComboBox placeholder="Categoria" editable="true" enabled="true" visible="true" width="auto" valueState="None" maxWidth="100%">
-																						<items>
-																							<core:Item text="Item" enabled="true" key="Item"/>
-																							<core:Item text="Item" enabled="true" key="Item"/>
-																							<core:Item text="Item" enabled="true" key="Item"/>
-																						</items>
-																					</ComboBox>
-																				</form:fields>
-																			</form:FormElement>
-																			<form:FormElement visible="true">
-																				<form:label>
-																					<Label text="Descrizione" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
-																				</form:label>
-																				<form:fields>
-																					<Link text="Link" textAlign="Begin" width="auto" target="_blank" wrapping="false" enabled="true" visible="true" emphasized="false"
-																						subtle="false"/>
-																				</form:fields>
-																			</form:FormElement>
-																			<form:FormElement visible="true">
-																				<form:label>
-																					<Label text="Priorità" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
-																				</form:label>
-																				<form:fields>
-																					<Text text="Field" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
-																				</form:fields>
-																			</form:FormElement>
-																			<form:FormElement visible="true">
-																				<form:label>
-																					<Label text="Owner" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
-																				</form:label>
-																				<form:fields>
-																					<Text text="Field" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
-																				</form:fields>
-																			</form:FormElement>
-																			<form:FormElement visible="true">
-																				<form:label>
-																					<Label text="Stato" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
-																				</form:label>
-																				<form:fields>
-																					<ComboBox editable="true" enabled="true" visible="true" width="auto" valueState="None" maxWidth="100%">
-																						<items>
-																							<core:Item text="Approvato" enabled="true" key="Approvato"/>
-																							<core:Item text="Rigettato" enabled="true" key="Rigettato"/>
-																						</items>
-																					</ComboBox>
-																				</form:fields>
-																			</form:FormElement>
-																			<form:FormElement visible="true">
-																				<form:label>
-																					<Label text="Assigned to" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
-																				</form:label>
-																				<form:fields>
-																					<Input type="Text" showValueHelp="false" enabled="true" visible="true" width="auto" valueHelpOnly="false" maxLength="0"/>
-																				</form:fields>
-																			</form:FormElement>
-																			<form:FormElement visible="true">
-																				<form:label>
-																					<Label text="Valutazione" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
-																				</form:label>
-																				<form:fields>
-																					<RatingIndicator value="0" maxValue="5" visualMode="Half" enabled="true" visible="true" change="_onRatingIndicatorChange"/>
-																				</form:fields>
-																			</form:FormElement>
-																		</form:formElements>
-																		<form:title/>
-																	</form:FormContainer>
-																</form:formContainers>
-																<form:layout>
-																	<form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
-																</form:layout>
-															</form:Form>
-														</layout:content>
-													</layout:BlockLayoutCell>
-												</layout:content>
-											</layout:BlockLayoutRow>
-										</layout:content>
-									</layout:BlockLayout>
+									<Panel expandable="true" expanded="false" headerText="Dettaglio ticket" width="auto" class="sapUiResponsiveMargin">
+										<List items="{/TicketCollection}" width="auto" growing="true" growingThreshold="20" growingScrollToLoad="false" backgroundDesign="Solid" >
+											<items>
+												<StandardListItem title="Numero:" info="{ID}"/>
+												<StandardListItem icon="sap-icon://activity-2" title="Titolo:" info="{Titolo}"/>
+												<StandardListItem title="Categoria:" info="{Categoria}"/>
+												<StandardListItem title="Descrizione:" info="{Descrizione}"/>
+												<StandardListItem title="Priorità:" info="{Priorita}"/>
+												<StandardListItem title="Owner:" info="{Owner}"/>
+												<StandardListItem title="Stato:" info="{Stato}"/>
+												<StandardListItem title="Assigned to:" info="{Assigned_to}"/>
+											</items>	
+										</List>
+									</Panel>
 								</content>
 							</ScrollContainer>
 						</content>
@@ -164,7 +68,7 @@
 				<contentLeft/>
 				<contentMiddle/>
 				<contentRight>
-					<Button text="Prosegui" type="Accept" iconFirst="true" width="136.26666259765625px" enabled="true" visible="true" iconDensityAware="false"
+					<Button text="Prosegui" type="Accept" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"
 						press="_onButtonPress3"/>
 				</contentRight>
 			</Bar>
