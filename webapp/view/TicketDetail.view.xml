@@ -44,14 +44,27 @@
 									<Panel expandable="true" expanded="false" headerText="Dettaglio ticket" width="auto" class="sapUiResponsiveMargin">
 										<List items="{/TicketCollection}" width="auto" growing="true" growingThreshold="20" growingScrollToLoad="false" backgroundDesign="Solid" >
 											<items>
-												<StandardListItem title="Numero:" info="{ID}"/>
-												<StandardListItem icon="sap-icon://activity-2" title="Titolo:" info="{Titolo}"/>
-												<StandardListItem title="Categoria:" info="{Categoria}"/>
-												<StandardListItem title="Descrizione:" info="{Descrizione}"/>
-												<StandardListItem title="Priorità:" info="{Priorita}"/>
-												<StandardListItem title="Owner:" info="{Owner}"/>
-												<StandardListItem title="Stato:" info="{Stato}"/>
-												<StandardListItem title="Assigned to:" info="{Assigned_to}"/>
+												<CustomListItem> 
+													<HBox>
+														<core:Icon size="2rem" src="sap-icon://activity-2" class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" />
+														<VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom">
+															<Label text="Titolo: {Titolo}" design="Standard" width="auto" required="false" textAlign="Begin" textDirection="Inherit"/>
+															<Text text="{Titolo}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+															<Label text="Categoria:" design="Standard" width="auto" required="false" textAlign="Begin" textDirection="Inherit"/>
+															<Text text="{Categoria}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+															<Label text="Descrizione:" design="Standard" width="auto" required="false" textAlign="Begin" textDirection="Inherit"/>
+															<Text text="{Descrizione}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+															<Label text="Priorità:" design="Standard" width="auto" required="false" textAlign="Begin" textDirection="Inherit"/>
+															<Text text="{Priorita}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+															<Label text="Owner:" design="Standard" width="auto" required="false" textAlign="Begin" textDirection="Inherit"/>
+															<Text text="{Owner}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+															<Label text="Stato:" design="Standard" width="auto" required="false" textAlign="Begin" textDirection="Inherit"/>
+															<Text text="{Stato}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+															<Label text="Assigned to:" design="Standard" width="auto" required="false" textAlign="Begin" textDirection="Inherit"/>
+															<Text text="{Assigned_to}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+														</VBox>
+													</HBox>
+												</CustomListItem>
 											</items>	
 										</List>
 									</Panel>
