@@ -82,6 +82,74 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			oSplitContainer.setShowSecondaryContent(!oSplitContainer.getShowSecondaryContent());
 		},
 		
+		ToggleSecondaryContent: function(oEvent) {
+			var oSplitContainer = this.getView().byId("SplitContainer");
+			var sOrientation = this.getView().byId("SplitContainer").getOrientation();
+			sOrientation = "Vertical";
+			this.getView().byId("SplitContainer").setOrientation(sOrientation);
+			oSplitContainer.setShowSecondaryContent(!oSplitContainer.getShowSecondaryContent());	
+		},
+		
+		_onButtonPress5: function(oEvent) {
+
+			oEvent = jQuery.extend(true, {}, oEvent);
+			return new Promise(function(fnResolve) {
+					fnResolve(true);
+				})
+				.then(function(result) {
+					var oView = this.getView();
+					var oController = this;
+
+					return new Promise(function(fnResolve, fnReject) {
+						var oModel = oController.oModel;
+
+						var fnResetChangesAndReject = function(sMessage) {
+							oModel.resetChanges();
+							fnReject(new Error(sMessage));
+						};
+						if (oModel && oModel.hasPendingChanges()) {
+							oModel.submitChanges({
+								success: function(oResponse) {
+									var oBatchResponse = oResponse.__batchResponses[0];
+									var oChangeResponse = oBatchResponse.__changeResponses && oBatchResponse.__changeResponses[0];
+									if (oChangeResponse && oChangeResponse.data) {
+										var sNewContext = oModel.getKey(oChangeResponse.data);
+										oView.unbindObject();
+										oView.bindObject({
+											path: "/" + sNewContext
+										});
+										if (window.history && window.history.replaceState) {
+											window.history.replaceState(undefined, undefined, window.location.hash.replace(encodeURIComponent(oController.sContext),
+												encodeURIComponent(sNewContext)));
+										}
+										oModel.refresh();
+										fnResolve();
+									} else if (oChangeResponse && oChangeResponse.response) {
+										fnResetChangesAndReject(oChangeResponse.message);
+									} else if (!oChangeResponse && oBatchResponse.response) {
+										fnResetChangesAndReject(oBatchResponse.message);
+									} else {
+										oModel.refresh();
+										fnResolve();
+									}
+								},
+								error: function(oError) {
+									fnReject(new Error(oError.message));
+								}
+							});
+						} else {
+							fnResolve();
+						}
+					});
+					
+				}.bind(this)).catch(function(err) {
+					if (err !== undefined) {
+						MessageBox.error(err.message);
+					}
+				});
+		},
+		
+		
 		handleRouteMatched: function(oEvent) {
 
 			var oParams = {};
