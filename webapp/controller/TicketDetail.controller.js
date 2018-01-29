@@ -19,10 +19,10 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			this.oModel = this.getOwnerComponent().getModel();
 			
 			// set mock model
-			var sPath = jQuery.sap.getModulePath("com.sap.build.standard.ticketManagement.localService", "/detail.json");
+		
+			var sPath = jQuery.sap.getModulePath("com.sap.build.standard.ticketManagement.localService", "/DetailSet.json");
 			var oModel = new JSONModel(sPath);
 			this.getView().setModel(oModel);
-
 		},
 		
 		onPost: function (oEvent) {
@@ -42,9 +42,11 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			// update model
 			var oModel = this.getView().getModel();
 			var aEntries = oModel.getData().ChatCollection;
+			var eEntries = oModel.getData().TicketCollection;
 			aEntries.unshift(oEntry);
 			oModel.setData({
-				ChatCollection : aEntries
+				ChatCollection : aEntries,
+				TicketCollection : eEntries
 			});
 			
 			//Toast message invio	

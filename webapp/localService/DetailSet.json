@@ -1,0 +1,110 @@
+{
+    "ChatCollection" : [{
+		"Text":"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore",
+		"Date":"March 04 2013",
+		"Type":"Request",
+		"AuthorPicUrl":"",
+		"Author":"Mario",
+		"ID":"1"
+}],
+    
+    "TicketCollection" : [{
+    	"ID": "1",
+		"Titolo": "problema hardware",
+		"Categoria": "hardware",
+		"Descrizione": "lo schermo non si accende",
+		"Priorita": "massima",
+		"Owner": "davide",
+		"Stato": "assegnato",
+		"Assigned_to": "mario",
+		"Screenshot": "data:image/png;base64,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",
+		"Valutazione": ""
+	}, {
+		"ID": "2",
+		"Titolo": "problema software",
+		"Categoria": "software",
+		"Descrizione": "non riesco ad accedere alla mia area personale",
+		"Priorita": "massima",
+		"Owner": "marco",
+		"Stato": "creato",
+		"Assigned_to": "gianni",
+		"Screenshot": "",
+		"Valutazione": ""
+	}, {
+		"ID": "3",
+		"Titolo": "problema sul caricamento di documenti pdf",
+		"Categoria": "varie",
+		"Descrizione": "non riesco a fare l'upload dei miei documenti pdf",
+		"Priorita": "alta",
+		"Owner": "gianni",
+		"Stato": "rigettato",
+		"Assigned_to": "francesco",
+		"Screenshot": "",
+		"Valutazione": ""
+	}, {
+		"Valutazione": "",
+		"Screenshot": "",
+		"Assigned_to": "mario",
+		"Stato": "creato",
+		"Owner": "gianni",
+		"Priorita": "bassa",
+		"Descrizione": "nsknnkn",
+		"Categoria": "varie",
+		"Titolo": "problema5",
+		"ID": "4"
+	}, {
+		"Valutazione": "",
+		"Screenshot": "",
+		"Assigned_to": "davide",
+		"Stato": "assegnato",
+		"Owner": "gianni",
+		"Priorita": "media",
+		"Descrizione": "osidnsjnd",
+		"Categoria": "varie",
+		"Titolo": "problema6",
+		"ID": "5"
+	}, {
+		"ID": "6",
+		"Titolo": "problema7",
+		"Categoria": "varie",
+		"Descrizione": "djn jkln",
+		"Priorita": "bassa",
+		"Owner": "mario",
+		"Stato": "da verificare",
+		"Assigned_to": "davide",
+		"Screenshot": "",
+		"Valutazione": ""
+	}, {
+		"ID": "8",
+		"Titolo": "problema software",
+		"Categoria": "software",
+		"Descrizione": "non riesco a stampare con la stampante di rete",
+		"Priorita": "massima",
+		"Owner": "marco",
+		"Stato": "creato",
+		"Assigned_to": "gianni",
+		"Screenshot": "",
+		"Valutazione": ""
+	},{
+		"ID": "10",
+		"Titolo": "problema software3",
+		"Categoria": "software",
+		"Descrizione": "non riesco ad accedere alla mia area personale",
+		"Priorita": "massima",
+		"Owner": "marco",
+		"Stato": "creato",
+		"Assigned_to": "gianni",
+		"Screenshot": "",
+		"Valutazione": ""
+	},{
+		"ID": "11",
+		"Titolo": "problema sap",
+		"Categoria": "software",
+		"Descrizione": "Non riesco più ad entrare nel mio coockpit personale di SAP",
+		"Priorita": "massima",
+		"Stato": "chiuso",
+		"Assigned_to": "gianni",
+		"Screenshot": "",
+		"Valutazione": ""
+    }]
+}
