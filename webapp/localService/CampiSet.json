@@ -1,0 +1,9 @@
+[
+	{"ID":"1","Nome":"ID"},
+	{"Nome":"Titolo","ID":"2"},
+	{"Nome":"Descrizione","ID":"3"},
+	{"ID":"4","Nome":"Stato"},
+	{"ID":"5","Nome":"Priorita"},
+	{"Nome":"Owner","ID":"6"},
+	{"Nome":"Assigned_to","ID":"7"}
+]

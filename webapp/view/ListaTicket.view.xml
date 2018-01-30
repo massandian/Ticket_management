@@ -20,14 +20,12 @@
 						iconDensityAware="false" press="ToggleSecondaryContent"/>
 					<Button text="" type="Default" icon="sap-icon://drop-down-list" iconFirst="true" width="auto" enabled="true" visible="true"
 						iconDensityAware="false" press="_onButtonPress15"/>
-					<layout:VerticalLayout class="sapUiContentPadding" width="auto">	
-							<Button text="" type="Default" icon="sap-icon://settings" iconFirst="true" width="auto" enabled="true" visible="true"
-								iconDensityAware="false" press="handleOpenDialogSingleCustomTab"/>
-					</layout:VerticalLayout>	
+					<Button text="select theme" type="Default" icon="sap-icon://settings" iconFirst="true" width="auto" enabled="true" visible="true"
+						iconDensityAware="false" press="handleOpenDialogSingleCustomTab"/>
 				</content>
 				<tooltip/>
 			</Toolbar>
-			<u:SplitContainer id="SplitContainer" showSecondaryContent="false">
+			<u:SplitContainer id="SplitContainer" showSecondaryContent="false" secondaryContentSize="500px">
 				<u:secondaryContent>
 					<IconTabBar expandable="true" expanded="true" applyContentPadding="true" backgroundDesign="Transparent" upperCase="false" visible="true" selectedKey="Ok" content="{/TicketSet}">
 		                <items>
@@ -148,11 +146,12 @@
 		                        <content>
 		                            <layout:BlockLayout background="Default">
 		                                <layout:content>
-		                                    <layout:BlockLayoutRow scrollable="true">
+		                                    <layout:BlockLayoutRow scrollable="false">
 		                                        <layout:content>
-		                                            <layout:BlockLayoutCell width="40" title="" titleAlignment="Begin" titleLevel="Auto">
+		                                            <layout:BlockLayoutCell width="2" title="" titleAlignment="Begin" titleLevel="Auto">
 		                                                <layout:content>
-		                                                    <Table width="auto" noDataText="No data" mode="None" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true">
+		                                                	<Button text="Move right" press="" icon="sap-icon://open-command-field" type="Default" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
+		                                                    <Table id="ordina_table" width="auto" noDataText="No data" mode="None" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true">
 		                                                        <infoToolbar>
 		                                                            <Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
 		                                                                <content>
@@ -168,36 +167,33 @@
 		                                                                </header>
 		                                                                <footer/>
 		                                                            </Column>
+		                                                            <Column width="auto" hAlign="End" vAlign="Top" minScreenWidth="Phone" demandPopin="false" popinDisplay="Inline" mergeDuplicates="false">
+		                                                                <header>
+		                                                                    <Text text="Ordinamento" width="auto" maxLines="1" wrapping="false" textAlign="End" textDirection="Inherit"/>
+		                                                                </header>
+		                                                                <footer/>
+		                                                            </Column>
 		                                                        </columns>
 		                                                        <items>
 		                                                            <ColumnListItem type="Active">
 		                                                                <cells>
-		                                                                    <ObjectIdentifier title="Product Name" text="Product ID" titleActive="false" visible="true"/>
-		                                                                </cells>
-		                                                            </ColumnListItem>
-		                                                            <ColumnListItem type="Active">
-		                                                                <cells>
-		                                                                    <ObjectIdentifier title="Product Name" text="Product ID" titleActive="false" visible="true"/>
-		                                                                </cells>
-		                                                            </ColumnListItem>
-		                                                            <ColumnListItem type="Active">
-		                                                                <cells>
-		                                                                    <ObjectIdentifier title="Product Name" text="Product ID" titleActive="false" visible="true"/>
+		                                                                    <ObjectIdentifier title="" text="Campo" titleActive="false" visible="true"/>
+		                                                                    <SegmentedButton selectedKey="SBYes">
+																				<items>
+																					<SegmentedButtonItem text="" icon="sap-icon://sort-ascending" key="SBYes" />
+																					<SegmentedButtonItem text="" icon="sap-icon://sort-descending" />
+																				</items>
+																		</SegmentedButton>
 		                                                                </cells>
 		                                                            </ColumnListItem>
 		                                                        </items>
 		                                                    </Table>
 		                                                </layout:content>
 		                                            </layout:BlockLayoutCell>
-		                                            <layout:BlockLayoutCell width="20" title="" titleAlignment="Begin" titleLevel="Auto">
+		                                            <layout:BlockLayoutCell width="2" title="" titleAlignment="End" titleLevel="Auto">
 		                                                <layout:content>
-		                                                    <Button text="Button" type="Default" iconFirst="true" width="111.5250015258789px" enabled="true" visible="true" iconDensityAware="false"/>
-		                                                    <Button text="Button" type="Default" iconFirst="true" width="111.625px" enabled="true" visible="true" iconDensityAware="false"/>
-		                                                </layout:content>
-		                                            </layout:BlockLayoutCell>
-		                                            <layout:BlockLayoutCell width="40" title="" titleAlignment="End" titleLevel="Auto">
-		                                                <layout:content>
-		                                                    <Table width="auto" noDataText="No data" mode="None" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" items="{/TicketSet}">
+		                                                	<Button text="Move left" type="Default" icon="sap-icon://close-command-field" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
+		                                                    <Table width="auto" noDataText="No data" mode="MultiSelect" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" items="">
 		                                                        <infoToolbar>
 		                                                            <Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
 		                                                                <content>
@@ -217,7 +213,37 @@
 		                                                        <items>
 		                                                            <ColumnListItem type="Active">
 		                                                                <cells>
-		                                                                    <ObjectIdentifier title="{ID}" text="{Titolo}" titleActive="false" visible="true"/>
+		                                                                    <ObjectIdentifier title="" text="ID" titleActive="false" visible="true"/>       
+		                                                                </cells>
+		                                                            </ColumnListItem>
+		                                                            <ColumnListItem type="Active">
+		                                                                <cells>
+		                                                                    <ObjectIdentifier title="" text="Titolo" titleActive="false" visible="true"/>
+		                                                                </cells>
+		                                                            </ColumnListItem>
+		                                                            <ColumnListItem type="Active">
+		                                                                <cells>
+		                                                                    <ObjectIdentifier title="" text="Descrizione" titleActive="false" visible="true"/>
+		                                                                </cells>
+		                                                            </ColumnListItem>
+		                                                            <ColumnListItem type="Active">
+		                                                                <cells>
+		                                                                    <ObjectIdentifier title="" text="Stato" titleActive="false" visible="true"/>
+		                                                                </cells>
+		                                                            </ColumnListItem>
+		                                                            <ColumnListItem type="Active">
+		                                                                <cells>
+		                                                                    <ObjectIdentifier title="" text="Priorità" titleActive="false" visible="true"/>
+		                                                                </cells>
+		                                                            </ColumnListItem>
+		                                                            <ColumnListItem type="Active">
+		                                                                <cells>
+		                                                                    <ObjectIdentifier title="" text="Owner" titleActive="false" visible="true"/>
+		                                                                </cells>
+		                                                            </ColumnListItem>
+		                                                            <ColumnListItem type="Active">
+		                                                                <cells>
+		                                                                    <ObjectIdentifier title="" text="Assigned to" titleActive="false" visible="true"/>
 		                                                                </cells>
 		                                                            </ColumnListItem>
 		                                                        </items>
@@ -234,12 +260,12 @@
 		                    <IconTabFilter icon="sap-icon://table-chart" iconColor="Neutral" text="Personalizza" count="" design="Vertical" showAll="false" textDirection="Inherit" enabled="true" visible="true" iconDensityAware="false">
 		                        <content>
 		                          	<CheckBox text="Raggruppa" select="onTableGrouping" />
+		                          	<ToolbarSpacer/>
 									<Button text="Edita tabella" icon="sap-icon://table-chart" press="onPersoButtonPressed" >
 									<layoutData>
 										<OverflowToolbarLayoutData priority="NeverOverflow" />
 									</layoutData>
 									</Button>
-		                            
 		                        </content>
 		                    </IconTabFilter>
 		                    <IconTabSeparator icon="sap-icon://open-command-field" iconDensityAware="false"/>
@@ -297,6 +323,7 @@
 		                </content>
 		            </IconTabBar>
 				</u:secondaryContent>
+				<u:content>
 			<u:SplitContainer id="mySplitContainer" showSecondaryContent="false">
 				<u:secondaryContent>
 					<Panel expandable="true" expanded="false" headerText="Personalizza" width="auto" class="sapUiResponsiveMargin">
@@ -332,6 +359,7 @@
 						</List>
 					</Panel>
 				</u:secondaryContent>
+				<u:content>
 			<Table
 				id="sap_Responsive_Page_0-content-sap_ui_layout_BlockLayout-1515407526987-content-sap_ui_layout_BlockLayoutRow-2-content-sap_ui_layout_BlockLayoutCell-1-content-build_simple_Table-1515407548335"
 				width="100%" noDataText="No data" mode="MultiSelect" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true"
@@ -383,7 +411,7 @@
 					</Column>
 				</columns>
 				<items>
-					<ColumnListItem type="Navigation" press="_onRowPress2">
+					<ColumnListItem type="Navigation" press="onPress">
 						<cells>
 							<ObjectIdentifier class="sapMTableContentMargin" title="{ID}" text="" titleActive="false" visible="true"/>
 							<Text text="{Titolo}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
@@ -395,7 +423,9 @@
 					</ColumnListItem>
 				</items>
 			</Table>
+			</u:content>
 			</u:SplitContainer>
+			</u:content>
 			</u:SplitContainer>
 		</content>
 		<footer>

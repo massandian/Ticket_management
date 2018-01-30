@@ -4,7 +4,8 @@
             <EntityContainer Name="6f59264c7ad7cd610ebcd581_Entities" m:IsDefaultEntityContainer="true">
                 <EntitySet Name="TicketSet" EntityType="6f59264c7ad7cd610ebcd581.Ticket" sap:creatable="true" sap:updatable="true" sap:deletable="true"/>
                 <EntitySet Name="FiltroSet" EntityType="6f59264c7ad7cd610ebcd581.Filtro" sap:creatable="true" sap:updatable="true" sap:deletable="true"/>
-                <EntitySet Name="DetailSet" EntityType="6f59264c7ad7cd610ebcd581.Detail" sap:creatable="true" sap:updatable="true" sap:deletable="true"/>
+                <EntitySet Name="ChatSet" EntityType="6f59264c7ad7cd610ebcd581.Chat" sap:creatable="true" sap:updatable="true" sap:deletable="true"/>
+                <EntitySet Name="CampiSet" EntityType="6f59264c7ad7cd610ebcd581.Campi" sap:creatable="true" sap:updatable="true" sap:deletable="true"/>
             </EntityContainer>
             <EntityType Name="Ticket">
                 <Key>
@@ -44,6 +45,13 @@
                 <Property Name="Type" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="DefaultName2"/>
                 <Property Name="Date" Type="Edm.DateTimeOffset" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="DefaultName"/>
                 <Property Name="Text" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="Text"/>
+            </EntityType>
+            <EntityType Name="Campi">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="ID"/>
+                <Property Name="Nome" Type="Edm.String" sap:creatable="true" sap:updatable="true" sap:deletable="true" sap:label="Nome"/>
             </EntityType>
         </Schema>
     </edmx:DataServices>

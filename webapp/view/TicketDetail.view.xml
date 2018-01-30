@@ -49,19 +49,12 @@
 														<core:Icon size="2rem" src="sap-icon://activity-2" class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" />
 														<VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom">
 															<Label text="Titolo: {Titolo}" design="Standard" width="auto" required="false" textAlign="Begin" textDirection="Inherit"/>
-															<Text text="{Titolo}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
-															<Label text="Categoria:" design="Standard" width="auto" required="false" textAlign="Begin" textDirection="Inherit"/>
-															<Text text="{Categoria}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
-															<Label text="Descrizione:" design="Standard" width="auto" required="false" textAlign="Begin" textDirection="Inherit"/>
-															<Text text="{Descrizione}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
-															<Label text="Priorità:" design="Standard" width="auto" required="false" textAlign="Begin" textDirection="Inherit"/>
-															<Text text="{Priorita}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
-															<Label text="Owner:" design="Standard" width="auto" required="false" textAlign="Begin" textDirection="Inherit"/>
-															<Text text="{Owner}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
-															<Label text="Stato:" design="Standard" width="auto" required="false" textAlign="Begin" textDirection="Inherit"/>
-															<Text text="{Stato}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
-															<Label text="Assigned to:" design="Standard" width="auto" required="false" textAlign="Begin" textDirection="Inherit"/>
-															<Text text="{Assigned_to}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+															<Label text="Categoria: {Categoria}" design="Standard" width="auto" required="false" textAlign="Begin" textDirection="Inherit"/>
+															<Label text="Descrizione: {Descrizione}" design="Standard" width="auto" required="false" textAlign="Begin" textDirection="Inherit"/>
+															<Label text="Priorità: {Priorita}" design="Standard" width="auto" required="false" textAlign="Begin" textDirection="Inherit"/>
+															<Label text="Owner: {Owner}" design="Standard" width="auto" required="false" textAlign="Begin" textDirection="Inherit"/>
+															<Label text="Stato: {Stato}" design="Standard" width="auto" required="false" textAlign="Begin" textDirection="Inherit"/>
+															<Label text="Assigned to: {Assigned_to}" design="Standard" width="auto" required="false" textAlign="Begin" textDirection="Inherit"/>
 														</VBox>
 													</HBox>
 												</CustomListItem>

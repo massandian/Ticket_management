@@ -7,6 +7,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 	"./DemoPersoService",
 	"./Formatter",
 	"sap/m/TablePersoController"
+
 ], function(BaseController, MessageBox, Utilities, History, jQuery, JSONModel, DemoPersoService, Formatter, TablePersoController) {
 	"use strict";
 	
@@ -19,7 +20,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			this.oRouter.getTarget("ListaTicket").attachDisplay(jQuery.proxy(this.handleRouteMatched, this));
 			
 			// set explored app's demo model on this sample
-			//var oModel = new JSONModel(jQuery.sap.getModulePath("localService", "/TicketSet.json"));
+			//var oModel = new JSONModel(jQuery.sap.getModulePath("com.sap.build.standard.ticketManagement.localService", "/TicketSet.json"));
 			var oGroupingModel = new JSONModel({ hasGrouping: false});
 			//this.getView().setModel(oModel);
 			this.getView().setModel(oGroupingModel, 'Grouping'); 
@@ -34,6 +35,16 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
     
 		},
 		
+		//Funzioni che applicano i temi belize o high contrast black 
+		ApplyThemeHcb: function () {
+			sap.ui.getCore().applyTheme("sap_hcb");  
+		},
+		
+		ApplyThemeBelize: function () {
+			sap.ui.getCore().applyTheme("sap_belize");  
+		},
+		
+		//Personalizzazione visualizzazione tabella
 		onPersoButtonPressed: function (oEvent) {
 			this._oTPC.openDialog();
 		},
@@ -56,19 +67,21 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			}
 		},
 		
-		handleOpenDialogSingleCustomTab: function () {
-			if (this._oDialog) {
-				this._oDialog.destroy();
-				this._oDialog = null;
-			}
-			if (!this._oDialogSingleCustomTab) {
-				this._oDialogSingleCustomTab = sap.ui.xmlfragment("com.sap.build.standard.ticketManagement.view.DialogSingleCustomTab", this);
+		//Apre il fragment con il menu a tendina sulla destra per il setting del tema
+		handleOpenDialogSingleCustomTab: function (oEvent) {
+			var oButton = oEvent.getSource();
+
+			// create menu only once
+			if (!this._menu) {
+				this._menu = sap.ui.xmlfragment(
+					"com.sap.build.standard.ticketManagement.view.DialogSingleCustomTab",
+					this
+				);
+				this.getView().addDependent(this._menu);
 			}
 
-			this._oDialogSingleCustomTab.setModel(this.getView().getModel());
-			// toggle compact style
-			jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this._oDialogSingleCustomTab);
-			this._oDialogSingleCustomTab.open();
+			var eDock = sap.ui.core.Popup.Dock;
+			this._menu.open(this._bKeyboard, oButton, eDock.BeginTop, eDock.BeginBottom, oButton);
 		},
 
 		handleConfirm: function (oEvent) {
@@ -167,6 +180,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			}
 
 		},
+		
 		_onPageNavButtonPress: function(oEvent) {
 
 			var oBindingContext = oEvent.getSource().getBindingContext();
@@ -577,6 +591,18 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			return sValue1 !== "" || sValue2 !== "" ? 1 : 0;
 
 		},
+		
+		onPress : function (oEvent) {
+				//Press item of table ticket
+				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			    oRouter.navTo("TicketDetail", {
+					ticketId: 
+				oEvent.getSource().getBindingContext().getProperty("ID")
+			    });
+		},
+		
+		
+		
 		_onTableItemPress2: function(oEvent) {
 
 			var oBindingContext = oEvent.getParameter("listItem").getBindingContext();
@@ -590,20 +616,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			});
 
 		},
-		_onRowPress2: function(oEvent) {
-
-			var oBindingContext = oEvent.getSource().getBindingContext();
-
-			return new Promise(function(fnResolve) {
-
-				this.doNavigate("TicketDetail", oBindingContext, fnResolve, "");
-			}.bind(this)).catch(function(err) {
-				if (err !== undefined) {
-					MessageBox.error(err.message);
-				}
-			});
-
-		},
+	
 		_onButtonPress16: function() {
 			return new Promise(function(fnResolve) {
 				sap.m.MessageBox.confirm("I seguenti ticket saranno contrassegnati come verificati", {

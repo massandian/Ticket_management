@@ -1,8 +1,9 @@
 sap.ui.define([
 	"sap/ui/core/UIComponent",
 	"sap/ui/Device",
-	"com/sap/build/standard/ticketManagement/model/models"
-], function(UIComponent, Device, models) {
+	"com/sap/build/standard/ticketManagement/model/models",
+	"sap/ui/model/json/JSONModel"
+], function(UIComponent, Device, models, JSONModel) {
 	"use strict";
 
 	var navigationWithContext = {
@@ -12,7 +13,24 @@ sap.ui.define([
 	return UIComponent.extend("com.sap.build.standard.ticketManagement.Component", {
 
 		metadata: {
-			manifest: "json"
+			manifest: "json",
+			rootView: "com.sap.build.standard.ticketManagement.view.HomeUser",
+			routing: {
+				routes: [
+					{
+						name: "master",
+						// empty hash - normally the start page
+						pattern: "",
+						target: ["master"]
+					},
+					{
+						name: "ticketDetails",
+					
+						pattern: "TicketSet/:ID:",
+						target: ["master", "ticketDetails"]
+					}
+				]
+			}
 		},
 
 		/**
@@ -41,6 +59,7 @@ sap.ui.define([
 			// create the views based on the url/hash
 			this.getRouter().initialize();
 		},
+		
 
 		createContent: function() {
 			var app = new sap.m.App({
