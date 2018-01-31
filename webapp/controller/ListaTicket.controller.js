@@ -20,9 +20,9 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			this.oRouter.getTarget("ListaTicket").attachDisplay(jQuery.proxy(this.handleRouteMatched, this));
 			
 			// set explored app's demo model on this sample
-			//var oModel = new JSONModel(jQuery.sap.getModulePath("com.sap.build.standard.ticketManagement.localService", "/TicketSet.json"));
+			var oModel = new JSONModel(jQuery.sap.getModulePath("com.sap.build.standard.ticketManagement.localService", "/TicketSet.json"));
 			var oGroupingModel = new JSONModel({ hasGrouping: false});
-			//this.getView().setModel(oModel);
+			this.getView().setModel(oModel);
 			this.getView().setModel(oGroupingModel, 'Grouping'); 
 
 			// init and activate controller
@@ -32,7 +32,21 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 				componentName: "demoApp",
 				persoService: DemoPersoService
 			}).activate();
-    
+			
+			//Model filtri personalizzati
+		
+			/*this.jModel = new sap.ui.model.json.JSONModel();
+			this.jModel.setData(this.TicketSet.TicketCollection);*/
+
+		},
+		
+	/*	onBeforeRendering: function() {
+			this.byId('ins').setModel(this.jModel);	
+		},*/
+		
+		onPressLogic: function (oArg) {
+			this.TicketSet.TicketCollection.push({Name : '', size : ''});
+			this.jModel.refresh();//refresh del model
 		},
 		
 		//Funzioni che applicano i temi belize o high contrast black 

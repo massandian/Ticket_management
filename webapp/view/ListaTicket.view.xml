@@ -40,7 +40,7 @@
 		                                       <form:formElements>
 		                                    		<form:FormElement visible="true" label="Filtro">
 		                                                 <form:fields>
-		                                                     <ComboBox placeholder="Seleziona il campo" editable="true" enabled="true" visible="true" width="auto" valueState="None" items="{/CampiSet}">
+		                                                     <ComboBox placeholder="Seleziona il campo" editable="true" enabled="true" visible="true" width="auto" valueState="None" items="{/CampiCollection}">
 		                                                        <items>
 		                                                            <core:Item text="{Nome}" enabled="true" key="campi"/>
 		                                                        </items>
@@ -234,7 +234,7 @@
 					</Panel>
 					<Panel expandable="true" expanded="false" headerText="Filtri preferiti" width="auto" class="sapUiResponsiveMargin">
 						 <List mode="SingleSelectLeft" width="auto" headerText="" footerText="" backgroundDesign="Solid" showSeparators="All"
-							growing="true" growingThreshold="30" growingScrollToLoad="true" items="{/FiltroSet}">
+							growing="true" growingThreshold="30" growingScrollToLoad="true" items="{/FiltroCollection}">
 							<infoToolbar>
 								<Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
 									<content>
@@ -257,7 +257,7 @@
 			<Table
 				id="sap_Responsive_Page_0-content-sap_ui_layout_BlockLayout-1515407526987-content-sap_ui_layout_BlockLayoutRow-2-content-sap_ui_layout_BlockLayoutCell-1-content-build_simple_Table-1515407548335"
 				width="100%" noDataText="No data" mode="MultiSelect" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true"
-				itemPress="_onTableItemPress2" items="{/TicketSet}">
+				itemPress="_onTableItemPress2" items="{/TicketCollection}">
 				<infoToolbar>
 					<Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
 						<content>

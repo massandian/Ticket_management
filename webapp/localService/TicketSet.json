@@ -1,4 +1,6 @@
-[{
+{
+	
+ "TicketCollection" :[{
 		"ID": "1",
 		"Titolo": "problema hardware",
 		"Categoria": "hardware",
@@ -96,4 +98,35 @@
 		"Assigned_to": "gianni",
 		"Screenshot": "",
 		"Valutazione": ""
-	}]
+	}],
+	
+	"FiltroCollection" : [{
+		"Campo": "ID",
+		"ID": "1",
+		"Nome": "filtro personale",
+		"Tipologia": "between",
+		"Estensione": "and",
+		"valore1": "1",
+		"valore2": "3",
+		"preferiti": true
+	}, {
+		"ID": "2",
+		"Nome": "filtro fantastico",
+		"Campo": "Categoria",
+		"Tipologia": "equal",
+		"Estensione": "",
+		"valore1": "hardware",
+		"valore2": "",
+		"preferiti": true
+	}],
+	
+	"CampiCollection" : [
+		{"ID":"1","Nome":"ID"},
+		{"Nome":"Titolo","ID":"2"},
+		{"Nome":"Descrizione","ID":"3"},
+		{"ID":"4","Nome":"Stato"},
+		{"ID":"5","Nome":"Priorita"},
+		{"Nome":"Owner","ID":"6"},
+		{"Nome":"Assigned_to","ID":"7"}
+	]
+}
