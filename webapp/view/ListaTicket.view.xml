@@ -1,4 +1,4 @@
-<mvc:View id="ListaTicket" xmlns:mvc="sap.ui.core.mvc" 
+<mvc:View id="ListaTicket" xmlns:mvc="sap.ui.core.mvc" class="sapUiSizeCompact"
 			controllerName="com.sap.build.standard.ticketManagement.controller.ListaTicket" 
 			xmlns="sap.m"
 			xmlns:layout="sap.ui.layout"
@@ -40,15 +40,9 @@
 		                                       <form:formElements>
 		                                    		<form:FormElement visible="true" label="Filtro">
 		                                                 <form:fields>
-		                                                     <ComboBox placeholder="Seleziona il campo" editable="true" enabled="true" visible="true" width="auto" valueState="None">
+		                                                     <ComboBox placeholder="Seleziona il campo" editable="true" enabled="true" visible="true" width="auto" valueState="None" items="{/CampiSet}">
 		                                                        <items>
-		                                                            <core:Item text="ID" enabled="true" key="ID"/>
-		                                                            <core:Item text="Owner" enabled="true" key="Owner"/>
-		                                                            <core:Item text="Stato" enabled="true" key="Stato"/>
-		                                                            <core:Item text="Descrizione" enabled="true" key="Descrizione"/>
-		                                                            <core:Item text="Assigned to" enabled="true" key="Assigned to"/>
-		                                                            <core:Item text="Priorità" enabled="true" key="Priorità"/>
-		                                                            <core:Item text="Assigned to" enabled="true" key="Assigned to"/>
+		                                                            <core:Item text="{Nome}" enabled="true" key="campi"/>
 		                                                        </items>
 		                                                     </ComboBox>
 		                                                	 <ComboBox placeholder="tipologia filtro" editable="true" enabled="true" visible="true" width="auto" valueState="None">
