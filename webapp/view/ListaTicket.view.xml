@@ -31,114 +31,46 @@
 		                <items>
 		                    <IconTabFilter icon="sap-icon://add-filter" iconColor="Neutral" text="Filtro personale" count="" design="Vertical" showAll="false" textDirection="Inherit" enabled="true" visible="true" iconDensityAware="false">
 		                        <content>
-		                            <layout:BlockLayout background="Default">
-		                                <layout:content>
-		                                    <layout:BlockLayoutRow scrollable="false">
-		                                        <layout:content>
-		                                            <layout:BlockLayoutCell width="1" title="" titleAlignment="Begin" titleLevel="Auto">
-		                                                <layout:content>
-		                                                    <form:Form width="auto" editable="true" visible="true">
-		                                                        <form:title>
-		                                                            <core:Title text="Regole di creazione filtro" level="Auto"/>
-		                                                        </form:title>
-		                                                        <form:formContainers>
-		                                                            <form:FormContainer visible="true">
-		                                                                <form:formElements>
-		                                                                    <form:FormElement visible="true">
-		                                                                        <form:label>
-		                                                                            <Label text="Campo da filtrare" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
-		                                                                        </form:label>
-		                                                                        <form:fields>
-		                                                                            <ComboBox placeholder="Seleziona il campo" editable="true" enabled="true" visible="true" width="auto" valueState="None" maxWidth="100%">
-		                                                                                <items>
-		                                                                                    <core:Item text="ID" enabled="true" key="ID"/>
-		                                                                                    <core:Item text="Owner" enabled="true" key="Owner"/>
-		                                                                                    <core:Item text="Stato" enabled="true" key="Stato"/>
-		                                                                                    <core:Item text="Descrizione" enabled="true" key="Descrizione"/>
-		                                                                                    <core:Item text="Assigned to" enabled="true" key="Assigned to"/>
-		                                                                                    <core:Item text="Priorità" enabled="true" key="Priorità"/>
-		                                                                                    <core:Item text="Assigned to" enabled="true" key="Assigned to"/>
-		                                                                                </items>
-		                                                                            </ComboBox>
-		                                                                        </form:fields>
-		                                                                    </form:FormElement>
-		                                                                    <form:FormElement visible="true">
-		                                                                        <form:label>
-		                                                                            <Label text="Tipologia di filtro" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
-		                                                                        </form:label>
-		                                                                        <form:fields>
-		                                                                            <ComboBox placeholder="Seleziona la tipologia" editable="true" enabled="true" visible="true" width="auto" valueState="None" maxWidth="100%">
-		                                                                                <items>
-		                                                                                    <core:Item text="EQUAL" enabled="true" key="EQUAL"/>
-		                                                                                    <core:Item text="BETWEEN" enabled="true" key="BETWEEN"/>
-		                                                                                    <core:Item text="DIFFERENT FROM" enabled="true" key="DIFFERENT FROM"/>
-		                                                                                    <core:Item text="CONTAIN" enabled="true" key="CONTAIN"/>
-		                                                                                </items>
-		                                                                            </ComboBox>
-		                                                                        </form:fields>
-		                                                                    </form:FormElement>
-		                                                                    <form:FormElement visible="true">
-		                                                                        <form:label>
-		                                                                            <Label text="Estendi" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
-		                                                                        </form:label>
-		                                                                        <form:fields>
-		                                                                            <ComboBox placeholder="Seleziona l'operando logico" editable="true" enabled="true" visible="true" width="auto" valueState="None" maxWidth="100%">
-		                                                                                <items>
-		                                                                                    <core:Item text="AND" enabled="true" key="AND"/>
-		                                                                                    <core:Item text="OR" enabled="true" key="OR"/>
-		                                                                                </items>
-		                                                                            </ComboBox>
-		                                                                        </form:fields>
-		                                                                    </form:FormElement>
-		                                                                </form:formElements>
-		                                                                <form:title/>
-		                                                            </form:FormContainer>
-		                                                        </form:formContainers>
-		                                                        <form:layout>
-		                                                            <form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
-		                                                        </form:layout>
-		                                                    </form:Form>
-		                                                </layout:content>
-		                                            </layout:BlockLayoutCell>
-		                                            <layout:BlockLayoutCell width="1" title="" titleAlignment="Begin" titleLevel="Auto">
-		                                                <layout:content>
-		                                                    <form:Form width="auto" editable="true" visible="true">
-		                                                        <form:title>
-		                                                            <core:Title text="Valore filtro/i" level="Auto"/>
-		                                                        </form:title>
-		                                                        <form:formContainers>
-		                                                            <form:FormContainer visible="true">
-		                                                                <form:formElements>
-		                                                                    <form:FormElement visible="true">
-		                                                                        <form:label>
-		                                                                            <Label text="valore 1" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
-		                                                                        </form:label>
-		                                                                        <form:fields>
-		                                                                            <Input type="Text" showValueHelp="false" enabled="true" visible="true" width="auto" valueHelpOnly="false" maxLength="0"/>
-		                                                                        </form:fields>
-		                                                                    </form:FormElement>
-		                                                                    <form:FormElement visible="true">
-		                                                                        <form:label>
-		                                                                            <Label text="valore 2" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
-		                                                                        </form:label>
-		                                                                        <form:fields>
-		                                                                            <Input type="Text" showValueHelp="false" enabled="true" visible="true" width="auto" valueHelpOnly="false" maxLength="0"/>
-		                                                                        </form:fields>
-		                                                                    </form:FormElement>
-		                                                                </form:formElements>
-		                                                                <form:title/>
-		                                                            </form:FormContainer>
-		                                                        </form:formContainers>
-		                                                        <form:layout>
-		                                                            <form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
-		                                                        </form:layout>
-		                                                    </form:Form>
-		                                                </layout:content>
-		                                            </layout:BlockLayoutCell>
-		                                        </layout:content>
-		                                    </layout:BlockLayoutRow>
-		                                </layout:content>
-		                            </layout:BlockLayout>
+		                    		 <form:Form width="auto" editable="true" visible="true">
+		                            	<form:title>	                                
+		                                	<core:Title text="Regole di creazione filtro" level="Auto"/>
+		                                </form:title>
+		                                <form:formContainers>
+		        	                       <form:FormContainer visible="true">
+		                                       <form:formElements>
+		                                    		<form:FormElement visible="true" label="Filtro">
+		                                                 <form:fields>
+		                                                     <ComboBox placeholder="Seleziona il campo" editable="true" enabled="true" visible="true" width="auto" valueState="None">
+		                                                        <items>
+		                                                            <core:Item text="ID" enabled="true" key="ID"/>
+		                                                            <core:Item text="Owner" enabled="true" key="Owner"/>
+		                                                            <core:Item text="Stato" enabled="true" key="Stato"/>
+		                                                            <core:Item text="Descrizione" enabled="true" key="Descrizione"/>
+		                                                            <core:Item text="Assigned to" enabled="true" key="Assigned to"/>
+		                                                            <core:Item text="Priorità" enabled="true" key="Priorità"/>
+		                                                            <core:Item text="Assigned to" enabled="true" key="Assigned to"/>
+		                                                        </items>
+		                                                     </ComboBox>
+		                                                	 <ComboBox placeholder="tipologia filtro" editable="true" enabled="true" visible="true" width="auto" valueState="None">
+		                                                        <items>
+		                                                            <core:Item text="EQUAL" enabled="true" key="EQUAL"/>
+		                                                            <core:Item text="BETWEEN" enabled="true" key="BETWEEN"/>
+		                                                            <core:Item text="DIFFERENT FROM" enabled="true" key="DIFFERENT FROM"/>
+		                                                            <core:Item text="CONTAIN" enabled="true" key="CONTAIN"/>
+		                                                        </items>
+		                                                     </ComboBox>
+		                                                     <Button text="AND" enabled="true" key="AND" press="onPressLogic"/>
+		                                                     <Button text="OR" enabled="true" key="OR" press="onPressLogic"/>
+		                                                     <Button text="" icon="sap-icon://delete" enabled="true" press=""/>
+		                                                  </form:fields>
+		                                        	 </form:FormElement>
+		                                         </form:formElements>
+		                                   </form:FormContainer>
+		                               </form:formContainers>
+		                               <form:layout>
+		                                   <form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
+		                               </form:layout>
+		                            </form:Form>                
 		                        </content>
 		                    </IconTabFilter>
 		                    <IconTabSeparator icon="sap-icon://open-command-field" iconDensityAware="false"/>
@@ -151,7 +83,7 @@
 		                                            <layout:BlockLayoutCell width="2" title="" titleAlignment="Begin" titleLevel="Auto">
 		                                                <layout:content>
 		                                                	<Button text="Move right" press="" icon="sap-icon://open-command-field" type="Default" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
-		                                                    <Table id="ordina_table" width="auto" noDataText="No data" mode="None" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true">
+		                                                    <Table id="ordina_table" width="auto" noDataText="No data" mode="None" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" items="">
 		                                                        <infoToolbar>
 		                                                            <Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
 		                                                                <content>
@@ -193,7 +125,7 @@
 		                                            <layout:BlockLayoutCell width="2" title="" titleAlignment="End" titleLevel="Auto">
 		                                                <layout:content>
 		                                                	<Button text="Move left" type="Default" icon="sap-icon://close-command-field" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
-		                                                    <Table width="auto" noDataText="No data" mode="MultiSelect" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" items="">
+		                                                    <Table width="auto" noDataText="No data" mode="MultiSelect" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" items="{/CampiSet}">
 		                                                        <infoToolbar>
 		                                                            <Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
 		                                                                <content>
@@ -213,37 +145,7 @@
 		                                                        <items>
 		                                                            <ColumnListItem type="Active">
 		                                                                <cells>
-		                                                                    <ObjectIdentifier title="" text="ID" titleActive="false" visible="true"/>       
-		                                                                </cells>
-		                                                            </ColumnListItem>
-		                                                            <ColumnListItem type="Active">
-		                                                                <cells>
-		                                                                    <ObjectIdentifier title="" text="Titolo" titleActive="false" visible="true"/>
-		                                                                </cells>
-		                                                            </ColumnListItem>
-		                                                            <ColumnListItem type="Active">
-		                                                                <cells>
-		                                                                    <ObjectIdentifier title="" text="Descrizione" titleActive="false" visible="true"/>
-		                                                                </cells>
-		                                                            </ColumnListItem>
-		                                                            <ColumnListItem type="Active">
-		                                                                <cells>
-		                                                                    <ObjectIdentifier title="" text="Stato" titleActive="false" visible="true"/>
-		                                                                </cells>
-		                                                            </ColumnListItem>
-		                                                            <ColumnListItem type="Active">
-		                                                                <cells>
-		                                                                    <ObjectIdentifier title="" text="Priorità" titleActive="false" visible="true"/>
-		                                                                </cells>
-		                                                            </ColumnListItem>
-		                                                            <ColumnListItem type="Active">
-		                                                                <cells>
-		                                                                    <ObjectIdentifier title="" text="Owner" titleActive="false" visible="true"/>
-		                                                                </cells>
-		                                                            </ColumnListItem>
-		                                                            <ColumnListItem type="Active">
-		                                                                <cells>
-		                                                                    <ObjectIdentifier title="" text="Assigned to" titleActive="false" visible="true"/>
+		                                                                    <ObjectIdentifier title="" text="{Nome}" titleActive="false" visible="true"/>       
 		                                                                </cells>
 		                                                            </ColumnListItem>
 		                                                        </items>
@@ -257,17 +159,15 @@
 		                        </content>
 		                    </IconTabFilter>
 		                    <IconTabSeparator icon="sap-icon://open-command-field" iconDensityAware="false"/>
-		                    <IconTabFilter icon="sap-icon://table-chart" iconColor="Neutral" text="Personalizza" count="" design="Vertical" showAll="false" textDirection="Inherit" enabled="true" visible="true" iconDensityAware="false">
-		                        <content>
-		                          	<CheckBox text="Raggruppa" select="onTableGrouping" />
-		                          	<ToolbarSpacer/>
-									<Button text="Edita tabella" icon="sap-icon://table-chart" press="onPersoButtonPressed" >
-									<layoutData>
-										<OverflowToolbarLayoutData priority="NeverOverflow" />
-									</layoutData>
-									</Button>
-		                        </content>
-		                    </IconTabFilter>
+		        			<IconTabFilter icon="sap-icon://table-chart" iconColor="Neutral" text="Personalizza" count="" design="Vertical" showAll="false" textDirection="Inherit" enabled="true" visible="true" iconDensityAware="false">
+		                		<CheckBox text="Raggruppa" select="onTableGrouping" width="100%"/>
+		                		<ToolbarSpacer/>
+								<Button icon="sap-icon://table-chart" press="onPersoButtonPressed" text="Edita tabella" >
+								<layoutData>
+									<OverflowToolbarLayoutData priority="NeverOverflow" />
+								</layoutData>
+							</Button>
+		                	</IconTabFilter>
 		                    <IconTabSeparator icon="sap-icon://open-command-field" iconDensityAware="false"/>
 		                    <IconTabFilter icon="sap-icon://save" iconColor="Neutral" text="Salva" count="" design="Vertical" showAll="false" textDirection="Inherit" enabled="true" visible="true" iconDensityAware="false">
 		                        <content>
