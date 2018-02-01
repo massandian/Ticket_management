@@ -10,5 +10,5 @@
  * 
  */
 function sample() {
-	var projectName = "Ticket_management2";
+	var projectName = "Ticket_management";
 }

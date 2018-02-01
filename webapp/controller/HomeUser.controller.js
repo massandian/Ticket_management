@@ -109,21 +109,25 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 		_onStandardTilePress1: function(oEvent) {
 
 			var oBindingContext = oEvent.getSource().getBindingContext();
-
+			
+		
 			return new Promise(function(fnResolve) {
-
+				
 				this.doNavigate("NewTicket", oBindingContext, fnResolve, "");
 			}.bind(this)).catch(function(err) {
 				if (err !== undefined) {
 					MessageBox.error(err.message);
 				}
+			
 			});
+			
 
 		},
+		
 		_onStandardTilePress2: function(oEvent) {
 
 			var oBindingContext = oEvent.getSource().getBindingContext();
-
+			
 			return new Promise(function(fnResolve) {
 
 				this.doNavigate("ListaTicket", oBindingContext, fnResolve, "");
@@ -132,8 +136,8 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 					MessageBox.error(err.message);
 				}
 			});
-
 		},
+		
 		_onGenericTilePress: function(oEvent) {
 
 			var oBindingContext = oEvent.getSource().getBindingContext();
@@ -162,6 +166,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			});
 
 		},
+		
 		_onGenericTilePress2: function(oEvent) {
 
 			var oBindingContext = oEvent.getSource().getBindingContext();
