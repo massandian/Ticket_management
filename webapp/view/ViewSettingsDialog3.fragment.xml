@@ -1,32 +1,35 @@
-<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout">
-	<ViewSettingsDialog>
+<core:FragmentDefinition 
+		xmlns="sap.m" 
+		xmlns:core="sap.ui.core" 
+		xmlns:l="sap.ui.layout">
+	<ViewSettingsDialog confirm="handleConfirm">
 		<filterItems>
-			<ViewSettingsFilterItem text="ID" key="ID" items="{path: '/ID'}">
+			<ViewSettingsFilterItem text="ID" key="ID" items="{path: 'ID'}" multiSelect="true">
 				<items>
 					<ViewSettingsItem key="String___ID___{}" text="{}"></ViewSettingsItem>
 				</items>
 			</ViewSettingsFilterItem>
-			<ViewSettingsFilterItem text="Titolo" key="Titolo" items="{path: '/Titolo'}">
+			<ViewSettingsFilterItem text="Titolo" key="Titolo" items="{path: 'Titolo'}" multiSelect="true">
 				<items>
 					<ViewSettingsItem key="String___Titolo___{}" text="{}"></ViewSettingsItem>
 				</items>
 			</ViewSettingsFilterItem>
-			<ViewSettingsFilterItem text="Priorita" key="Priorita" items="{path: '/Priorita'}">
+			<ViewSettingsFilterItem text="Priorita" key="Priorita" items="{path: 'Priorita'}" multiSelect="true">
 				<items>
 					<ViewSettingsItem key="String___Priorita___{}" text="{}"></ViewSettingsItem>
 				</items>
 			</ViewSettingsFilterItem>
-			<ViewSettingsFilterItem text="Stato" key="Stato" items="{path: '/Stato'}">
+			<ViewSettingsFilterItem text="Stato" key="Stato" items="{path: 'Stato'}" multiSelect="true">
 				<items>
 					<ViewSettingsItem key="String___Stato___{}" text="{}"></ViewSettingsItem>
 				</items>
 			</ViewSettingsFilterItem>
-			<ViewSettingsFilterItem text="Owner" key="Owner" items="{path: '/Owner'}">
+			<ViewSettingsFilterItem text="Owner" key="Owner" items="{path: 'Owner'}" multiSelect="true">
 				<items>
 					<ViewSettingsItem key="String___Owner___{}" text="{}"></ViewSettingsItem>
 				</items>
 			</ViewSettingsFilterItem>
-			<ViewSettingsFilterItem text="Assigned_to" key="Assigned_to" items="{path: '/Assigned_to'}">
+			<ViewSettingsFilterItem text="Assigned_to" key="Assigned_to" items="{path: 'Assigned_to'}" multiSelect="true">
 				<items>
 					<ViewSettingsItem key="String___Assigned_to___{}" text="{}"></ViewSettingsItem>
 				</items>
@@ -41,8 +44,6 @@
 			<ViewSettingsItem text="Assigned_to" key="Assigned_to"/>
 		</sortItems>
 		<groupItems>
-			<ViewSettingsItem text="ID" key="ID"/>
-			<ViewSettingsItem text="Titolo" key="Titolo"/>
 			<ViewSettingsItem text="Priorita" key="Priorita"/>
 			<ViewSettingsItem text="Stato" key="Stato"/>
 			<ViewSettingsItem text="Owner" key="Owner"/>

@@ -6,9 +6,11 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 	"sap/ui/model/json/JSONModel",
 	"./DemoPersoService",
 	"./Formatter",
-	"sap/m/TablePersoController"
+	"sap/m/TablePersoController",
+	"sap/ui/model/Filter",
+	"sap/ui/model/Sorter"
 
-], function(BaseController, MessageBox, Utilities, History, jQuery, JSONModel, DemoPersoService, Formatter, TablePersoController) {
+], function(BaseController, MessageBox, Utilities, History, jQuery, JSONModel, DemoPersoService, Formatter, TablePersoController, Filter, Sorter) {
 	"use strict";
 	
 	return BaseController.extend("com.sap.build.standard.ticketManagement.controller.ListaTicket", {
@@ -33,22 +35,46 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 				persoService: DemoPersoService
 			}).activate();
 			
-			//Model filtri personalizzati
-		
-			/*this.jModel = new sap.ui.model.json.JSONModel();
-			this.jModel.setData(this.TicketSet.TicketCollection);*/
-
+			//Group function
+			this.mGroupFunctions = {
+				Stato: function(oContext) {
+					var stato = oContext.getProperty("Stato");
+					return {
+						key: stato,
+						text: stato
+					};
+				},
+				Priorita: function(oContext) {
+					var priorita = oContext.getProperty("Priorita");
+					return {
+						key: priorita,
+						text: priorita
+					};
+				},
+				Owner: function(oContext) {
+					var owner = oContext.getProperty("Owner");
+					return {
+						key: owner,
+						text: owner
+					};
+				},
+				Assigned_to: function(oContext) {
+					var assigned_to = oContext.getProperty("Assigned_to");
+					return {
+						key: assigned_to,
+						text: assigned_to
+					};
+				}
+			};
 		},
 		
-	/*	onBeforeRendering: function() {
-			this.byId('ins').setModel(this.jModel);	
-		},*/
 		
-		onPressLogic: function (oArg) {
-			this.TicketSet.TicketCollection.push({Name : '', size : ''});
-			this.jModel.refresh();//refresh del model
+		addRow : function(oEvent){
+			
+			
 		},
 		
+	
 		//Funzioni che applicano i temi belize o high contrast black 
 		ApplyThemeHcb: function () {
 			sap.ui.getCore().applyTheme("sap_hcb");  
@@ -76,12 +102,12 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			if (this._oDialog) {
 				this._oDialog.destroy();
 			}
-			if (this._oDialogSingleCustomTab) {
+			else if (this._oDialogSingleCustomTab) {
 				this._oDialogSingleCustomTab.destroy();
 			}
 		},
 		
-		//Apre il fragment con il menu a tendina sulla destra per il setting del tema
+	
 		handleOpenDialogSingleCustomTab: function (oEvent) {
 			var oButton = oEvent.getSource();
 
@@ -98,11 +124,6 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			this._menu.open(this._bKeyboard, oButton, eDock.BeginTop, eDock.BeginBottom, oButton);
 		},
 
-		handleConfirm: function (oEvent) {
-			if (oEvent.getParameters().filterString) {
-				sap.m.MessageToast.show(oEvent.getParameters().filterString);
-			}
-		},
 		
 		handleToggleSecondaryContent: function(oEvent) {
 			var oSplitContainer = this.getView().byId("mySplitContainer");
@@ -386,197 +407,63 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			});
 
 		},
-		_onButtonPress14: function(oEvent) {
+		
+		
+		handleViewSettingsDialogButtonPressed: function(oEvent) {
 
-			var sPopoverName = "Popover2";
-			this.mPopovers = this.mPopovers || {};
-			var oPopover = this.mPopovers[sPopoverName];
-			var oSource = oEvent.getSource();
-			var oBindingContext = oSource.getBindingContext();
-			var sPath = (oBindingContext) ? oBindingContext.getPath() : null;
-			var oView;
-			if (!oPopover) {
-				this.getOwnerComponent().runAsOwner(function() {
-					oView = sap.ui.xmlview({
-						viewName: "com.sap.build.standard.ticketManagement.view." + sPopoverName
-					});
-					this.getView().addDependent(oView);
-					oView.getController().setRouter(this.oRouter);
-					oPopover = oView.getContent()[0];
-					oPopover.setPlacement("Auto");
-					this.mPopovers[sPopoverName] = oPopover;
-				}.bind(this));
+			if (!this._oDialog) {
+				this._oDialog = sap.ui.xmlfragment("com.sap.build.standard.ticketManagement.view.ViewSettingsDialog3", this);
 			}
-
-			return new Promise(function(fnResolve) {
-				oPopover.attachEventOnce("afterOpen", null, fnResolve);
-				oPopover.openBy(oSource);
-				if (oView) {
-					oPopover.attachAfterOpen(function() {
-						oPopover.rerender();
-					});
-				} else {
-					oView = oPopover.getParent();
-				}
-
-				var oModel = this.getView().getModel();
-				if (oModel) {
-					oView.setModel(oModel);
-				}
-				if (sPath) {
-					var oParams = oView.getController().getBindingParameters();
-					oView.bindObject({
-						path: sPath,
-						parameters: oParams
-					});
-				}
-			}.bind(this)).catch(function(err) {
-				if (err !== undefined) {
-					MessageBox.error(err.message);
-				}
-			});
-
-		},
-		_onButtonPress15: function(oEvent) {
-
-			this.mSettingsDialogs = this.mSettingsDialogs || {};
-			var sSourceId = oEvent.getSource().getId();
-			var oDialog = this.mSettingsDialogs["ViewSettingsDialog3"];
-
-			var confirmHandler = function(oConfirmEvent) {
-				var self = this;
-				var sFilterString = oConfirmEvent.getParameter('filterString');
-				var oBindingData = {};
-
-				/* Grouping */
-				if (oConfirmEvent.getParameter("groupItem")) {
-					var sPath = oConfirmEvent.getParameter("groupItem").getKey();
-					oBindingData.groupby = new sap.ui.model.Sorter(sPath, oConfirmEvent.getParameter("groupDescending"), true);
-				} else {
-					// Reset the group by
-					oBindingData.groupby = null;
-				}
-
-				/* Sorting */
-				if (oConfirmEvent.getParameter("sortItem")) {
-					var sPath = oConfirmEvent.getParameter("sortItem").getKey();
-					oBindingData.sorters = [new sap.ui.model.Sorter(sPath, oConfirmEvent.getParameter("sortDescending"))];
-				}
-
-				/* Filtering */
-				oBindingData.filters = [];
-				// The list of filters that will be applied to the collection
-				var oFilter;
-				var vValueLT, vValueGT;
-
-				// Simple filters (String)
-				var mSimpleFilters = {},
-					sKey;
-				for (sKey in oConfirmEvent.getParameter("filterKeys")) {
-					var aSplit = sKey.split("___");
-					var sPath = aSplit[1];
-					var sValue1 = aSplit[2];
-					var oFilterInfo = new sap.ui.model.Filter(sPath, "EQ", sValue1);
-
-					// Creating a map of filters for each path
-					if (!mSimpleFilters[sPath]) {
-						mSimpleFilters[sPath] = [oFilterInfo];
-					} else {
-						mSimpleFilters[sPath].push(oFilterInfo);
-					}
-				}
-
-				for (var path in mSimpleFilters) {
-					// All filters on a same path are combined with a OR
-					oBindingData.filters.push(new sap.ui.model.Filter(mSimpleFilters[path], false));
-				}
-
-				aCollections.forEach(function(oCollectionItem) {
-					var oCollection = self.getView().byId(oCollectionItem.id);
-					var oBindingInfo = oCollection.getBindingInfo(oCollectionItem.aggregation);
-					var oBindingOptions = this.updateBindingOptions(oCollectionItem.id, oBindingData, sSourceId);
-					oCollection.bindAggregation(oCollectionItem.aggregation, {
-						model: oBindingInfo.model,
-						path: oBindingInfo.path,
-						parameters: oBindingInfo.parameters,
-						template: oBindingInfo.template,
-						sorter: oBindingOptions.sorters,
-						filters: oBindingOptions.filters
-					});
-
-					// Display the filter string if necessary
-					if (typeof oCollection.getInfoToolbar === "function") {
-						var oToolBar = oCollection.getInfoToolbar();
-						if (oToolBar && oToolBar.getContent().length === 1) {
-							oToolBar.setVisible(!!sFilterString);
-							oToolBar.getContent()[0].setText(sFilterString);
-						}
-					}
-				}, this);
-			}.bind(this);
-
-			function resetFiltersHandler() {
-
-			}
-
-			function updateDialogData() {
-				var mParams = {
-					context: oReferenceCollection.getBindingContext(),
-					success: function(oData) {
-						var oJsonModelDialogData = {};
-						// Loop through each entity
-						oData.results.forEach(function(oEntity) {
-							// Add the distinct properties in a map
-							for (var oKey in oEntity) {
-								if (!oJsonModelDialogData[oKey]) {
-									oJsonModelDialogData[oKey] = [oEntity[oKey]];
-								} else if (oJsonModelDialogData[oKey].indexOf(oEntity[oKey]) === -1) {
-									oJsonModelDialogData[oKey].push(oEntity[oKey]);
-								}
-							}
-						});
-
-						var oDialogModel = oDialog.getModel();
-
-						if (!oDialogModel) {
-							oDialogModel = new sap.ui.model.json.JSONModel();
-							oDialog.setModel(oDialogModel);
-						}
-						oDialogModel.setData(oJsonModelDialogData);
-						oDialog.open();
-					}
-				};
-
-				var sPath = oReferenceCollection.getBindingInfo(aCollections[0].aggregation).path;
-				oModel.read(sPath, mParams);
-			}
-
-			if (!oDialog) {
-				oDialog = sap.ui.xmlfragment({
-					fragmentName: "com.sap.build.standard.ticketManagement.view.ViewSettingsDialog3"
-				}, this);
-				oDialog.attachEvent("confirm", confirmHandler);
-				oDialog.attachEvent("resetFilters", resetFiltersHandler);
-
-				this.mSettingsDialogs["ViewSettingsDialog3"] = oDialog;
-			}
-
-			var aCollections = [];
-
-			aCollections.push({
-				id: "sap_Responsive_Page_0-content-sap_ui_layout_BlockLayout-1515407526987-content-sap_ui_layout_BlockLayoutRow-2-content-sap_ui_layout_BlockLayoutCell-1-content-build_simple_Table-1515407548335",
-				aggregation: "items"
-			});
-
-			var oReferenceCollection = this.getView().byId(aCollections[0].id);
-			var oSourceBindingContext = oReferenceCollection.getBindingContext();
-			var oModel = oSourceBindingContext ? oSourceBindingContext.getModel() : this.getView().getModel();
-
 			// toggle compact style
-			jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), oDialog);
-			updateDialogData();
-
+			jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this._oDialog);
+			this._oDialog.open();
 		},
+		
+		handleConfirm: function(oEvent) {
+
+			var oView = this.getView();
+			var oTable = oView.byId("sap_Responsive_Page_0-content-sap_ui_layout_BlockLayout-1515407526987-content-sap_ui_layout_BlockLayoutRow-2-content-sap_ui_layout_BlockLayoutCell-1-content-build_simple_Table-1515407548335");
+
+			var mParams = oEvent.getParameters();
+			var oBinding = oTable.getBinding("items");
+
+			// apply sorter to binding
+			// (grouping comes before sorting)
+			var sPath;
+			var bDescending;
+			var vGroup;
+			var aSorters = [];
+			if (mParams.groupItem) {
+				sPath = mParams.groupItem.getKey();
+				bDescending = mParams.groupDescending;
+				vGroup = this.mGroupFunctions[sPath];
+				aSorters.push(new Sorter(sPath, bDescending, vGroup));
+			}
+			sPath = mParams.sortItem.getKey();
+			bDescending = mParams.sortDescending;
+			aSorters.push(new Sorter(sPath, bDescending));
+			oBinding.sort(aSorters);
+
+			// apply filters to binding
+			var aFilters = [];
+			jQuery.each(mParams.filterItems, function (i, oItem) {
+				var aSplit = oItem.getKey().split("___");
+				var sPath = aSplit[0];
+				var sOperator = aSplit[1];
+				var sValue1 = aSplit[2];
+				var sValue2 = aSplit[3];
+				var oFilter = new Filter(sPath, sOperator, sValue1, sValue2);
+				aFilters.push(oFilter);
+			});
+			oBinding.filter(aFilters);
+
+			// update filter bar
+			oView.byId("vsdFilterBar").setVisible(aFilters.length > 0);
+			oView.byId("vsdFilterLabel").setText(mParams.filterString);
+		},
+		
+		
+		
 		getCustomFilter: function(sPath, vValueLT, vValueGT) {
 			if (vValueLT !== "" && vValueGT !== "") {
 				return new sap.ui.model.Filter([
@@ -607,14 +494,16 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 		},
 		
 		onPress : function (oEvent) {
-				//Press item of table ticket
+				
+				sap.n = {};
+				sap.n.oTicketId = oEvent.getSource().getBindingContext().getProperty("ID");
+				
+				//Press item of the ticket table
 				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			    oRouter.navTo("TicketDetail", {
-					ticketId: 
-				oEvent.getSource().getBindingContext().getProperty("ID")
+					ticketId:oEvent.getSource().getBindingContext().getProperty("ID")
 			    });
 		},
-		
 		
 		
 		_onTableItemPress2: function(oEvent) {

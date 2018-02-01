@@ -1,5 +1,5 @@
 <mvc:View xmlns:mvc="sap.ui.core.mvc" controllerName="com.sap.build.standard.ticketManagement.controller.TicketDetail" xmlns="sap.m"
-	xmlns:layout="sap.ui.layout" xmlns:form="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	xmlns:layout="sap.ui.layout" xmlns:form="sap.ui.layout.form" xmlns:core="sap.ui.core" class="sapUiSizeCompact">
 	<Page showHeader="true" title="Dettaglio ticket" showFooter="true" showNavButton="true" navButtonPress="_onPageNavButtonPress">
 		<content>
 			<IconTabBar expandable="true" expanded="true" applyContentPadding="true" backgroundDesign="Transparent" upperCase="true" visible="true"
@@ -42,7 +42,7 @@
 										</pages>
 									</Carousel>
 									<Panel expandable="true" expanded="false" headerText="Dettaglio ticket" width="auto" class="sapUiResponsiveMargin">
-										<List items="{/TicketCollection}" width="auto" growing="true" growingThreshold="20" growingScrollToLoad="false" backgroundDesign="Solid" >
+										<List id="listdetail" items="{/TicketCollection}" width="auto" growing="true" growingThreshold="20" growingScrollToLoad="false" backgroundDesign="Solid" >
 											<items>
 												<CustomListItem> 
 													<HBox>

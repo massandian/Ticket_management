@@ -128,5 +128,22 @@
 		{"ID":"5","Nome":"Priorita"},
 		{"Nome":"Owner","ID":"6"},
 		{"Nome":"Assigned_to","ID":"7"}
-	]
+	],
+	
+	"TipologieFiltriCollection" : [
+		{"ID":"1","Tipo":"BETWEEN"},
+		{"ID":"2","Tipo":"EQUAL"},
+		{"ID":"3","Tipo":"DIFFERENT FROM"},
+		{"ID":"4","Tipo":"CONTENT"}
+	],
+	
+	 "ChatCollection" : [{
+		"Text":"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore",
+		"Date":"March 04 2013",
+		"Type":"Request",
+		"AuthorPicUrl":"",
+		"Author":"Mario",
+		"ID":"1"
+	 }]
+
 }

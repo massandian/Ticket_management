@@ -39,7 +39,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 				Text : sValue
 			};
 
-			// update model
+			// update model 
 			var oModel = this.getView().getModel();
 			var aEntries = oModel.getData().ChatCollection;
 			var eEntries = oModel.getData().TicketCollection;
@@ -77,7 +77,21 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 					this.getView().bindObject(oPath);
 				}
 			}
-
+			
+			this.onFilterTicketDetail();
+		},
+		
+		//Filtraggio dei dati del ticket nella pagina di dettaglio
+		onFilterTicketDetail: function() {
+    		if (sap.n.oTicketId) {
+        		//filter on table detail ticket         
+    			var oTicketId = sap.n.oTicketId;
+					if (typeof listDetailTicket !== 'undefined') {
+		        		var listDetailTicket = sap.ui.getCore().byId("application-BUILD-prototype-component---TicketDetail--listDetailTicket");
+		        		var oFilterByTicketId = new sap.ui.model.Filter("ID", sap.ui.model.FilterOperator.EQ, oTicketId);
+		        		listDetailTicket.getBinding("items").filter(oFilterByTicketId);
+	    			}
+    		}
 		},
 		
 		_onPageNavButtonPress: function() {
