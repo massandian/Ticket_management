@@ -381,31 +381,13 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			};
 
 		},
+		
 		_onButtonPress13: function(oEvent) {
-
-			var oSource = oEvent.getSource();
-			var oSourceBindingContext = oSource.getBindingContext();
-
-			return new Promise(function(fnResolve, fnReject) {
-				if (oSourceBindingContext) {
-					var oModel = oSourceBindingContext.getModel();
-					oModel.remove(oSourceBindingContext.getPath(), {
-						success: function() {
-							oModel.refresh();
-							fnResolve();
-						},
-						error: function() {
-							oModel.refresh();
-							fnReject(new Error("remove failed"));
-						}
-					});
-				}
-			}).catch(function(err) {
-				if (err !== undefined) {
-					MessageBox.error(err.message);
-				}
-			});
-
+			
+			//Clear all sortings and grouping rules
+			var oTable = this.getView().byId("sap_Responsive_Page_0-content-sap_ui_layout_BlockLayout-1515407526987-content-sap_ui_layout_BlockLayoutRow-2-content-sap_ui_layout_BlockLayoutCell-1-content-build_simple_Table-1515407548335");
+			oTable.getBinding("items").sort(null);
+			
 		},
 		
 		
@@ -455,11 +437,6 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 				aFilters.push(oFilter);
 			});
 			oBinding.filter(aFilters);
-
-			// update filter bar
-			oView.byId("vsdFilterBar").setVisible(aFilters.length > 0);
-			oView.byId("vsdFilterLabel").setText(mParams.filterString);
-			
 			
 		},
 		
