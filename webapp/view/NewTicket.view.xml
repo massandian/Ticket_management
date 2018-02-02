@@ -1,5 +1,5 @@
 <mvc:View xmlns:mvc="sap.ui.core.mvc" controllerName="com.sap.build.standard.ticketManagement.controller.NewTicket" xmlns="sap.m"
-	xmlns:form="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	xmlns:form="sap.ui.layout.form" xmlns:core="sap.ui.core" class="sapUiSizeCompact">
 	<Page id="NewTicket" showHeader="true" title="Gestione ticket" showFooter="true" showNavButton="true" navButtonPress="_onPageNavButtonPress">
 		<content>
 			<form:Form width="100%" editable="true" visible="true">

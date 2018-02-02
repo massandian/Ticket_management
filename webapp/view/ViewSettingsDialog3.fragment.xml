@@ -4,34 +4,29 @@
 		xmlns:l="sap.ui.layout">
 	<ViewSettingsDialog confirm="handleConfirm">
 		<filterItems>
-			<ViewSettingsFilterItem text="ID" key="ID" items="{path: 'ID'}" multiSelect="true">
+			<ViewSettingsFilterItem text="Priorita" key="Priorita" multiSelect="true">
 				<items>
-					<ViewSettingsItem key="String___ID___{}" text="{}"></ViewSettingsItem>
+					<ViewSettingsItem key="Priorita___EQ___bassa" text="bassa"/>
+					<ViewSettingsItem key="Priorita___EQ___media" text="media"/>
+					<ViewSettingsItem key="Priorita___EQ___alta" text="alta"/>
+					<ViewSettingsItem key="Priorita___EQ___massima" text="massima"/>
 				</items>
 			</ViewSettingsFilterItem>
-			<ViewSettingsFilterItem text="Titolo" key="Titolo" items="{path: 'Titolo'}" multiSelect="true">
+			<ViewSettingsFilterItem text="Stato" key="Stato" multiSelect="true">
 				<items>
-					<ViewSettingsItem key="String___Titolo___{}" text="{}"></ViewSettingsItem>
+					<ViewSettingsItem key="Stato___EQ___creato" text="creato"/>
+					<ViewSettingsItem key="Stato___EQ___approvato" text="approvato"/>
+					<ViewSettingsItem key="Stato___EQ___assegnato" text="assegnato"/>
+					<ViewSettingsItem key="Stato___EQ___rigettato" text="rigettato"/>
+					<ViewSettingsItem key="Stato___EQ___da verificare" text="da verificare"/>
+					<ViewSettingsItem key="Stato___EQ___chiuso" text="chiuso"/>
 				</items>
 			</ViewSettingsFilterItem>
-			<ViewSettingsFilterItem text="Priorita" key="Priorita" items="{path: 'Priorita'}" multiSelect="true">
+			<ViewSettingsFilterItem text="Categoria" key="Categoria" multiSelect="true">
 				<items>
-					<ViewSettingsItem key="String___Priorita___{}" text="{}"></ViewSettingsItem>
-				</items>
-			</ViewSettingsFilterItem>
-			<ViewSettingsFilterItem text="Stato" key="Stato" items="{path: 'Stato'}" multiSelect="true">
-				<items>
-					<ViewSettingsItem key="String___Stato___{}" text="{}"></ViewSettingsItem>
-				</items>
-			</ViewSettingsFilterItem>
-			<ViewSettingsFilterItem text="Owner" key="Owner" items="{path: 'Owner'}" multiSelect="true">
-				<items>
-					<ViewSettingsItem key="String___Owner___{}" text="{}"></ViewSettingsItem>
-				</items>
-			</ViewSettingsFilterItem>
-			<ViewSettingsFilterItem text="Assigned_to" key="Assigned_to" items="{path: 'Assigned_to'}" multiSelect="true">
-				<items>
-					<ViewSettingsItem key="String___Assigned_to___{}" text="{}"></ViewSettingsItem>
+					<ViewSettingsItem key="Categoria___EQ___software" text="software"></ViewSettingsItem>
+					<ViewSettingsItem key="Categoria___EQ___hardware" text="hardware"></ViewSettingsItem>
+					<ViewSettingsItem key="Categoria___EQ___varie" text="varie"></ViewSettingsItem>
 				</items>
 			</ViewSettingsFilterItem>
 		</filterItems>
@@ -39,6 +34,7 @@
 			<ViewSettingsItem text="ID" key="ID"/>
 			<ViewSettingsItem text="Titolo" key="Titolo"/>
 			<ViewSettingsItem text="Priorita" key="Priorita"/>
+			<ViewSettingsItem text="Categoria" key="Categoria"/>
 			<ViewSettingsItem text="Stato" key="Stato"/>
 			<ViewSettingsItem text="Owner" key="Owner"/>
 			<ViewSettingsItem text="Assigned_to" key="Assigned_to"/>

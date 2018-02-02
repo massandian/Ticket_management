@@ -1,5 +1,5 @@
 <mvc:View xmlns:mvc="sap.ui.core.mvc" controllerName="com.sap.build.standard.ticketManagement.controller.HomeUser" xmlns="sap.m"
-	xmlns:layout="sap.ui.layout" xmlns:microchart="sap.suite.ui.microchart">
+	xmlns:layout="sap.ui.layout" xmlns:microchart="sap.suite.ui.microchart" class="sapUiSizeCompact">
 	<Page showHeader="true" title="" showFooter="true" showNavButton="false">
 		<content>
 			<layout:BlockLayout background="Default">

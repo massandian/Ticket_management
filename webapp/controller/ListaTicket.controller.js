@@ -451,8 +451,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 				var sPath = aSplit[0];
 				var sOperator = aSplit[1];
 				var sValue1 = aSplit[2];
-				var sValue2 = aSplit[3];
-				var oFilter = new Filter(sPath, sOperator, sValue1, sValue2);
+				var oFilter = new Filter(sPath, sOperator, sValue1);
 				aFilters.push(oFilter);
 			});
 			oBinding.filter(aFilters);
@@ -460,6 +459,8 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			// update filter bar
 			oView.byId("vsdFilterBar").setVisible(aFilters.length > 0);
 			oView.byId("vsdFilterLabel").setText(mParams.filterString);
+			
+			
 		},
 		
 		
