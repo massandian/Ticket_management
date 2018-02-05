@@ -117,13 +117,6 @@
 					"viewLevel": 7,
 					"transition": "slide"
 				},
-				"ListaTicketEspansa": {
-					"controlAggregation": "pages",
-					"viewName": "ListaTicketEspansa",
-					"viewId": "ListaTicketEspansa",
-					"viewLevel": 3,
-					"transition": "slide"
-				},
 				"TicketDetail": {
 					"controlAggregation": "pages",
 					"viewName": "TicketDetail",
@@ -143,13 +136,6 @@
 					"viewName": "ListaTicket",
 					"viewId": "ListaTicket",
 					"viewLevel": 2,
-					"transition": "slide"
-				},
-				"ListaTicketEspansa2": {
-					"controlAggregation": "pages",
-					"viewName": "ListaTicketEspansa2",
-					"viewId": "ListaTicketEspansa2",
-					"viewLevel": 4,
 					"transition": "slide"
 				}
 			},
@@ -172,12 +158,6 @@
 					"NewTicket"
 				]
 			}, {
-				"pattern": "ListaTicketEspansa/:context:",
-				"name": "ListaTicketEspansa",
-				"target": [
-					"ListaTicketEspansa"
-				]
-			}, {
 				"pattern": "TicketDetail/:context:",
 				"name": "TicketDetail",
 				"target": [
@@ -194,12 +174,6 @@
 				"name": "ListaTicket",
 				"target": [
 					"ListaTicket"
-				]
-			}, {
-				"pattern": "ListaTicketEspansa2/:context:",
-				"name": "ListaTicketEspansa2",
-				"target": [
-					"ListaTicketEspansa2"
 				]
 			}]
 		}

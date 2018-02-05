@@ -1,7 +1,7 @@
 <core:FragmentDefinition 
 		xmlns="sap.m" 
 		xmlns:core="sap.ui.core" 
-		xmlns:l="sap.ui.layout">
+		xmlns:l="sap.ui.layout" class="sapUiSizeCompact">
 	<ViewSettingsDialog confirm="handleConfirm">
 		<filterItems>
 			<ViewSettingsFilterItem text="Priorita" key="Priorita" multiSelect="true">

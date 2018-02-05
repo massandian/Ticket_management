@@ -14,18 +14,18 @@
 					<Title text="Tickets" titleStyle="Auto" width="auto" textAlign="Begin" visible="true"/>
 					<ToolbarSpacer width=""/>
 					<SearchField placeholder="Search" showSearchButton="true" visible="true" width="auto" liveChange="_onSearchFieldLiveChange2"/>
+					<Button text="Custom filter" type="Default" icon="sap-icon://drop-down-list" iconFirst="true" width="auto" enabled="true" visible="true"
+						iconDensityAware="false" press="ToggleSecondaryContent"/>
 					<Button text="" type="Default" icon="sap-icon://clear-filter" iconFirst="true" width="auto" enabled="true" visible="true"
 						iconDensityAware="false" press="_onButtonPress13"/>
 					<Button text="" type="Default" icon="sap-icon://add-filter" iconFirst="true" width="auto" enabled="true" visible="true"
-						iconDensityAware="false" press="ToggleSecondaryContent"/>
-					<Button text="" type="Default" icon="sap-icon://drop-down-list" iconFirst="true" width="auto" enabled="true" visible="true"
 						iconDensityAware="false" press="handleViewSettingsDialogButtonPressed"/>
 					<Button text="select theme" type="Default" icon="sap-icon://settings" iconFirst="true" width="auto" enabled="true" visible="true"
 						iconDensityAware="false" press="handleOpenDialogSingleCustomTab"/>
 				</content>
 				<tooltip/>
 			</Toolbar>
-			<u:SplitContainer id="SplitContainer" showSecondaryContent="false" secondaryContentSize="500px">
+			<u:SplitContainer id="SplitContainer" showSecondaryContent="false" secondaryContentSize="60%" orientation="Vertical">
 				<u:secondaryContent>
 					<IconTabBar expandable="true" expanded="true" applyContentPadding="true" backgroundDesign="Transparent" upperCase="false" visible="true" selectedKey="Ok" content="{/TicketSet}">
 		                <items>
@@ -75,7 +75,6 @@
 		                                        <layout:content>
 		                                            <layout:BlockLayoutCell width="2" title="" titleAlignment="Begin" titleLevel="Auto">
 		                                                <layout:content>
-		                                                	<Button text="Move right" press="" icon="sap-icon://open-command-field" type="Default" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
 		                                                    <Table id="ordina_table" width="auto" noDataText="No data" mode="None" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" items="">
 		                                                        <infoToolbar>
 		                                                            <Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
@@ -115,9 +114,12 @@
 		                                                    </Table>
 		                                                </layout:content>
 		                                            </layout:BlockLayoutCell>
+		                                            <layout:BlockLayoutCell >
+		                                        		<Button text="Move right" press="" icon="sap-icon://open-command-field" type="Default" iconFirst="true" width="80%" enabled="true" visible="true" iconDensityAware="false"/>
+		                                            	<Button text="Move left" type="Default" icon="sap-icon://close-command-field" iconFirst="true" width="80%" enabled="true" visible="true" iconDensityAware="false"/>
+		                                            </layout:BlockLayoutCell>
 		                                            <layout:BlockLayoutCell width="2" title="" titleAlignment="End" titleLevel="Auto">
 		                                                <layout:content>
-		                                                	<Button text="Move left" type="Default" icon="sap-icon://close-command-field" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
 		                                                    <Table width="auto" noDataText="No data" mode="MultiSelect" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" items="{/CampiCollection}">
 		                                                        <infoToolbar>
 		                                                            <Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">

@@ -1,7 +1,7 @@
 <core:FragmentDefinition
 	xmlns="sap.m"
 	xmlns:core="sap.ui.core"
-	xmlns:u="sap.ui.unified">
+	xmlns:u="sap.ui.unified" class="sapUiSizeCompact">
 		<u:Menu>
 			<u:MenuItem
 				text="SAP Belize"

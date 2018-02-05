@@ -473,9 +473,9 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 		
 		onPress : function (oEvent) {
 				
-				sap.n = {};
+				sap.n =  {};
 				sap.n.oTicketId = oEvent.getSource().getBindingContext().getProperty("ID");
-				
+
 				//Press item of the ticket table
 				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			    oRouter.navTo("TicketDetail", {
@@ -483,6 +483,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			    });
 		},
 		
+
 		
 		_onTableItemPress2: function(oEvent) {
 

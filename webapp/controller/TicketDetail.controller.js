@@ -86,11 +86,12 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
     		if (sap.n.oTicketId) {
         		//filter on table detail ticket         
     			var oTicketId = sap.n.oTicketId;
-					if (typeof listDetailTicket !== 'undefined') {
-		        		var listDetailTicket = sap.ui.getCore().byId("application-BUILD-prototype-component---TicketDetail--listDetailTicket");
-		        		var oFilterByTicketId = new sap.ui.model.Filter("ID", sap.ui.model.FilterOperator.EQ, oTicketId);
-		        		listDetailTicket.getBinding("items").filter(oFilterByTicketId);
-	    			}
+			    var listDetailTicket = this.getView().byId("application-BUILD-prototype-component---TicketDetail--listDetailTicket");
+			    var oFilterByTicketId = new sap.ui.model.Filter("ID", sap.ui.model.FilterOperator.EQ, oTicketId);
+			      
+			    //if (typeof listDetailTicket !== 'undefined') {
+			      	listDetailTicket.getBinding("items").filter(oFilterByTicketId);
+    			//}
     		}
 		},
 		

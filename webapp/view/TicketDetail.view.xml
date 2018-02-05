@@ -42,13 +42,13 @@
 										</pages>
 									</Carousel>
 									<Panel expandable="true" expanded="false" headerText="Dettaglio ticket" width="auto" class="sapUiResponsiveMargin">
-										<List id="listdetail" items="{/TicketCollection}" width="auto" growing="true" growingThreshold="20" growingScrollToLoad="false" backgroundDesign="Solid" >
+										<List id="listDetailTicket" items="{/TicketCollection}" width="auto" growing="true" growingThreshold="20" growingScrollToLoad="false" backgroundDesign="Solid" >
 											<items>
 												<CustomListItem> 
 													<HBox>
 														<core:Icon size="2rem" src="sap-icon://activity-2" class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" />
 														<VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom">
-															<Label text="Titolo: {Titolo}" design="Standard" width="auto" required="false" textAlign="Begin" textDirection="Inherit"/>
+															<Label text="Titolo: {Titolo}" design="bold" width="auto" required="false" textAlign="Begin" textDirection="Inherit"/>
 															<Label text="Categoria: {Categoria}" design="Standard" width="auto" required="false" textAlign="Begin" textDirection="Inherit"/>
 															<Label text="Descrizione: {Descrizione}" design="Standard" width="auto" required="false" textAlign="Begin" textDirection="Inherit"/>
 															<Label text="Priorità: {Priorita}" design="Standard" width="auto" required="false" textAlign="Begin" textDirection="Inherit"/>
