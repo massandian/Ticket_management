@@ -20,7 +20,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			
 			// set mock model
 		
-			var sPath = jQuery.sap.getModulePath("com.sap.build.standard.ticketManagement.localService", "/DetailSet.json");
+			var sPath = jQuery.sap.getModulePath("com.sap.build.standard.ticketManagement.localService", "/TicketSet.json");
 			var oModel = new JSONModel(sPath);
 			this.getView().setModel(oModel);
 		},
@@ -79,18 +79,58 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			}
 			
 			this.onFilterTicketDetail();
+			this.onFilterTicketScreenshot();
+			this.onFilterTicketScreenshot1();
+			this.onFilterTicketChat();
 		},
 		
 		//Filtraggio dei dati del ticket nella pagina di dettaglio
 		onFilterTicketDetail: function() {
     		if (sap.n.oTicketId) {
-        		//filter on table detail ticket         
+        		//Filtra il ticket selezionato nella tabella e produce4 i risultati nella pagina di dettaglio (dettagli)       
     			var oTicketId = sap.n.oTicketId;
 			    var listDetailTicket = this.getView().byId("__component0---TicketDetail--listDetailTicket");
 			    var oFilterByTicketId = new sap.ui.model.Filter("ID", sap.ui.model.FilterOperator.EQ, oTicketId);
 		      	listDetailTicket.getBinding("items").filter(oFilterByTicketId);
-    	
-    	 		}
+		      	
+    	    }
+		},
+		
+		onFilterTicketScreenshot: function () {
+		
+			if (sap.n.oTicketId) {
+        		//Filtra il ticket selezionato nella tabella e produce4 i risultati nella pagina di dettaglio (screenshot pagina dettaglio)
+	    			var oTicketId = sap.n.oTicketId;
+				    var listDetailTicket = this.getView().byId("__component0---TicketDetail--screenshot");
+				    var oFilterByTicketId = new sap.ui.model.Filter("ID", sap.ui.model.FilterOperator.EQ, oTicketId);
+			      	listDetailTicket.getBinding("pages").filter(oFilterByTicketId);
+ 
+       	    }
+		},
+		
+		onFilterTicketScreenshot1: function () {
+		
+			if (sap.n.oTicketId) {
+        		//Filtra il ticket selezionato nella tabella e produce4 i risultati nella pagina di dettaglio (screenshot pagina chat)     
+       	
+	    			var oTicketId = sap.n.oTicketId;
+				    var listDetailTicket = this.getView().byId("__component0---TicketDetail--screenshot1");
+				    var oFilterByTicketId = new sap.ui.model.Filter("ID", sap.ui.model.FilterOperator.EQ, oTicketId);
+			      	listDetailTicket.getBinding("pages").filter(oFilterByTicketId);
+    	    }
+		},
+	
+		
+		onFilterTicketChat: function () {
+		
+		/*	if (sap.n.oTicketId) {
+        		//Filtra il ticket selezionato nella tabella e produce4 i risultati nella pagina di dettaglio (chatlist)       
+    			var oTicketId = sap.n.oTicketId;
+			    var listDetailTicket = this.getView().byId("__item11-__clone19");
+			    var oFilterByTicketId = new sap.ui.model.Filter("ID", sap.ui.model.FilterOperator.EQ, oTicketId);
+		      	listDetailTicket.getBinding("items").filter(oFilterByTicketId);
+		      	
+    	    }*/
 		},
 		
 		_onPageNavButtonPress: function() {

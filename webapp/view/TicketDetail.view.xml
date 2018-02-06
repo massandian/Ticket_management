@@ -10,12 +10,17 @@
 						<content>
 							<ScrollContainer horizontal="true" vertical="true" width="auto" height="auto" visible="true">
 								<content>
-									<Carousel height="auto" width="auto" loop="true" showPageIndicator="true" pageIndicatorPlacement="Bottom" visible="true"
+									<Carousel id="screenshot1" height="auto" width="auto" loop="true" showPageIndicator="true" pageIndicatorPlacement="Bottom" visible="true"
 										class="sapUiContentPadding" pages="{/TicketCollection}">
 										<pages>
 											<Image src="{Screenshot}" height="auto" width="auto" densityAware="false"/>
 										</pages>
 									</Carousel>
+									<Bar design="footer">
+										<contentMiddle>
+											<Title text="Chat" level="H1"/>
+										</contentMiddle>
+									</Bar>
 									<FeedInput showIcon="true" icon="" value="" placeholder="Post something here" enabled="true" visible="true" maxLength="0"
 										buttonTooltip="Submit" post="onPost"/>
 									<List items="{/ChatCollection}" width="auto" growing="true" growingThreshold="20" growingScrollToLoad="false" backgroundDesign="Solid">
@@ -35,13 +40,18 @@
 						<content>
 							<ScrollContainer horizontal="true" vertical="true" width="auto" height="auto" visible="true">
 								<content>
-									<Carousel height="auto" width="auto" loop="true" showPageIndicator="true" pageIndicatorPlacement="Bottom" visible="true"
+									<Carousel id="screenshot" height="auto" width="auto" loop="true" showPageIndicator="true" pageIndicatorPlacement="Bottom" visible="true"
 										class="sapUiContentPadding" pages="{/TicketCollection}">
 										<pages>
 											<Image src="{Screenshot}" height="auto" width="auto" densityAware="false"/>
 										</pages>
 									</Carousel>
-									<Panel expandable="true" expanded="false" headerText="Dettaglio ticket" width="auto" class="sapUiResponsiveMargin">
+									<Bar design="footer">
+										<contentMiddle>
+											<Title text="Informazioni ticket" level="H1"/>
+										</contentMiddle>
+									</Bar>
+									<Panel expandable="true" expanded="true" headerText="Dettaglio" width="auto" class="sapUiResponsiveMargin">
 										<List id="listDetailTicket" items="{/TicketCollection}" width="auto" growing="true" growingThreshold="20" growingScrollToLoad="false" backgroundDesign="Solid" >
 											<items>
 												<CustomListItem> 

@@ -1,5 +1,5 @@
 {
-	
+
  "TicketCollection" :[{
 		"ID": "1",
 		"Titolo": "problema hardware",
@@ -11,6 +11,7 @@
 		"Assigned_to": "mario",
 		"Screenshot": "",
 		"Valutazione": ""
+		
 	}, {
 		"ID": "2",
 		"Titolo": "problema software",
@@ -20,7 +21,7 @@
 		"Owner": "marco",
 		"Stato": "creato",
 		"Assigned_to": "gianni",
-		"Screenshot": "",
+		"Screenshot":  "http://www.andresfuentesangarita.com/wp-content/uploads/2017/01/problemas.jpg",
 		"Valutazione": ""
 	}, {
 		"ID": "3",
@@ -31,11 +32,11 @@
 		"Owner": "gianni",
 		"Stato": "rigettato",
 		"Assigned_to": "francesco",
-		"Screenshot": "",
+		"Screenshot":  "http://www.andresfuentesangarita.com/wp-content/uploads/2017/01/problemas.jpg",
 		"Valutazione": ""
 	}, {
 		"Valutazione": "",
-		"Screenshot": "",
+		"Screenshot": "http://paladins.it/wp-content/uploads/2018/01/1200px-Google_2015_logo.svg_-768x260.png",
 		"Assigned_to": "mario",
 		"Stato": "creato",
 		"Owner": "gianni",
@@ -46,7 +47,7 @@
 		"ID": "4"
 	}, {
 		"Valutazione": "",
-		"Screenshot": "",
+		"Screenshot":"",
 		"Assigned_to": "davide",
 		"Stato": "assegnato",
 		"Owner": "gianni",
@@ -64,7 +65,7 @@
 		"Owner": "mario",
 		"Stato": "da verificare",
 		"Assigned_to": "davide",
-		"Screenshot": "",
+		"Screenshot":"",
 		"Valutazione": ""
 	}, {
 		"ID": "8",
