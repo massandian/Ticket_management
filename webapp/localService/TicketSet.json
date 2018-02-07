@@ -9,9 +9,9 @@
 		"Owner": "davide",
 		"Stato": "assegnato",
 		"Assigned_to": "mario",
-		"Screenshot": "",
+		"Screenshot": "http://www.andresfuentesangarita.com/wp-content/uploads/2017/01/problemas.jpg",
 		"Valutazione": ""
-		
+	
 	}, {
 		"ID": "2",
 		"Titolo": "problema software",
@@ -21,7 +21,7 @@
 		"Owner": "marco",
 		"Stato": "creato",
 		"Assigned_to": "gianni",
-		"Screenshot":  "http://www.andresfuentesangarita.com/wp-content/uploads/2017/01/problemas.jpg",
+		"Screenshot":  "http://www.andresfuentesangarita.com/wp-content/uploads/2017/01/problemas.jpg", 
 		"Valutazione": ""
 	}, {
 		"ID": "3",
@@ -140,13 +140,20 @@
 		{"ID":"4","Tipo":"CONTENT"}
 	],
 	
-	 "ChatCollection" : [{
+	"ChatCollection" : [{
 		"Text":"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore",
 		"Date":"March 04 2013",
 		"Type":"Request",
 		"AuthorPicUrl":"",
-		"Author":"Mario",
-		"ID":"1"
-	 }]
-
+		"Author":"Mario"
+	
+	},{
+		"Text":"Lorem ipsum dolor sit amet, consetetur sadipscing elitre",
+		"Date":"March 04 2013",
+		"Type":"Request",
+		"AuthorPicUrl":"",
+		"Author":"Mario"
+		
+	}]
+	
 }

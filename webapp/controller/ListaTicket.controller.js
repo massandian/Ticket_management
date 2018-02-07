@@ -66,6 +66,23 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 					};
 				}
 			};
+			
+			
+			this._data = {
+				CampiCollection : [
+						            { Name : 'Clock' , size : '1X2X5'},
+						            { Name : 'Pen' , size : '7X2X5'}
+						          ],	
+						          
+				TipologieFiltriCollection : [
+									            { Name : 'Clock' , size : '1X2X5'},
+									            { Name : 'Pen' , size : '7X2X5'}
+									        ]	
+			};
+			
+			this.jModel = new sap.ui.model.json.JSONModel();
+			this.jModel.setData(this._data);
+			
 		},
 		
 		
@@ -77,7 +94,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 	
 		//Funzioni che applicano i temi belize o high contrast black 
 		ApplyThemeHcb: function () {
-			sap.ui.getCore().applyTheme("sap_hcb");  
+			sap.ui.getCore().applyTheme("sap_bluecrystal");  
 		},
 		
 		ApplyThemeBelize: function () {
@@ -213,8 +230,20 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 					this.getView().bindObject(oPath);
 				}
 			}
-
 		},
+		
+		onFilterTicketList: function() {
+		
+		/*	if (sap.n.oTicketStato === "da verificare") {
+        		//Filtra il ticket selezionato nella tabella e produce4 i risultati nella pagina di dettaglio (dettagli)       
+    			var oTicketStato= sap.n.oTicketStato;
+			    var listTicket = this.getView().byId("");
+			    var oFilterByTicketStato = new sap.ui.model.Filter("Stato", sap.ui.model.FilterOperator.EQ, oTicketStato);
+		      	listTicket.getBinding("items").filter(oFilterByTicketStato);
+		      	
+    	    }*/
+		},
+		
 		
 		_onPageNavButtonPress: function(oEvent) {
 
@@ -286,7 +315,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			}
 		},
 		
-/*		_onButtonPress12: function(oEvent) {
+		/*_onButtonPress12: function(oEvent) {
 
 			var oBindingContext = oEvent.getSource().getBindingContext();
 
@@ -475,11 +504,14 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 				
 				sap.n =  {};
 				sap.n.oTicketId = oEvent.getSource().getBindingContext().getProperty("ID");
+				sap.n.oTicketChat = oEvent.getSource().getBindingContext().getProperty("ID_Ticket");
+
 
 				//Press item of the ticket table
 				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			    oRouter.navTo("TicketDetail", {
-					ticketId:oEvent.getSource().getBindingContext().getProperty("ID")
+					oTicketId:oEvent.getSource().getBindingContext().getProperty("ID"),
+					oTicketChat:oEvent.getSource().getBindingContext().getProperty("ID_Ticket")
 			    });
 		},
 		

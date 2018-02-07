@@ -10,6 +10,11 @@
 						<content>
 							<ScrollContainer horizontal="true" vertical="true" width="auto" height="auto" visible="true">
 								<content>
+									<Bar design="footer">
+										<contentMiddle>
+											<Title text="Screenshot" level="H1"/>
+										</contentMiddle>
+									</Bar>
 									<Carousel id="screenshot1" height="auto" width="auto" loop="true" showPageIndicator="true" pageIndicatorPlacement="Bottom" visible="true"
 										class="sapUiContentPadding" pages="{/TicketCollection}">
 										<pages>
@@ -23,7 +28,7 @@
 									</Bar>
 									<FeedInput showIcon="true" icon="" value="" placeholder="Post something here" enabled="true" visible="true" maxLength="0"
 										buttonTooltip="Submit" post="onPost"/>
-									<List items="{/ChatCollection}" width="auto" growing="true" growingThreshold="20" growingScrollToLoad="false" backgroundDesign="Solid">
+									<List id="ChatList" items="{/ChatCollection}" width="auto" growing="true" growingThreshold="20" growingScrollToLoad="false" backgroundDesign="Solid">
 										<items>
 											<FeedListItem icon="{AuthorPicUrl}" sender="{Author}"
 												text="{Text}" info="{Type}" timestamp="{Date}"
@@ -40,6 +45,11 @@
 						<content>
 							<ScrollContainer horizontal="true" vertical="true" width="auto" height="auto" visible="true">
 								<content>
+									<Bar design="footer">
+										<contentMiddle>
+											<Title text="Screenshot" level="H1"/>
+										</contentMiddle>
+									</Bar>
 									<Carousel id="screenshot" height="auto" width="auto" loop="true" showPageIndicator="true" pageIndicatorPlacement="Bottom" visible="true"
 										class="sapUiContentPadding" pages="{/TicketCollection}">
 										<pages>
