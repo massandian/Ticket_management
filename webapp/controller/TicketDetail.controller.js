@@ -27,6 +27,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 		},
 		
 		onPost: function (oEvent) {
+			
 			var oFormat = DateFormat.getDateTimeInstance({style: "medium"});
 			var oDate = new Date();
 			var sDate = oFormat.format(oDate);

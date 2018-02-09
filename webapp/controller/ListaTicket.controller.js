@@ -8,9 +8,10 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 	"./Formatter",
 	"sap/m/TablePersoController",
 	"sap/ui/model/Filter",
-	"sap/ui/model/Sorter"
+	"sap/ui/model/Sorter",
+	"sap/m/MessageToast"
 
-], function(BaseController, MessageBox, Utilities, History, jQuery, JSONModel, DemoPersoService, Formatter, TablePersoController, Filter, Sorter) {
+], function(BaseController, MessageBox, Utilities, History, jQuery, JSONModel, DemoPersoService, Formatter, TablePersoController, Filter, Sorter, MessageToast) {
 	"use strict";
 	
 	return BaseController.extend("com.sap.build.standard.ticketManagement.controller.ListaTicket", {
@@ -67,17 +68,26 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 				}
 			};
 			
-			
+			//Dichiarato oggetto che contiene le regole per la definizione dei filtri custom
 			this._data = {
-				CampiCollection : [
-						            { Name : 'Clock' , size : '1X2X5'},
-						            { Name : 'Pen' , size : '7X2X5'}
-						          ],	
+					CampiCollection : [
+						            	{ID:"1",Nome:"ID"},
+										{Nome:"Titolo",ID:"2"},
+										{Nome:"Descrizione",ID:"3"},
+										{ID:"4",Nome:"Stato"},
+										{ID:"5",Nome:"Priorita"},
+										{Nome:"Owner",ID:"6"},
+										{Nome:"Assigned_to",ID:"7"},
+										{Nome:"Categoria",ID:"8"}
+						    	      ],	
 						          
-				TipologieFiltriCollection : [
-									            { Name : 'Clock' , size : '1X2X5'},
-									            { Name : 'Pen' , size : '7X2X5'}
-									        ]	
+					TipologieFiltriCollection : [
+										        {"ID":"1","Tipo":"BETWEEN"},
+												{"ID":"2","Tipo":"EQUAL"},
+												{"ID":"3","Tipo":"DIFFERENT FROM"},
+												{"ID":"4","Tipo":"CONTAIN"}
+										        ]
+	
 			};
 			
 			this.jModel = new sap.ui.model.json.JSONModel();
@@ -86,10 +96,74 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 		},
 		
 		
-		addRow : function(oEvent){
+		onBeforeRendering: function() {
 			
-			
+			this.byId('CustomFilter').setModel(this.jModel);
+			this.byId('OrdinaCampi').setModel(this.jModel);
 		},
+		
+		fetchRecords : function(oArg){
+		
+			//data will be in this._data.Products
+			console.log(this._data.CampiCollection);
+			console.log(this._data.TipologieFiltriCollection);
+		
+		},
+		
+	
+		addRow : function(oArg){
+			//Inserisce una nuova riga all'interno dei filtri custom per stabilire una nuova regola
+			this._data.CampiCollection.push({"ID":"1","Nome":"ID"},
+											{"Nome":"Titolo","ID":"2"},
+											{"Nome":"Descrizione","ID":"3"},
+											{"ID":"4","Nome":"Stato"},
+											{"ID":"5","Nome":"Priorita"},
+											{"Nome":"Owner","ID":"6"},
+											{"Nome":"Assigned_to","ID":"7"},
+											{"Nome":"Categoria","ID":"8"});
+											
+			this._data.TipologieFiltriCollection.push(	{"ID":"1","Tipo":"BETWEEN"},
+														{"ID":"2","Tipo":"EQUAL"},
+														{"ID":"3","Tipo":"DIFFERENT FROM"},
+														{"ID":"4","Tipo":"CONTAIN"});
+		
+			this.jModel.refresh();	//which will add the new record
+		},
+		
+		deleteRow : function(oArg){
+			
+			/*var deleteRecord = oArg.getSource().getBindingContext().getObject();
+			for(var i=0;i<this._data.CampiCollection.length;i++){
+				if(this._data.CampiCollection[i] == deleteRecord )
+						{
+						//	pop this._data.Products[i] 
+							this._data.CampiCollection.splice(i,1); //removing 1 record from i th index.
+							this.jModel.refresh();
+							break;//quit the loop
+						}
+			}*/
+		},
+		
+		
+		//Funzione per la completa gestione della larghezza delle colonne della tabella "lista ticket"
+		onColumnResize : function(oEvent) {
+		/*	var oColumn = oEvent.getParameter("column");
+
+			if (this.getView().byId("deliverydate") == oColumn) {
+				oEvent.preventDefault();
+			} else {
+				this._messageBuffer.push("Column '" + oColumn.getLabel().getText() + "' was resized to " + oEvent.getParameter("width") + ".");
+				if (this._messageTimer) {
+					jQuery.sap.clearDelayedCall(this._messageTimer);
+				}
+				this._messageTimer = jQuery.sap.delayedCall(50, this, function(){
+					MessageToast.show(this._messageBuffer.join("\n"));
+					this._messageBuffer = [];
+					this._messageTimer = null;
+				});
+			}*/
+		},
+
 		
 	
 		//Funzioni che applicano i temi belize o high contrast black 

@@ -32,7 +32,7 @@
 		                    <IconTabFilter icon="sap-icon://add-filter" iconColor="Neutral" text="Filtro personale" count="" design="Vertical" showAll="false" textDirection="Inherit" enabled="true" visible="true" iconDensityAware="false">
 		                        <content>
 		                        	<Title text="Regole di creazione filtro" level="Auto"/>
-		                            <Table id="CustomFilter">
+		                            <Table id="CustomFilter" width="100%" noDataText="No data" selectionMode="MultiToggle">
 										<columns>
 											<Column width="10%"/>
 											<Column id="campo" width="20%"/>
@@ -46,12 +46,12 @@
 											<ColumnListItem>
 												<cells>
 													<Label text="Filtro:"/>
-													<ComboBox id="combo1" items="{/CampiCollection}" placeholder="Seleziona il campo" editable="true" enabled="true" visible="true" width="100%" valueState="None">
+													<ComboBox items="{/CampiCollection}" id="combo1"  placeholder="Seleziona il campo" editable="true" enabled="true" visible="true" width="100%" valueState="None">
 		                                               <items>
 		                                                  <core:Item text="{Nome}" enabled="true" key="campi"/>
 		                                               </items>
 		                                            </ComboBox>
-		                                            <ComboBox id="combo2" items="{/TipologieFiltriCollection}" placeholder="tipologia filtro" editable="true" enabled="true" visible="true" width="100%" valueState="None">
+		                                            <ComboBox items="{/TipologieFiltriCollection}" id="combo2" placeholder="tipologia filtro" editable="true" enabled="true" visible="true" width="100%" valueState="None">
 		                                               <items>
 		                                                  <core:Item text="{Tipo}" enabled="true" key=""/>
 		                                               </items>
@@ -59,7 +59,7 @@
 		                                            <Input id="value" placeholder="Inserisci valore"/>
 		                                            <Button text="AND" enabled="true" key="AND" press="addRow" width="100%"/>
 		                                            <Button text="OR" enabled="true" key="OR" press="addRow" width="100%"/>
-		                                            <Button text="delete" icon="sap-icon://delete" enabled="true" press="" width="100%"/>
+		                                            <Button text="delete" icon="sap-icon://delete" enabled="true" press="deleteRow" width="100%"/>
 												</cells>
 											</ColumnListItem>
 										</items>
@@ -75,7 +75,7 @@
 		                                        <layout:content>
 		                                            <layout:BlockLayoutCell width="2" title="" titleAlignment="Begin" titleLevel="Auto">
 		                                                <layout:content>
-		                                                    <Table id="ordina_table" width="auto" noDataText="No data" mode="None" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" items="">
+		                                                    <Table id="ordinaSet" width="auto" noDataText="No data" mode="None" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" items="">
 		                                                        <infoToolbar>
 		                                                            <Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
 		                                                                <content>
@@ -120,7 +120,7 @@
 		                                            </layout:BlockLayoutCell>
 		                                            <layout:BlockLayoutCell width="2" title="" titleAlignment="End" titleLevel="Auto">
 		                                                <layout:content>
-		                                                    <Table width="auto" noDataText="No data" mode="MultiSelect" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" items="{/CampiCollection}">
+		                                                    <Table id="OrdinaCampi" width="auto" noDataText="No data" mode="MultiSelect" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" items="{/CampiCollection}">
 		                                                        <infoToolbar>
 		                                                            <Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
 		                                                                <content>
@@ -258,7 +258,7 @@
 			<Table
 				id="sap_Responsive_Page_0-content-sap_ui_layout_BlockLayout-1515407526987-content-sap_ui_layout_BlockLayoutRow-2-content-sap_ui_layout_BlockLayoutCell-1-content-build_simple_Table-1515407548335"
 				width="100%" noDataText="No data" mode="MultiSelect" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true"
-				itemPress="_onTableItemPress2" items="{/TicketCollection}">
+				itemPress="_onTableItemPress2" items="{/TicketCollection}" alternateRowColors="true" columnResize="onColumnResize">
 				<infoToolbar>
 					<Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
 						<content>
@@ -270,7 +270,7 @@
 				<columns>
 					<Column id="idcol" width="5%" hAlign="Left" vAlign="Middle" minScreenWidth="Phone" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
 						<header>
-							<Text text="ID Ticket" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+							<Text text="ID" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
 						</header>
 						<footer/>
 					</Column>
