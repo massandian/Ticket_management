@@ -121,17 +121,17 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 		},
 		
 		deleteRow : function(oArg){
-			
-			/*var deleteRecord = oArg.getSource().getBindingContext().getObject();
-			for(var i=0;i<this._data.CampiCollection.length;i++){
-				if(this._data.CampiCollection[i] == deleteRecord )
-						{
-						//	pop this._data.Products[i] 
-							this._data.CampiCollection.splice(i,1); //removing 1 record from i th index.
-							this.jModel.refresh();
-							break;//quit the loop
-						}
-			}*/
+			//Al press del tasto di cancellazione, elimina una riga per la dichiarazione di un filtro custom
+			var deleteRecord = oArg.getSource().getBindingContext().getObject();
+			for(var i=1 ; i<this._data.CustomFilterCollection.length ; i++){
+				if (this._data.CustomFilterCollection[i] == deleteRecord )
+					{
+					//	pop this._data.Products[i] 
+						this._data.CustomFilterCollection.splice(i,1); //removing 1 record from i th index.
+						this.jModel.refresh();
+						break;//quit the loop
+					}
+			}
 		},
 		
 		
