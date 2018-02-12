@@ -69,25 +69,24 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			};
 			
 			//Dichiarato oggetto che contiene le regole per la definizione dei filtri custom
-			this._data = {
-					CampiCollection : [
-						            	{ID:"1",Nome:"ID"},
-										{Nome:"Titolo",ID:"2"},
-										{Nome:"Descrizione",ID:"3"},
-										{ID:"4",Nome:"Stato"},
-										{ID:"5",Nome:"Priorita"},
-										{Nome:"Owner",ID:"6"},
-										{Nome:"Assigned_to",ID:"7"},
-										{Nome:"Categoria",ID:"8"}
+			this._data = {      
+					CustomFilterCollection : [
+						            	{"Nome" : ['ID', 'Titolo', 'Descrizione', 'Stato', 'Priorita', 'Owner', 'Categoria', 'Assigned_to'],
+						            	 "Tipo": ["BETWEEN", "EQUAL", "DIFFERENT FROM", "CONTAIN"]}
 						    	      ],	
 						          
-					TipologieFiltriCollection : [
-										        {"ID":"1","Tipo":"BETWEEN"},
-												{"ID":"2","Tipo":"EQUAL"},
-												{"ID":"3","Tipo":"DIFFERENT FROM"},
-												{"ID":"4","Tipo":"CONTAIN"}
-										        ]
-	
+										        
+					OrdinaCollection : [{ID:"1", Nome:"ID"},
+										{Nome:"Titolo", ID:"2"},
+										{Nome:"Descrizione", ID:"3"},
+										{ID:"4", Nome:"Stato"},
+										{ID:"5", Nome:"Priorita"},
+										{Nome:"Owner", ID:"6"},
+										{Nome:"Assigned_to", ID:"7"},
+										{Nome:"Categoria", ID:"8"}
+						
+						]
+					
 			};
 			
 			this.jModel = new sap.ui.model.json.JSONModel();
@@ -100,32 +99,23 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			
 			this.byId('CustomFilter').setModel(this.jModel);
 			this.byId('OrdinaCampi').setModel(this.jModel);
+		
 		},
 		
 		fetchRecords : function(oArg){
 		
 			//data will be in this._data.Products
-			console.log(this._data.CampiCollection);
-			console.log(this._data.TipologieFiltriCollection);
+			console.log(this._data.CustomFilterCollection);
 		
 		},
 		
 	
 		addRow : function(oArg){
 			//Inserisce una nuova riga all'interno dei filtri custom per stabilire una nuova regola
-			this._data.CampiCollection.push({"ID":"1","Nome":"ID"},
-											{"Nome":"Titolo","ID":"2"},
-											{"Nome":"Descrizione","ID":"3"},
-											{"ID":"4","Nome":"Stato"},
-											{"ID":"5","Nome":"Priorita"},
-											{"Nome":"Owner","ID":"6"},
-											{"Nome":"Assigned_to","ID":"7"},
-											{"Nome":"Categoria","ID":"8"});
-											
-			this._data.TipologieFiltriCollection.push(	{"ID":"1","Tipo":"BETWEEN"},
-														{"ID":"2","Tipo":"EQUAL"},
-														{"ID":"3","Tipo":"DIFFERENT FROM"},
-														{"ID":"4","Tipo":"CONTAIN"});
+		
+			
+			this._data.CustomFilterCollection.push({"Nome" : ['ID', 'Titolo', 'Descrizione', 'Stato', 'Priorita', 'Owner', 'Categoria', 'Assigned_to'],
+						            				"Tipo": ["BETWEEN", "EQUAL", "DIFFERENT FROM", "CONTAIN"]});
 		
 			this.jModel.refresh();	//which will add the new record
 		},
@@ -145,27 +135,6 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 		},
 		
 		
-		//Funzione per la completa gestione della larghezza delle colonne della tabella "lista ticket"
-		onColumnResize : function(oEvent) {
-		/*	var oColumn = oEvent.getParameter("column");
-
-			if (this.getView().byId("deliverydate") == oColumn) {
-				oEvent.preventDefault();
-			} else {
-				this._messageBuffer.push("Column '" + oColumn.getLabel().getText() + "' was resized to " + oEvent.getParameter("width") + ".");
-				if (this._messageTimer) {
-					jQuery.sap.clearDelayedCall(this._messageTimer);
-				}
-				this._messageTimer = jQuery.sap.delayedCall(50, this, function(){
-					MessageToast.show(this._messageBuffer.join("\n"));
-					this._messageBuffer = [];
-					this._messageTimer = null;
-				});
-			}*/
-		},
-
-		
-	
 		//Funzioni che applicano i temi belize o high contrast black 
 		ApplyThemeHcb: function () {
 			sap.ui.getCore().applyTheme("sap_bluecrystal");  
@@ -198,7 +167,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			}
 		},
 		
-	
+		//Apertura context menu per il setting del tema
 		handleOpenDialogSingleCustomTab: function (oEvent) {
 			var oButton = oEvent.getSource();
 
@@ -304,14 +273,15 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 					this.getView().bindObject(oPath);
 				}
 			}
+			this.onFilterTicketList();                         
 		},
 		
 		onFilterTicketList: function() {
 		
 		/*	if (sap.n.oTicketStato === "da verificare") {
         		//Filtra il ticket selezionato nella tabella e produce4 i risultati nella pagina di dettaglio (dettagli)       
-    			var oTicketStato= sap.n.oTicketStato;
-			    var listTicket = this.getView().byId("");
+    			var oTicketStato = sap.n.oTicketStato;
+			    var listTicket = this.getView().byId("__component0---ListaTicket--sap_Responsive_Page_0-content-sap_ui_layout_BlockLayout-1515407526987-content-sap_ui_layout_BlockLayoutRow-2-content-sap_ui_layout_BlockLayoutCell-1-content-build_simple_Table-1515407548335");
 			    var oFilterByTicketStato = new sap.ui.model.Filter("Stato", sap.ui.model.FilterOperator.EQ, oTicketStato);
 		      	listTicket.getBinding("items").filter(oFilterByTicketStato);
 		      	
@@ -490,6 +460,8 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			//Clear all sortings and grouping rules
 			var oTable = this.getView().byId("sap_Responsive_Page_0-content-sap_ui_layout_BlockLayout-1515407526987-content-sap_ui_layout_BlockLayoutRow-2-content-sap_ui_layout_BlockLayoutCell-1-content-build_simple_Table-1515407548335");
 			oTable.getBinding("items").sort(null);
+			oTable.getBinding("items").filter(null);
+			oTable.getBinding("items").order(null);
 			
 		},
 		
@@ -607,7 +579,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 	
 		_onButtonPress16: function() {
 			return new Promise(function(fnResolve) {
-				sap.m.MessageBox.confirm("I seguenti ticket saranno contrassegnati come verificati", {
+				sap.m.MessageBox.confirm("I ticket selezionati saranno contrassegnati come verificati", {
 					title: "Conferma",
 					actions: ["OK", "ANNULLA"],
 					onClose: function(sActionClicked) {
