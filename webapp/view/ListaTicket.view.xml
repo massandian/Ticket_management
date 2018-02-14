@@ -5,7 +5,7 @@
 			xmlns:u="sap.ui.unified"
 			xmlns:form="sap.ui.layout.form"
 			xmlns:core="sap.ui.core">
-	<Page showHeader="true" title="lista ticket" showFooter="true" showNavButton="true" navButtonPress="_onPageNavButtonPress">
+	<Page title="lista ticket" showFooter="true" showHeader="true" showNavButton="true" navButtonPress="_onPageNavButtonPress" class="backgroundImage">
 		<content>
 			<Toolbar width="auto" height="auto" design="Solid" visible="true" enabled="true">
 				<content>
@@ -48,12 +48,12 @@
 													<Label text="Filtro:"/>
 													<ComboBox items="{Nome}" id="combo1" placeholder="Seleziona il campo" editable="true" enabled="true" visible="true" width="100%" valueState="None">
 		                                               <items>
-		                                                  <core:Item templateShareable="false" text="{}" enabled="true" key="campi"/>
+		                                                  <core:Item templateShareable="true" text="{}" enabled="true" key="campi"/>
 		                                               </items>
 		                                            </ComboBox>
 		                                            <ComboBox items="{Tipo}" id="combo2" placeholder="tipologia filtro" editable="true" enabled="true" visible="true" width="100%" valueState="None">
 		                                               <items>
-		                                                  <core:Item templateShareable="false" text="{}" enabled="true" key="tipologie"/>
+		                                                  <core:Item templateShareable="true" text="{}" enabled="true" key="tipologie"/>
 		                                               </items>
 		                                            </ComboBox>
 		                                            <Input id="value" placeholder="Inserisci valore"/>
@@ -75,7 +75,7 @@
 		                                        <layout:content>
 		                                            <layout:BlockLayoutCell width="2" title="" titleAlignment="Begin" titleLevel="Auto">
 		                                                <layout:content>
-		                                                    <Table id="ordinaSet" items="" width="auto" noDataText="No data" mode="None" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true">
+		                                                    <Table id="ordinaSet" items="{/OrdinaCollection}" width="auto" noDataText="No data" mode="None" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true">
 		                                                        <infoToolbar>
 		                                                            <Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
 		                                                                <content>

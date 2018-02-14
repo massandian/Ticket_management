@@ -4,13 +4,13 @@
 		"_version": "1.2.0",
 		"id": "com.sap.build.standard.ticketManagement",
 		"type": "application",
-		"i18n": "i18n/i18n.properties",
+		"i18n": "i18n/i18n_it.properties",
 		"applicationVersion": {
 			"version": "1.0.0"
 		},
 		"dataSources": {
 			"local": {
-				"uri": "/here/goes/your/serviceUrl/local/",
+				"uri": "localService/metadata.xml",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "2.0",
@@ -43,10 +43,7 @@
 			"tablet": true,
 			"phone": true
 		},
-		"supportedThemes": [
-			"sap_hcb",
-			"sap_belize"
-		]
+		"supportedThemes": ["sap_belize", "sap_bluecrystal"]
 	},
 	"sap.ui5": {
 		"_version": "1.1.0",
@@ -86,7 +83,9 @@
 			}
 		},
 		"resources": {
-			"css": []
+			"css": [{
+						"uri": "style.css"
+					}]
 		},
 		"routing": {
 			"config": {
@@ -97,9 +96,7 @@
 				"clearTarget": false,
 				"controlAggregation": "pages",
 				"bypassed": {
-					"target": [
-						"HomeUser"
-					]
+					"target": ["HomeUser"]
 				}
 			},
 			"targets": {
@@ -140,41 +137,29 @@
 				}
 			},
 			"routes": [{
-				"pattern": "HomeUser/:context:",
-				"name": "HomeUser",
-				"target": [
-					"HomeUser"
-				]
+				"pattern": "TicketDetail/:context:",
+				"name": "TicketDetail",
+				"target": ["TicketDetail"]
 			}, {
 				"pattern": "",
 				"name": "default",
-				"target": [
-					"HomeUser"
-				]
+				"target": ["HomeUser"]
+			}, {
+				"pattern": "HomeUser/:context:",
+				"name": "HomeUser",
+				"target": ["HomeUser"]
 			}, {
 				"pattern": "NewTicket/:context:",
 				"name": "NewTicket",
-				"target": [
-					"NewTicket"
-				]
-			}, {
-				"pattern": "TicketDetail/:context:",
-				"name": "TicketDetail",
-				"target": [
-					"TicketDetail"
-				]
+				"target": ["NewTicket"]
 			}, {
 				"pattern": "StatisticheTicket/:context:",
 				"name": "StatisticheTicket",
-				"target": [
-					"StatisticheTicket"
-				]
+				"target": ["StatisticheTicket"]
 			}, {
 				"pattern": "ListaTicket/:context:",
 				"name": "ListaTicket",
-				"target": [
-					"ListaTicket"
-				]
+				"target": ["ListaTicket"]
 			}]
 		}
 	}

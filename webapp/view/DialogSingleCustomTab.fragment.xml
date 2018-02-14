@@ -8,7 +8,7 @@
 				select="ApplyThemeBelize"
 				icon="sap-icon://palette"/>
 			<u:MenuItem
-				text="SAP hcb"
+				text="SAP Bluecrystal"
 				select="ApplyThemeHcb" 
 				icon="sap-icon://palette"/>
 		</u:Menu>

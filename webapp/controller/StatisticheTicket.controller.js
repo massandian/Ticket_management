@@ -53,8 +53,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			var sMasterContext = this.sMasterContext ? this.sMasterContext : sPath;
 
 			if (sEntityNameSet !== null) {
-				sNavigationPropertyName = sViaRelation || this.getOwnerComponent().getNavigationPropertyForNavigationWithContext(sEntityNameSet,
-					sRouteName);
+				sNavigationPropertyName = sViaRelation || this.getOwnerComponent().getNavigationPropertyForNavigationWithContext(sEntityNameSet, sRouteName);
 			}
 			if (sNavigationPropertyName !== null && sNavigationPropertyName !== undefined) {
 				if (sNavigationPropertyName === "") {
@@ -92,9 +91,60 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 				fnPromiseResolve();
 			}
 		},
-		onInit: function() {
+		applyFiltersAndSorters: function(sControlId, sAggregationName) {
+			var oBindingInfo = this.getView().byId(sControlId).getBindingInfo(sAggregationName);
+			var oBindingOptions = this.updateBindingOptions(sControlId);
+			this.getView().byId(sControlId).bindAggregation(sAggregationName, {
+				model: oBindingInfo.model,
+				path: oBindingInfo.path,
+				parameters: oBindingInfo.parameters,
+				template: oBindingInfo.template,
+				sorter: oBindingOptions.sorters,
+				filters: oBindingOptions.filters
+			});
 
-			this.mBindingOptions = {};
+		},
+		updateBindingOptions: function(sCollectionId, oBindingData, sSourceId) {
+			this.mBindingOptions = this.mBindingOptions || {};
+			this.mBindingOptions[sCollectionId] = this.mBindingOptions[sCollectionId] || {};
+
+			var aSorters = this.mBindingOptions[sCollectionId].sorters;
+			var oGroupby = this.mBindingOptions[sCollectionId].groupby;
+
+			// If there is no oBindingData parameter, we just need the processed filters and sorters from this function
+			if (oBindingData) {
+				if (oBindingData.sorters) {
+					aSorters = oBindingData.sorters;
+				}
+				if (oBindingData.groupby) {
+					oGroupby = oBindingData.groupby;
+				}
+				// 1) Update the filters map for the given collection and source
+				this.mBindingOptions[sCollectionId].sorters = aSorters;
+				this.mBindingOptions[sCollectionId].groupby = oGroupby;
+				this.mBindingOptions[sCollectionId].filters = this.mBindingOptions[sCollectionId].filters || {};
+				this.mBindingOptions[sCollectionId].filters[sSourceId] = oBindingData.filters || [];
+			}
+
+			// 2) Reapply all the filters and sorters
+			var aFilters = [];
+			for (var key in this.mBindingOptions[sCollectionId].filters) {
+				aFilters = aFilters.concat(this.mBindingOptions[sCollectionId].filters[key]);
+			}
+
+			// Add the groupby first in the sorters array
+			if (oGroupby) {
+				aSorters = aSorters ? [oGroupby].concat(aSorters) : [oGroupby];
+			}
+
+			var aFinalFilters = aFilters.length > 0 ? [new sap.ui.model.Filter(aFilters, true)] : undefined;
+			return {
+				filters: aFinalFilters,
+				sorters: aSorters
+			};
+
+		},
+		onInit: function() {
 			this.oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			this.oRouter.getTarget("StatisticheTicket").attachDisplay(jQuery.proxy(this.handleRouteMatched, this));
 
@@ -102,14 +152,15 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			var oModel = new sap.ui.model.json.JSONModel();
 			oView.setModel(oModel, "staticDataModel");
 
-			function dateDimensionFormatter(dimensionValue) {
-				if (dimensionValue instanceof Date) {
+			function dateDimensionFormatter(oDimensionValue, sTextValue) {
+				var oValueToFormat = sTextValue !== undefined ? sTextValue : oDimensionValue;
+				if (oValueToFormat instanceof Date) {
 					var oFormat = sap.ui.core.format.DateFormat.getDateInstance({
 						style: "short"
 					});
-					return oFormat.format(dimensionValue);
+					return oFormat.format(oValueToFormat);
 				}
-				return dimensionValue;
+				return oValueToFormat;
 			}
 
 			this.oBindingParameters = {};
@@ -138,15 +189,11 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			oView.getModel("staticDataModel").setData({
 				"sap_Responsive_Page_0-content-sap_ui_layout_BlockLayout-1513604393273-content-sap_ui_layout_BlockLayoutRow-1-content-sap_ui_layout_BlockLayoutCell-1-content-sap_chart_ColumnChart-1515512310109": oData
 			}, true);
-			this.oBindingParameters[
-				'sap_Responsive_Page_0-content-sap_ui_layout_BlockLayout-1513604393273-content-sap_ui_layout_BlockLayoutRow-1-content-sap_ui_layout_BlockLayoutCell-1-content-sap_chart_ColumnChart-1515512310109'
-			] = {
+			this.oBindingParameters['sap_Responsive_Page_0-content-sap_ui_layout_BlockLayout-1513604393273-content-sap_ui_layout_BlockLayoutRow-1-content-sap_ui_layout_BlockLayoutCell-1-content-sap_chart_ColumnChart-1515512310109'] = {
 				"path": "/TicketSet",
 				"parameters": {}
 			};
-			var aDimensions = oView.byId(
-				"sap_Responsive_Page_0-content-sap_ui_layout_BlockLayout-1513604393273-content-sap_ui_layout_BlockLayoutRow-1-content-sap_ui_layout_BlockLayoutCell-1-content-sap_chart_ColumnChart-1515512310109"
-			).getDimensions();
+			var aDimensions = oView.byId("sap_Responsive_Page_0-content-sap_ui_layout_BlockLayout-1513604393273-content-sap_ui_layout_BlockLayoutRow-1-content-sap_ui_layout_BlockLayoutCell-1-content-sap_chart_ColumnChart-1515512310109").getDimensions();
 			aDimensions.forEach(function(oDimension) {
 				oDimension.setTextFormatter(dateDimensionFormatter);
 			});
@@ -175,15 +222,11 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			oView.getModel("staticDataModel").setData({
 				"sap_Responsive_Page_0-content-sap_ui_layout_BlockLayout-1513604393273-content-sap_ui_layout_BlockLayoutRow-2-content-sap_ui_layout_BlockLayoutCell-1-content-sap_chart_PieChart-1513604475519": oData
 			}, true);
-			this.oBindingParameters[
-				'sap_Responsive_Page_0-content-sap_ui_layout_BlockLayout-1513604393273-content-sap_ui_layout_BlockLayoutRow-2-content-sap_ui_layout_BlockLayoutCell-1-content-sap_chart_PieChart-1513604475519'
-			] = {
+			this.oBindingParameters['sap_Responsive_Page_0-content-sap_ui_layout_BlockLayout-1513604393273-content-sap_ui_layout_BlockLayoutRow-2-content-sap_ui_layout_BlockLayoutCell-1-content-sap_chart_PieChart-1513604475519'] = {
 				"path": "/TicketSet",
 				"parameters": {}
 			};
-			var aDimensions = oView.byId(
-				"sap_Responsive_Page_0-content-sap_ui_layout_BlockLayout-1513604393273-content-sap_ui_layout_BlockLayoutRow-2-content-sap_ui_layout_BlockLayoutCell-1-content-sap_chart_PieChart-1513604475519"
-			).getDimensions();
+			var aDimensions = oView.byId("sap_Responsive_Page_0-content-sap_ui_layout_BlockLayout-1513604393273-content-sap_ui_layout_BlockLayoutRow-2-content-sap_ui_layout_BlockLayoutCell-1-content-sap_chart_PieChart-1513604475519").getDimensions();
 			aDimensions.forEach(function(oDimension) {
 				oDimension.setTextFormatter(dateDimensionFormatter);
 			});
@@ -192,25 +235,24 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 		onAfterRendering: function() {
 
 			var oChart,
+				self = this,
 				oBindingParameters = this.oBindingParameters,
 				oView = this.getView();
 
 			oView.getModel().getMetaModel().loaded().then(function() {
-				oChart = oView.byId(
-					"sap_Responsive_Page_0-content-sap_ui_layout_BlockLayout-1513604393273-content-sap_ui_layout_BlockLayoutRow-1-content-sap_ui_layout_BlockLayoutCell-1-content-sap_chart_ColumnChart-1515512310109"
-				);
-				oChart.bindData(oBindingParameters[
-					'sap_Responsive_Page_0-content-sap_ui_layout_BlockLayout-1513604393273-content-sap_ui_layout_BlockLayoutRow-1-content-sap_ui_layout_BlockLayoutCell-1-content-sap_chart_ColumnChart-1515512310109'
-				]);
+				oChart = oView.byId("sap_Responsive_Page_0-content-sap_ui_layout_BlockLayout-1513604393273-content-sap_ui_layout_BlockLayoutRow-1-content-sap_ui_layout_BlockLayoutCell-1-content-sap_chart_ColumnChart-1515512310109");
+				var oParameters = oBindingParameters['sap_Responsive_Page_0-content-sap_ui_layout_BlockLayout-1513604393273-content-sap_ui_layout_BlockLayoutRow-1-content-sap_ui_layout_BlockLayoutCell-1-content-sap_chart_ColumnChart-1515512310109'];
+
+				oChart.bindData(oBindingParameters['sap_Responsive_Page_0-content-sap_ui_layout_BlockLayout-1513604393273-content-sap_ui_layout_BlockLayoutRow-1-content-sap_ui_layout_BlockLayoutCell-1-content-sap_chart_ColumnChart-1515512310109']);
+
 			});
 
 			oView.getModel().getMetaModel().loaded().then(function() {
-				oChart = oView.byId(
-					"sap_Responsive_Page_0-content-sap_ui_layout_BlockLayout-1513604393273-content-sap_ui_layout_BlockLayoutRow-2-content-sap_ui_layout_BlockLayoutCell-1-content-sap_chart_PieChart-1513604475519"
-				);
-				oChart.bindData(oBindingParameters[
-					'sap_Responsive_Page_0-content-sap_ui_layout_BlockLayout-1513604393273-content-sap_ui_layout_BlockLayoutRow-2-content-sap_ui_layout_BlockLayoutCell-1-content-sap_chart_PieChart-1513604475519'
-				]);
+				oChart = oView.byId("sap_Responsive_Page_0-content-sap_ui_layout_BlockLayout-1513604393273-content-sap_ui_layout_BlockLayoutRow-2-content-sap_ui_layout_BlockLayoutCell-1-content-sap_chart_PieChart-1513604475519");
+				var oParameters = oBindingParameters['sap_Responsive_Page_0-content-sap_ui_layout_BlockLayout-1513604393273-content-sap_ui_layout_BlockLayoutRow-2-content-sap_ui_layout_BlockLayoutCell-1-content-sap_chart_PieChart-1513604475519'];
+
+				oChart.bindData(oBindingParameters['sap_Responsive_Page_0-content-sap_ui_layout_BlockLayout-1513604393273-content-sap_ui_layout_BlockLayoutRow-2-content-sap_ui_layout_BlockLayoutCell-1-content-sap_chart_PieChart-1513604475519']);
+
 			});
 
 		}

@@ -25,7 +25,6 @@ sap.ui.define([
 					},
 					{
 						name: "ticketDetails",
-					
 						pattern: "TicketSet/:ID:",
 						target: ["master", "ticketDetails"]
 					}

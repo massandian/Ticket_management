@@ -1,14 +1,14 @@
 <mvc:View xmlns:mvc="sap.ui.core.mvc" controllerName="com.sap.build.standard.ticketManagement.controller.HomeUser" xmlns="sap.m"
-	xmlns:layout="sap.ui.layout" xmlns:microchart="sap.suite.ui.microchart" class="sapUiSizeCompact">
-	<Page showHeader="true" title="" showFooter="true" showNavButton="false">
+	xmlns:layout="sap.ui.layout" xmlns:microchart="sap.suite.ui.microchart" class="sapUiSizeCompact"> 
+	<Page showHeader="false" title="" showFooter="true" showNavButton="false" class="backgroundImage">
 		<content>
-			<layout:BlockLayout background="Default">
+			<layout:BlockLayout background="Accent">
 				<layout:content>
 					<layout:BlockLayoutRow scrollable="false">
 						<layout:content>
 							<layout:BlockLayoutCell width="1" title="" titleAlignment="Center" titleLevel="Auto">
-								<layout:content>
-									<Image src="/webapp/resources/logo-De-cecco.png" height="auto" width="auto" densityAware="false" press="_onImagePress"/>
+								<layout:content>	
+									<Image src="/webapp/resources/logo-De-cecco.png" height="auto" width="auto"  densityAware="false" press="_onImagePress"/>
 								</layout:content>
 							</layout:BlockLayoutCell>
 							<layout:BlockLayoutCell width="3" title="" titleAlignment="Center" titleLevel="Auto">
@@ -29,20 +29,20 @@
 							<layout:BlockLayoutCell width="1" title="" titleAlignment="Center" titleLevel="Auto">
 								<layout:content>
 									<StandardTile title="ticket in lavorazione" number="" numberUnit="" info="Information" infoState="None" icon="sap-icon://settings"
-										press="_onStandardTilePress"/>
+										press="_onStandardTilePress" class="title"/>
 									<Title text="" titleStyle="H1" width="auto" textAlign="Begin" visible="true"/>
 								</layout:content>
 							</layout:BlockLayoutCell>
 							<layout:BlockLayoutCell width="1" title="" titleAlignment="Center" titleLevel="Auto">
 								<layout:content>
 									<StandardTile title="creazione nuovo ticket" number="" numberUnit="" info="Information" infoState="None"
-										icon="sap-icon://write-new-document" press="_onStandardTilePress1"/>
+										icon="sap-icon://write-new-document" press="_onStandardTilePress1" class="title"/>
 								</layout:content>
 							</layout:BlockLayoutCell>
-							<layout:BlockLayoutCell width="1" title="" titleAlignment="Begin" titleLevel="Auto">
+							<layout:BlockLayoutCell width="1" title="" titleAlignment="Center" titleLevel="Auto">
 								<layout:content>
-									<StandardTile title="terminati da verificare" number="6" numberUnit="NUM" info="Information" infoState="None"
-										icon="sap-icon://status-completed" press="_onStandardTilePress2"/>
+									<StandardTile title="terminati da verificare" info="Information" infoState="None"
+									icon="sap-icon://status-completed" press="_onStandardTilePress2" class="title" />
 								</layout:content>
 							</layout:BlockLayoutCell>
 						</layout:content>

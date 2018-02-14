@@ -72,7 +72,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			this._data = {      
 					CustomFilterCollection : [
 						            	{"Nome" : ['ID', 'Titolo', 'Descrizione', 'Stato', 'Priorita', 'Owner', 'Categoria', 'Assigned_to'],
-						            	 "Tipo": ["BETWEEN", "EQUAL", "DIFFERENT FROM", "CONTAIN"]}
+						            	 "Tipo": ["COMPRESO TRA", "UGUALE", "DIVERSO DA", "CONTIENE"]}
 						    	      ],	
 						          
 										        
@@ -115,7 +115,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 		
 			
 			this._data.CustomFilterCollection.push({"Nome" : ['ID', 'Titolo', 'Descrizione', 'Stato', 'Priorita', 'Owner', 'Categoria', 'Assigned_to'],
-						            				"Tipo": ["BETWEEN", "EQUAL", "DIFFERENT FROM", "CONTAIN"]});
+						            				"Tipo": ["COMPRESO TRA", "UGUALE", "DIVERSO DA", "CONTIENE"]});
 		
 			this.jModel.refresh();	//which will add the new record
 		},
@@ -144,7 +144,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			sap.ui.getCore().applyTheme("sap_belize");  
 		},
 		
-		//Personalizzazione visualizzazione tabella
+		//Personalizzazione visualizzazione tabella con dialog 
 		onPersoButtonPressed: function (oEvent) {
 			this._oTPC.openDialog();
 		},
@@ -184,12 +184,13 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			this._menu.open(this._bKeyboard, oButton, eDock.BeginTop, eDock.BeginBottom, oButton);
 		},
 
-		
+		//Nasconde e visualizza il secondary content della pagina sulla sinistra
 		handleToggleSecondaryContent: function(oEvent) {
 			var oSplitContainer = this.getView().byId("mySplitContainer");
 			oSplitContainer.setShowSecondaryContent(!oSplitContainer.getShowSecondaryContent());
 		},
 		
+		//Nasconde e visualizza il secondary content con le regole di filtro custom
 		ToggleSecondaryContent: function(oEvent) {
 			var oSplitContainer = this.getView().byId("SplitContainer");
 			var sOrientation = this.getView().byId("SplitContainer").getOrientation();
@@ -198,6 +199,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			oSplitContainer.setShowSecondaryContent(!oSplitContainer.getShowSecondaryContent());	
 		},
 		
+		//Apertura confirm box e salvataggio del custom filter appena creato
 		_onButtonPress5: function(oEvent) {
 
 			oEvent = jQuery.extend(true, {}, oEvent);
@@ -227,8 +229,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 											path: "/" + sNewContext
 										});
 										if (window.history && window.history.replaceState) {
-											window.history.replaceState(undefined, undefined, window.location.hash.replace(encodeURIComponent(oController.sContext),
-												encodeURIComponent(sNewContext)));
+											window.history.replaceState(undefined, undefined, window.location.hash.replace(encodeURIComponent(oController.sContext), encodeURIComponent(sNewContext)));
 										}
 										oModel.refresh();
 										fnResolve();
@@ -249,15 +250,37 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 							fnResolve();
 						}
 					});
-					
+
+				}.bind(this))
+				.then(function(result) {
+					if (result === false) {
+						return false;
+					} else {
+						return new Promise(function(fnResolve) {
+							sap.m.MessageBox.confirm("Il filtro custom sarà salvato nel sistema", {
+								title: "Filtro Custom",
+								actions: ["OK", "Annulla"],
+								onClose: function(sActionClicked) {
+									fnResolve(sActionClicked === "OK");
+								}
+							});
+						});
+
+					}
 				}.bind(this)).catch(function(err) {
 					if (err !== undefined) {
 						MessageBox.error(err.message);
 					}
 				});
+			
+		/*	this.TicketSet.ChatCollection.push({"Nome" : ['ID', 'Titolo', 'Descrizione', 'Stato', 'Priorita', 'Owner', 'Categoria', 'Assigned_to'],
+						            				"Tipo": ["COMPRESO TRA", "UGUALE", "DIVERSO DA", "CONTIENE"]});
+		
+			this.jModel.refresh();	*/
+				
 		},
 		
-		
+		//Regole di routing
 		handleRouteMatched: function(oEvent) {
 
 			var oParams = {};
@@ -278,7 +301,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 		
 		onFilterTicketList: function() {
 		
-		/*	if (sap.n.oTicketStato === "da verificare") {
+			/*if (sap.n.oTicketStato === "da verificare") {
         		//Filtra il ticket selezionato nella tabella e produce4 i risultati nella pagina di dettaglio (dettagli)       
     			var oTicketStato = sap.n.oTicketStato;
 			    var listTicket = this.getView().byId("__component0---ListaTicket--sap_Responsive_Page_0-content-sap_ui_layout_BlockLayout-1515407526987-content-sap_ui_layout_BlockLayoutRow-2-content-sap_ui_layout_BlockLayoutCell-1-content-build_simple_Table-1515407548335");
@@ -303,6 +326,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			});
 
 		},
+		
 		doNavigate: function(sRouteName, oBindingContext, fnPromiseResolve, sViaRelation) {
 
 			var sPath = (oBindingContext) ? oBindingContext.getPath() : null;
@@ -374,6 +398,8 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 
 		},*/
 		
+		
+		//Funzione che gestisce la barra di ricerca dei ticket
 		_onSearchFieldLiveChange2: function(oEvent) {
 			var sControlId =
 				"sap_Responsive_Page_0-content-sap_ui_layout_BlockLayout-1515407526987-content-sap_ui_layout_BlockLayoutRow-2-content-sap_ui_layout_BlockLayoutCell-1-content-build_simple_Table-1515407548335";
@@ -455,6 +481,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 
 		},
 		
+		//Funzione associata al bottone clear (pulisce tutti i filtri, gli ordinamenti e i raggruppamenti inseriti)
 		_onButtonPress13: function(oEvent) {
 			
 			//Clear all sortings and grouping rules
@@ -465,7 +492,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			
 		},
 		
-		
+		//Funzione che apre la dialog per la definizione delle regole di filtro standard
 		handleViewSettingsDialogButtonPressed: function(oEvent) {
 
 			if (!this._oDialog) {
@@ -516,7 +543,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 		},
 		
 		
-		
+		//Funzioni implementate per la gestione dei custom filter lato frontend (non ancora utilizzate)
 		getCustomFilter: function(sPath, vValueLT, vValueGT) {
 			if (vValueLT !== "" && vValueGT !== "") {
 				return new sap.ui.model.Filter([
@@ -530,6 +557,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			return new sap.ui.model.Filter(sPath, sap.ui.model.FilterOperator.GT, vValueGT);
 
 		},
+		
 		getCustomFilterString: function(bIsNumber, sPath, sOperator, vValueLT, vValueGT) {
 			switch (sOperator) {
 				case sap.ui.model.FilterOperator.LT:
@@ -538,26 +566,27 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 					return sPath + ' (Between ' + vValueGT + ' and ' + vValueLT + ')';
 				case sap.ui.model.FilterOperator.GT:
 					return sPath + (bIsNumber ? ' (More than ' : ' (After ') + vValueGT + ')';
+		
 			}
 
 		},
+		
 		filterCountFormatter: function(sValue1, sValue2) {
 			return sValue1 !== "" || sValue2 !== "" ? 1 : 0;
 
 		},
 		
+		//Evento press di un ticket specifico
 		onPress : function (oEvent) {
 				
 				sap.n =  {};
 				sap.n.oTicketId = oEvent.getSource().getBindingContext().getProperty("ID");
-				sap.n.oTicketChat = oEvent.getSource().getBindingContext().getProperty("ID_Ticket");
-
+				
 
 				//Press item of the ticket table
 				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			    oRouter.navTo("TicketDetail", {
-					oTicketId:oEvent.getSource().getBindingContext().getProperty("ID"),
-					oTicketChat:oEvent.getSource().getBindingContext().getProperty("ID_Ticket")
+					oTicketId:oEvent.getSource().getBindingContext().getProperty("ID")
 			    });
 		},
 		

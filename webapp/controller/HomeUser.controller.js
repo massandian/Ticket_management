@@ -1,11 +1,14 @@
 sap.ui.define(["sap/ui/core/mvc/Controller",
 	"sap/m/MessageBox",
 	"./utilities",
-	"sap/ui/core/routing/History"
-], function(BaseController, MessageBox, Utilities, History) {
+	"sap/ui/core/routing/History",
+	"sap/ui/model/json/JSONModel"
+	
+], function(BaseController, MessageBox, Utilities, History, JSONModel) {
 	"use strict";
 
 	return BaseController.extend("com.sap.build.standard.ticketManagement.controller.HomeUser", {
+		
 		handleRouteMatched: function(oEvent) {
 
 			var oParams = {};
@@ -21,8 +24,8 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 					this.getView().bindObject(oPath);
 				}
 			}
-
 		},
+		
 		_onImagePress: function(oEvent) {
 
 			var oBindingContext = oEvent.getSource().getBindingContext();
@@ -106,6 +109,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			});
 
 		},
+		
 		_onStandardTilePress1: function(oEvent) {
 
 			var oBindingContext = oEvent.getSource().getBindingContext();
@@ -125,9 +129,10 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 		},
 		
 		_onStandardTilePress2: function(oEvent) {
-
-			var oBindingContext = oEvent.getSource().getBindingContext();
 			
+			
+			var oBindingContext = oEvent.getSource().getBindingContext();
+
 			return new Promise(function(fnResolve) {
 
 				this.doNavigate("ListaTicket", oBindingContext, fnResolve, "");
@@ -136,6 +141,8 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 					MessageBox.error(err.message);
 				}
 			});
+
+			
 		},
 		
 		_onGenericTilePress: function(oEvent) {
@@ -186,6 +193,11 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			this.mBindingOptions = {};
 			this.oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			this.oRouter.getTarget("HomeUser").attachDisplay(jQuery.proxy(this.handleRouteMatched, this));
+			
+			//Set mock model
+			var sPath = jQuery.sap.getModulePath("com.sap.build.standard.ticketManagement.localService", "/TicketSet.json");
+			var oModel = new JSONModel(sPath);
+			this.getView().setModel(oModel);
 
 		}
 	});
