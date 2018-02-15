@@ -13,8 +13,10 @@
 							</layout:BlockLayoutCell>
 							<layout:BlockLayoutCell width="3" title="" titleAlignment="Center" titleLevel="Auto">
 								<layout:content>
-									<layout:BlockLayoutCell width="1" title="HELP DESK TICKETING TOOL" titleAlignment="Center" titleLevel="Auto">
-										<layout:content/>
+									<layout:BlockLayoutCell width="1" titleAlignment="Center" titleLevel="Auto">
+										<layout:content>
+											<layout:BlockLayoutCell width="1" title="HELP DESK TICKETING TOOL" titleAlignment="Center" titleLevel="Auto"/>
+										</layout:content>
 									</layout:BlockLayoutCell>
 								</layout:content>
 							</layout:BlockLayoutCell>

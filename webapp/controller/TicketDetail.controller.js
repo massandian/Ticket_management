@@ -80,7 +80,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 					this.getView().bindObject(oPath);
 				}
 			}
-			
+		
 			this.onFilterTicketDetail();
 			this.onFilterTicketScreenshot();
 			this.onFilterTicketScreenshot1();
@@ -95,19 +95,23 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			    var listDetailTicket = this.getView().byId("__component0---TicketDetail--listDetailTicket");
 			    var oFilterByTicketId = new sap.ui.model.Filter("ID", sap.ui.model.FilterOperator.EQ, oTicketId);
 		      	listDetailTicket.getBinding("items").filter(oFilterByTicketId);
-		      	
     	    }
+
 		},
 		
 		onFilterTicketScreenshot: function () {
 			//Filtra il ticket selezionato nella tabella e produce4 i risultati nella pagina di dettaglio (screenshot pagina dettaglio)
 			if (sap.n.oTicketId) {
-				
+				var oTicketScreenshot =	sap.n.oTicketScreenshot;
+				for (var i=0; i<=oTicketScreenshot.length; i++) {
+					
+					oTicketScreenshot[i];
 					var oTicketId = sap.n.oTicketId;
 				    var listDetailTicket = this.getView().byId("__component0---TicketDetail--screenshot");
 				    var oFilterByTicketId = new sap.ui.model.Filter("ID", sap.ui.model.FilterOperator.EQ, oTicketId);
 			      	listDetailTicket.getBinding("pages").filter(oFilterByTicketId);
-        		
+					break;
+				}	
        	    }
 		},
 		
@@ -124,7 +128,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 	
 		
 		onFilterTicketChat: function () {
-		
+		/*
 			if (sap.n.oTicketChat) {
         		//Filtra il ticket selezionato nella tabella e produce4 i risultati nella pagina di dettaglio (chatlist)       
     			var oTicketChat = sap.n.oTicketChat;
@@ -132,7 +136,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			    var oFilterByTicketId = new sap.ui.model.Filter("ID_Ticket", sap.ui.model.FilterOperator.EQ, oTicketChat);
 		      	listDetailTicket.getBinding("items").filter(oFilterByTicketId);
     	    }
- 
+ */
 		},
 		
 		_onPageNavButtonPress: function() {

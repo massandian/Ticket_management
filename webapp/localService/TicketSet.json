@@ -123,6 +123,7 @@
 	
 	
 	"ChatCollection" : [{
+		"ID" : "1",
 		"Text":"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore",
 		"Date":"March 04 2013",
 		"Type":"Request",
@@ -130,6 +131,7 @@
 		"Author":"Mario"
 	
 	},{
+		"ID": "1",
 		"Text":"Lorem ipsum dolor sit amet, consetetur sadipscing elitre",
 		"Date":"March 04 2013",
 		"Type":"Request",

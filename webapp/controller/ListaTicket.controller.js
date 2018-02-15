@@ -581,12 +581,13 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 				
 				sap.n =  {};
 				sap.n.oTicketId = oEvent.getSource().getBindingContext().getProperty("ID");
+				sap.n.oTicketScreenshot= oEvent.getSource().getBindingContext().getProperty("Screenshot");
 				
-
 				//Press item of the ticket table
 				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			    oRouter.navTo("TicketDetail", {
-					oTicketId:oEvent.getSource().getBindingContext().getProperty("ID")
+					oTicketId:oEvent.getSource().getBindingContext().getProperty("ID"),
+					oTicketScreenshot:oEvent.getSource().getBindingContext().getProperty("Screenshot")
 			    });
 		},
 		
