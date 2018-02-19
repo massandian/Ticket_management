@@ -5,7 +5,7 @@
 			xmlns:u="sap.ui.unified"
 			xmlns:form="sap.ui.layout.form"
 			xmlns:core="sap.ui.core">
-	<Page title="lista ticket" showFooter="true" showHeader="true" showNavButton="true" navButtonPress="_onPageNavButtonPress" class="backgroundImage">
+	<Page title="lista ticket" showFooter="true" showHeader="true" showNavButton="true" navButtonPress="_onPageNavButtonPress" class="backgroundImage sapMShellCentralBox">
 		<content>
 			<Toolbar width="auto" height="auto" design="Solid" visible="true" enabled="true">
 				<content>
@@ -48,12 +48,12 @@
 													<Label text="Filtro:"/>
 													<ComboBox items="{Nome}" id="combo1" placeholder="Seleziona il campo" editable="true" enabled="true" visible="true" width="100%" valueState="None">
 		                                               <items>
-		                                                  <core:Item templateShareable="true" text="{}" enabled="true" key="campi"/>
+		                                                  <core:Item templateShareable="false" text="{}" enabled="true" key="campi"/>
 		                                               </items>
 		                                            </ComboBox>
 		                                            <ComboBox items="{Tipo}" id="combo2" placeholder="tipologia filtro" editable="true" enabled="true" visible="true" width="100%" valueState="None">
 		                                               <items>
-		                                                  <core:Item templateShareable="true" text="{}" enabled="true" key="tipologie"/>
+		                                                  <core:Item templateShareable="false" text="{}" enabled="true" key="tipologie"/>
 		                                               </items>
 		                                            </ComboBox>
 		                                            <Input id="value" placeholder="Inserisci valore"/>
@@ -221,7 +221,7 @@
 				<u:content>
 			<u:SplitContainer id="mySplitContainer" showSecondaryContent="false">
 				<u:secondaryContent>
-					<Panel expandable="true" expanded="false" headerText="Filtri preferiti" width="auto" class="sapUiResponsiveMargin" backgroundDesign="Solid">
+					<Panel expandable="true" expanded="true" headerText="Filtri preferiti" width="auto" class="sapUiResponsiveMargin" backgroundDesign="Solid">
 						 <List mode="SingleSelectLeft" width="auto" headerText="" footerText="" backgroundDesign="Solid" showSeparators="All"
 							growing="true" growingThreshold="30" growingScrollToLoad="true" items="{/FiltroCollection}">
 							<infoToolbar>

@@ -2,14 +2,14 @@
 
 	"TicketCollection" :[{
 		"ID": "1",
-		"Titolo": "problema hardware",
+		"Titolo" : "problema hardware",
 		"Categoria": "hardware",
 		"Descrizione": "lo schermo non si accende",
 		"Priorita": "massima",
 		"Owner": "davide",
 		"Stato": "assegnato",
 		"Assigned_to": "mario",
-		"Screenshot": "http://www.andresfuentesangarita.com/wp-content/uploads/2017/01/problemas.jpg",
+		"Screenshot": "http://www.andresfuentesangarita.com/wp-content/uploads/2017/01/problemas.jpg", 
 		"Valutazione": ""
 		
 	}, {

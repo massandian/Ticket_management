@@ -131,6 +131,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 		_onStandardTilePress2: function(oEvent) {
 			
 			
+			
 			var oBindingContext = oEvent.getSource().getBindingContext();
 
 			return new Promise(function(fnResolve) {

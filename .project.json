@@ -44,5 +44,10 @@
       "compass": {},
       "bFacade": true
     }
+  },
+  "hcpdeploy": {
+    "account": "p2000005994trial",
+    "name": "ticketmanagement",
+    "lastVersionWeTriedToDeploy": "1.2.0"
   }
 }

@@ -15,10 +15,10 @@
 											<Title text="Screenshot" level="H1"/>
 										</contentMiddle>
 									</Bar>
-									<Carousel id="screenshot1" height="auto" width="auto" loop="true" showPageIndicator="true" pageIndicatorPlacement="Bottom" visible="true"
-										class="sapUiContentPadding" pages="{/TicketCollection}">
+									<Carousel id="screenshot1" height="50%" width="50%" loop="true" showPageIndicator="true" pageIndicatorPlacement="Bottom" visible="true"
+										class="sapUiContentPadding centerScreenshot" pages="{/TicketCollection}">
 										<pages>
-											<Image src="{Screenshot}" height="auto" width="auto" densityAware="false"/>
+											<Image src="{Screenshot}" alt="Screnshoot 1" height="auto" width="auto" densityAware="false"/>
 										</pages>
 									</Carousel>
 									<Bar design="footer">
@@ -50,8 +50,8 @@
 											<Title text="Screenshot" level="H1"/>
 										</contentMiddle>
 									</Bar>
-									<Carousel id="screenshot" height="auto" width="auto" loop="true" showPageIndicator="true" pageIndicatorPlacement="Bottom" visible="true"
-										class="sapUiContentPadding" pages="{/TicketCollection}">
+									<Carousel id="screenshot" height="50%" width="50%" loop="true" showPageIndicator="true" pageIndicatorPlacement="Bottom" visible="true"
+										class="sapUiContentPadding centerScreenshot" pages="{/TicketCollection}">
 										<pages>
 											<Image src="{Screenshot}" height="auto" width="auto" densityAware="false"/>
 										</pages>

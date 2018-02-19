@@ -55,7 +55,8 @@
 				<layout:content>
 					<layout:BlockLayoutRow scrollable="false">
 						<layout:content>
-							<layout:BlockLayoutCell width="2" title="Statistiche ticket:" titleAlignment="Begin" titleLevel="Auto">
+							<layout:BlockLayoutCell width="2" titleAlignment="Begin" titleLevel="Auto">
+								<Title text="Statistiche ticket:" level="H1" class="stat_title"/>
 								<layout:content>
 									<layout:BlockLayout background="Default">
 										<layout:content>
@@ -63,7 +64,7 @@
 												<layout:content>
 													<layout:BlockLayoutCell width="1" title="" titleAlignment="Begin" titleLevel="Auto">
 														<layout:content>
-															<GenericTile header="TICKET IN LAVORAZIONE" subheader="totale 15" frameType="TwoThirds" press="_onGenericTilePress">
+															<GenericTile header="TICKET IN LAVORAZIONE" subheader="totale 15" frameType="TwoThirds" press="_onGenericTilePress" class="stat">
 																<tileContent>
 																	<TileContent footer="" unit="">
 																		<content>
@@ -95,7 +96,7 @@
 													</layout:BlockLayoutCell>
 													<layout:BlockLayoutCell width="1" title="" titleAlignment="Begin" titleLevel="Auto">
 														<layout:content>
-															<GenericTile header="TICKET IN APPROVAZIONE" subheader="totale 10" frameType="TwoThirds" press="_onGenericTilePress1">
+															<GenericTile header="TICKET IN APPROVAZIONE" subheader="totale 10" frameType="TwoThirds" press="_onGenericTilePress1" class="stat">
 																<tileContent>
 																	<TileContent footer="" unit="">
 																		<content>
@@ -127,7 +128,7 @@
 													</layout:BlockLayoutCell>
 													<layout:BlockLayoutCell width="1" title="" titleAlignment="Begin" titleLevel="Auto">
 														<layout:content>
-															<GenericTile header="TICKET CHIUSI" subheader="totale 10" frameType="TwoThirds" press="_onGenericTilePress2">
+															<GenericTile header="TICKET CHIUSI" subheader="totale 10" frameType="TwoThirds" press="_onGenericTilePress2" class="stat">
 																<tileContent>
 																	<TileContent footer="" unit="">
 																		<content>

@@ -43,12 +43,15 @@
 			"tablet": true,
 			"phone": true
 		},
-		"supportedThemes": ["sap_belize", "sap_bluecrystal"]
+		"supportedThemes": [
+			"sap_belize",
+			"sap_bluecrystal"
+		]
 	},
 	"sap.ui5": {
 		"_version": "1.1.0",
 		"rootView": {
-			"viewName": "generated.app.view.ListaTicketEspansa2",
+			"viewName": "generated.app.view.HomeUser",
 			"type": "XML"
 		},
 		"dependencies": {
@@ -83,9 +86,13 @@
 			}
 		},
 		"resources": {
-			"css": [{
-						"uri": "style.css"
-					}]
+			"css": [
+				{
+					"uri": "css/style.css"
+					
+				}
+				
+			]
 		},
 		"routing": {
 			"config": {
@@ -96,7 +103,9 @@
 				"clearTarget": false,
 				"controlAggregation": "pages",
 				"bypassed": {
-					"target": ["HomeUser"]
+					"target": [
+						"HomeUser"
+					]
 				}
 			},
 			"targets": {
@@ -136,31 +145,54 @@
 					"transition": "slide"
 				}
 			},
-			"routes": [{
-				"pattern": "TicketDetail/:context:",
-				"name": "TicketDetail",
-				"target": ["TicketDetail"]
-			}, {
-				"pattern": "",
-				"name": "default",
-				"target": ["HomeUser"]
-			}, {
-				"pattern": "HomeUser/:context:",
-				"name": "HomeUser",
-				"target": ["HomeUser"]
-			}, {
-				"pattern": "NewTicket/:context:",
-				"name": "NewTicket",
-				"target": ["NewTicket"]
-			}, {
-				"pattern": "StatisticheTicket/:context:",
-				"name": "StatisticheTicket",
-				"target": ["StatisticheTicket"]
-			}, {
-				"pattern": "ListaTicket/:context:",
-				"name": "ListaTicket",
-				"target": ["ListaTicket"]
-			}]
+			"routes": [
+				{
+					"pattern": "TicketDetail/:context:",
+					"name": "TicketDetail",
+					"target": [
+						"TicketDetail"
+					]
+				},
+				{
+					"pattern": "",
+					"name": "default",
+					"target": [
+						"HomeUser"
+					]
+				},
+				{
+					"pattern": "HomeUser/:context:",
+					"name": "HomeUser",
+					"target": [
+						"HomeUser"
+					]
+				},
+				{
+					"pattern": "NewTicket/:context:",
+					"name": "NewTicket",
+					"target": [
+						"NewTicket"
+					]
+				},
+				{
+					"pattern": "StatisticheTicket/:context:",
+					"name": "StatisticheTicket",
+					"target": [
+						"StatisticheTicket"
+					]
+				},
+				{
+					"pattern": "ListaTicket/:context:",
+					"name": "ListaTicket",
+					"target": [
+						"ListaTicket"
+					]
+				}
+			]
 		}
+	},
+	"sap.platform.hcp": {
+		"uri": "webapp",
+		"_version": "1.1.0"
 	}
 }
