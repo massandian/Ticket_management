@@ -15,7 +15,7 @@
 	background-repeat: no-repeat;
 	background-origin: content-box;
 	background-position: center;
-
+	
 }
 
 .title {
@@ -37,7 +37,7 @@
 }
 
 .stat_title {
-	color: #000000;
+	color: #ffffff;
 	font-size: 25px;
 	font-weight: bold;
 

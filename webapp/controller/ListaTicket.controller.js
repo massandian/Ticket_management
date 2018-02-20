@@ -36,7 +36,8 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 				persoService: DemoPersoService
 			}).activate();
 			
-			//Group function
+			
+			//Funzioni di raggruppamento
 			this.mGroupFunctions = {
 				Stato: function(oContext) {
 					var stato = oContext.getProperty("Stato");
@@ -102,36 +103,56 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 		
 		},
 		
-		fetchRecords : function(oArg){
+		fetchRecords : function(){
 		
-			//data will be in this._data.Products
+			//data will be in this._data.Custom filter
 			console.log(this._data.CustomFilterCollection);
 		
 		},
 		
+		//Funzione che edita in tempo reale l'espressione matematica del filtro custom definito
+		handleLiveChange: function(oEvent) {
+			
+				var oldValue = oEvent.getParameter("value");
+				var newValue = oEvent.getParameter("value");
+				this.getView().byId('getValue').setText(newValue + " " + oldValue);
+			
+		},
 	
-		addRow : function(oArg){
+		addRowAND : function(){
 			//Inserisce una nuova riga all'interno dei filtri custom per stabilire una nuova regola
-		
 			
 			this._data.CustomFilterCollection.push({"Nome" : ['ID', 'Titolo', 'Descrizione', 'Stato', 'Priorita', 'Owner', 'Categoria', 'Assigned_to'],
 						            				"Tipo": ["COMPRESO TRA", "UGUALE", "DIVERSO DA", "CONTIENE"]});
 		
 			this.jModel.refresh();	//which will add the new record
+			this.getView().byId('getValue').setText("AND");
+		},
+		
+		addRowOR : function(){
+			
+			//Inserisce una nuova riga all'interno dei filtri custom per stabilire una nuova regola
+			
+			this._data.CustomFilterCollection.push({"Nome" : ['ID', 'Titolo', 'Descrizione', 'Stato', 'Priorita', 'Owner', 'Categoria', 'Assigned_to'],
+						            				"Tipo": ["COMPRESO TRA", "UGUALE", "DIVERSO DA", "CONTIENE"]});
+		
+			this.jModel.refresh();	//which will add the new record
+			this.getView().byId('getValue').setText("OR");
 		},
 		
 		deleteRow : function(oArg){
 			//Al press del tasto di cancellazione, elimina una riga per la dichiarazione di un filtro custom
 			var deleteRecord = oArg.getSource().getBindingContext().getObject();
 			for(var i=1 ; i<this._data.CustomFilterCollection.length ; i++){
-				if (this._data.CustomFilterCollection[i] == deleteRecord )
+				if (this._data.CustomFilterCollection[i] === deleteRecord )
 					{
-					//	pop this._data.Products[i] 
-						this._data.CustomFilterCollection.splice(i,1); //removing 1 record from i th index.
+					//	pop this._data.CustomFilter[i] 
+						this._data.CustomFilterCollection.splice(i,1); //rimuove un record dalla tabella in tempo reale
 						this.jModel.refresh();
-						break;//quit the loop
+						break;//esci dal loop
 					}
 			}
+			this.getView().byId('getValue').setText();
 		},
 		
 		
@@ -186,22 +207,26 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 
 		//Nasconde e visualizza il secondary content della pagina sulla sinistra
 		handleToggleSecondaryContent: function(oEvent) {
+			
 			var oSplitContainer = this.getView().byId("mySplitContainer");
 			oSplitContainer.setShowSecondaryContent(!oSplitContainer.getShowSecondaryContent());
 		},
 		
 		//Nasconde e visualizza il secondary content con le regole di filtro custom
 		ToggleSecondaryContent: function(oEvent) {
+			
 			var oSplitContainer = this.getView().byId("SplitContainer");
 			var sOrientation = this.getView().byId("SplitContainer").getOrientation();
 			sOrientation = "Vertical";
 			this.getView().byId("SplitContainer").setOrientation(sOrientation);
-			oSplitContainer.setShowSecondaryContent(!oSplitContainer.getShowSecondaryContent());	
+			oSplitContainer.setShowSecondaryContent(!oSplitContainer.getShowSecondaryContent());
+			
 		},
 		
 		//Apertura confirm box e salvataggio del custom filter appena creato
 		_onButtonPress5: function(oEvent) {
 
+			this.ToggleSecondaryContent();
 			oEvent = jQuery.extend(true, {}, oEvent);
 			return new Promise(function(fnResolve) {
 					fnResolve(true);
@@ -272,11 +297,6 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 						MessageBox.error(err.message);
 					}
 				});
-			
-		/*	this.TicketSet.ChatCollection.push({"Nome" : ['ID', 'Titolo', 'Descrizione', 'Stato', 'Priorita', 'Owner', 'Categoria', 'Assigned_to'],
-						            				"Tipo": ["COMPRESO TRA", "UGUALE", "DIVERSO DA", "CONTIENE"]});
-		
-			this.jModel.refresh();	*/
 				
 		},
 		
@@ -586,8 +606,8 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 				//Press item of the ticket table
 				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			    oRouter.navTo("TicketDetail", {
-					oTicketId:oEvent.getSource().getBindingContext().getProperty("ID")
-					
+					oTicketId:oEvent.getSource().getBindingContext().getProperty("ID"),
+					oChatID:oEvent.getSource().getBindingContext().getProperty("ID")
 			    });
 		},
 		

@@ -24,6 +24,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			var oModel = new JSONModel(sPath);
 			this.getView().setModel(oModel);
 			
+			
 		},
 		
 		onPost: function (oEvent) {
@@ -125,7 +126,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 		
 		onFilterTicketChat: function () {
 		
-			if (sap.n.oChatId) {
+			if (sap.n.oChatId===sap.n.oTicketId) {
 				
         		//Filtra il ticket selezionato nella tabella e produce4 i risultati nella pagina di dettaglio (chatlist)       
     			var oChatId = sap.n.oChatId;

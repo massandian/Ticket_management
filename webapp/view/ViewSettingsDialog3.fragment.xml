@@ -31,7 +31,7 @@
 			</ViewSettingsFilterItem>
 		</filterItems>
 		<sortItems>
-			<ViewSettingsItem text="ID" key="ID"/>
+			<ViewSettingsItem text="ID" key="ID" selected="true"/>
 			<ViewSettingsItem text="Titolo" key="Titolo"/>
 			<ViewSettingsItem text="Priorita" key="Priorita"/>
 			<ViewSettingsItem text="Categoria" key="Categoria"/>

@@ -9,7 +9,7 @@
 		<content>
 			<Toolbar width="auto" height="auto" design="Solid" visible="true" enabled="true">
 				<content>
-					<Button text="" type="Default" icon="sap-icon://menu2" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"
+					<Button id="SecondaryContent" text="" type="Default" icon="sap-icon://menu2" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"
 						press="handleToggleSecondaryContent"/>
 					<Title text="Tickets" titleStyle="Auto" width="auto" textAlign="Begin" visible="true"/>
 					<ToolbarSpacer width=""/>
@@ -31,8 +31,12 @@
 		                <items>
 		                    <IconTabFilter icon="sap-icon://add-filter" iconColor="Neutral" text="Filtro personale" count="" design="Vertical" showAll="false" textDirection="Inherit" enabled="true" visible="true" iconDensityAware="false">
 		                        <content>
-		                        	<Title text="Regole di creazione filtro" level="Auto"/>
-		                            <Table items="{/CustomFilterCollection}" id="CustomFilter" width="100%" noDataText="No data" selectionMode="MultiToggle">
+		                        	<Bar>
+		                        		<contentLeft>
+		                        			<Title text="Regole di creazione filtro:" level="Auto"/>
+		                        		</contentLeft>
+		                        	</Bar>
+		                            <Table items="{/CustomFilterCollection}" id="CustomFilter" width="100%" noDataText="No data" selectionMode="MultiToggle" >
 										<columns>
 											<Column width="10%"/>
 											<Column id="campo" width="20%"/>
@@ -46,25 +50,32 @@
 											<ColumnListItem>
 												<cells>
 													<Label text="Filtro:"/>
-													<ComboBox items="{Nome}" id="combo1" placeholder="Seleziona il campo" editable="true" enabled="true" visible="true" width="100%" valueState="None">
+													<ComboBox items="{Nome}" id="combo1" change="handleLiveChange" placeholder="Seleziona il campo" editable="true" enabled="true" visible="true" width="100%" valueState="None">
 		                                               <items>
 		                                                  <core:Item templateShareable="false" text="{}" enabled="true" key="campi"/>
 		                                               </items>
 		                                            </ComboBox>
-		                                            <ComboBox items="{Tipo}" id="combo2" placeholder="tipologia filtro" editable="true" enabled="true" visible="true" width="100%" valueState="None">
+		                                            <ComboBox items="{Tipo}" id="combo2" change="handleLiveChange" placeholder="tipologia filtro" editable="true" enabled="true" visible="true" width="100%" valueState="None">
 		                                               <items>
 		                                                  <core:Item templateShareable="false" text="{}" enabled="true" key="tipologie"/>
 		                                               </items>
 		                                            </ComboBox>
-		                                            <Input id="value" placeholder="Inserisci valore"/>
-		                                            <Button text="AND" enabled="true" key="AND" press="addRow" width="100%"/>
-		                                            <Button text="OR" enabled="true" key="OR" press="addRow" width="100%"/>
-		                                            <Button text="delete" icon="sap-icon://delete" enabled="true" press="deleteRow" width="100%"/>
+		                                            <Input width="100%" placeholder="Inserisci valore" valueLiveUpdate="true" liveChange="handleLiveChange"/>
+		                                            <Button text="AND" enabled="true" key="AND" press="addRowAND" width="100%"/>
+		                                            <Button text="OR" enabled="true" key="OR" press="addRowOR" width="100%"/>
+		                                            <Button text="delete" icon="sap-icon://delete" enabled="true" press="deleteRow" width="100%" />
 												</cells>
 											</ColumnListItem>
 										</items>
 									</Table>
 		                        </content>
+		                        <Bar design="footer">
+									<contentLeft>
+										<Title text="Espressione:" level="H1"/>
+									</contentLeft>
+								</Bar>
+								<ToolbarSpacer/>
+		                        <Text id="getValue"/>
 		                    </IconTabFilter>
 		                    <IconTabSeparator icon="sap-icon://open-command-field" iconDensityAware="false"/>
 		                    <IconTabFilter icon="sap-icon://sort" iconColor="Neutral" text="Ordina" count="" design="Vertical" showAll="false" textDirection="Inherit" enabled="true" visible="true" iconDensityAware="false">
@@ -155,7 +166,7 @@
 		                    </IconTabFilter>
 		                    <IconTabSeparator icon="sap-icon://open-command-field" iconDensityAware="false"/>
 		        			<IconTabFilter icon="sap-icon://table-chart" iconColor="Neutral" text="Personalizza" count="" design="Vertical" showAll="false" textDirection="Inherit" enabled="true" visible="true" iconDensityAware="false">
-		                		<CheckBox text="Raggruppa" select="onTableGrouping" width="100%"/>
+		                		<CheckBox text="Raggruppa" select="onTableGrouping" width="auto"/>
 		                		<ToolbarSpacer/>
 								<Button icon="sap-icon://table-chart" press="onPersoButtonPressed" text="Edita tabella" >
 								<layoutData>
@@ -313,9 +324,9 @@
 					</ColumnListItem>
 				</items>
 			</Table>
-			</u:content>
+				</u:content>
 			</u:SplitContainer>
-			</u:content>
+				</u:content>
 			</u:SplitContainer>
 		</content>
 		<footer>

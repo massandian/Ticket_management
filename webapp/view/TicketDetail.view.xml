@@ -15,10 +15,10 @@
 											<Title text="Screenshot" level="H1"/>
 										</contentMiddle>
 									</Bar>
-									<Carousel id="screenshot1" height="50%" width="50%" loop="true" showPageIndicator="true" pageIndicatorPlacement="Bottom" visible="true"
+									<Carousel id="screenshot1" height="50%" width="50%" loop="true" showPageIndicator="false" pageIndicatorPlacement="Bottom" visible="true"
 										class="sapUiContentPadding centerScreenshot" pages="{/TicketCollection}">
 										<pages>
-											<Image src="{Screenshot}" alt="Screnshoot 1" height="auto" width="auto" densityAware="false"/>
+											<Image src="{Screenshot}" alt="Screnshoot" height="auto" width="auto" densityAware="false"/>
 										</pages>
 									</Carousel>
 									<Bar design="footer">
@@ -50,7 +50,7 @@
 											<Title text="Screenshot" level="H1"/>
 										</contentMiddle>
 									</Bar>
-									<Carousel id="screenshot" height="50%" width="50%" loop="true" showPageIndicator="true" pageIndicatorPlacement="Bottom" visible="true"
+									<Carousel id="screenshot" height="50%" width="50%" loop="true" showPageIndicator="false" pageIndicatorPlacement="Bottom" visible="true"
 										class="sapUiContentPadding centerScreenshot" pages="{/TicketCollection}">
 										<pages>
 											<Image src="{Screenshot}" height="auto" width="auto" densityAware="false"/>
@@ -65,18 +65,79 @@
 										<List id="listDetailTicket" items="{/TicketCollection}" width="auto" growing="true" growingThreshold="20" growingScrollToLoad="false" backgroundDesign="Solid">
 											<items>
 												<CustomListItem> 
-													<HBox>
-														<core:Icon size="2rem" src="sap-icon://activity-2" class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" />
 														<VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom">
-															<Label text="TITOLO:   {Titolo}" design="Bold" width="auto" required="false" textAlign="Begin" textDirection="Inherit"/>
-															<Label text="CATEGORIA:   {Categoria}" design="Bold" width="auto" required="false" textAlign="Begin" textDirection="Inherit"/>
-															<Label text="DESCRIZIONE:   {Descrizione}" design="Bold" width="auto" required="false" textAlign="Begin" textDirection="Inherit"/>
-															<Label text="PRIORITA':   {Priorita}" design="Bold" width="auto" required="false" textAlign="Begin" textDirection="Inherit"/>
-															<Label text="OWNER:   {Owner}" design="Bold" width="auto" required="false" textAlign="Begin" textDirection="Inherit"/>
-															<Label text="STATO:   {Stato}" design="Bold" width="auto" required="false" textAlign="Begin" textDirection="Inherit"/>
-															<Label text="ASSIGNED TO:   {Assigned_to}" design="Bold" width="auto" required="false" textAlign="Begin" textDirection="Inherit"/>		
+															<form:Form>
+																<form:title>
+																	<core:Title text="Ticket {ID}" level="Auto" icon="sap-icon://activity-2"/>
+																</form:title>
+																<form:formContainers>
+		                                                            <form:FormContainer visible="true">
+		                                                                <form:formElements>
+		                                                                    <form:FormElement visible="true">
+		                                                                        <form:label>
+		                                                                            <Label text="Titolo" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
+		                                                                        </form:label>
+		                                                                        <form:fields>
+		                                                                            <Text text="{Titolo}"/>
+		                                                                        </form:fields>
+		                                                                    </form:FormElement>
+		                                                                    <form:FormElement visible="true">
+		                                                                        <form:label>
+		                                                                            <Label text="Descrizione" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
+		                                                                        </form:label>
+		                                                                        <form:fields>
+		                                                                            <Text text="{Descrizione}"/>
+		                                                                        </form:fields>
+		                                                                    </form:FormElement>
+		                                                                    <form:FormElement visible="true">
+		                                                                        <form:label>
+		                                                                            <Label text="Stato" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
+		                                                                        </form:label>
+		                                                                        <form:fields>
+		                                                                            <Text text="{Stato}"/>
+		                                                                        </form:fields>
+		                                                                    </form:FormElement>
+		                                                                    <form:FormElement visible="true">
+		                                                                        <form:label>
+		                                                                            <Label text="Priorità" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
+		                                                                        </form:label>
+		                                                                        <form:fields>
+		                                                                            <Text text="{Priorita}"/>
+		                                                                        </form:fields>
+		                                                                    </form:FormElement>
+		                                                                    <form:FormElement visible="true">
+		                                                                        <form:label>
+		                                                                            <Label text="Owner" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
+		                                                                        </form:label>
+		                                                                        <form:fields>
+		                                                                            <Text text="{Owner}"/>
+		                                                                        </form:fields>
+		                                                                    </form:FormElement>
+		                                                                     <form:FormElement visible="true">
+		                                                                        <form:label>
+		                                                                            <Label text="Categoria" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
+		                                                                        </form:label>
+		                                                                        <form:fields>
+		                                                                            <Text text="{Categoria}"/>
+		                                                                        </form:fields>
+		                                                                    </form:FormElement>
+		                                                                     <form:FormElement visible="true">
+		                                                                        <form:label>
+		                                                                            <Label text="Assigned to" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
+		                                                                        </form:label>
+		                                                                        <form:fields>
+		                                                                            <Text text="{Assigned_to}"/>
+		                                                                        </form:fields>
+		                                                                    </form:FormElement>
+		                                                                </form:formElements>
+		                                                                <form:title/>
+		                                                            </form:FormContainer>
+		                                                        </form:formContainers>
+		                                                        <form:layout>
+		                                                            <form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
+		                                                        </form:layout>
+															</form:Form>
 														</VBox>
-													</HBox>
 												</CustomListItem>
 											</items>	
 										</List>
