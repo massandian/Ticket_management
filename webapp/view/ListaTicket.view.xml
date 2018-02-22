@@ -38,13 +38,14 @@
 		                        	</Bar>
 		                            <Table items="{/CustomFilterCollection}" id="CustomFilter" width="100%" noDataText="No data" selectionMode="MultiToggle" >
 										<columns>
-											<Column width="10%"/>
-											<Column id="campo" width="20%"/>
-											<Column id="tipologia" width="20%"/>
+											<Column width="7%"/>
+											<Column id="campo" width="16%"/>
+											<Column id="tipologia" width="16%"/>
 											<Column width="20%"/>
-											<Column id="and" width="10%"/>
-											<Column id="or" width="10%"/>
-											<Column id="delete" width="10%"/>
+											<Column width="20%"/>
+											<Column id="and" width="6%"/>
+											<Column id="or" width="6%"/>
+											<Column id="delete" width="9%"/>
 										</columns>
 										<items>
 											<ColumnListItem>
@@ -61,6 +62,7 @@
 		                                               </items>
 		                                            </ComboBox>
 		                                            <Input width="100%" placeholder="Inserisci valore" valueLiveUpdate="true" liveChange="handleLiveChange"/>
+		                                        	<Input width="100%" visible="true" enabled="false" placeholder="Inserisci valore" valueLiveUpdate="true" liveChange="handleLiveChange"/>
 		                                            <Button text="AND" enabled="true" key="AND" press="addRowAND" width="100%"/>
 		                                            <Button text="OR" enabled="true" key="OR" press="addRowOR" width="100%"/>
 		                                            <Button text="delete" icon="sap-icon://delete" enabled="true" press="deleteRow" width="100%" />

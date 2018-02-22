@@ -14,6 +14,8 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 ], function(BaseController, MessageBox, Utilities, History, jQuery, JSONModel, DemoPersoService, Formatter, TablePersoController, Filter, Sorter, MessageToast) {
 	"use strict";
 	
+	var fresult;
+	
 	return BaseController.extend("com.sap.build.standard.ticketManagement.controller.ListaTicket", {
 		
 		onInit: function() {
@@ -97,7 +99,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 		
 		
 		onBeforeRendering: function() {
-			
+		
 			this.byId('CustomFilter').setModel(this.jModel);
 			this.byId('OrdinaCampi').setModel(this.jModel);
 		
@@ -110,13 +112,40 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 		
 		},
 		
+		
 		//Funzione che edita in tempo reale l'espressione matematica del filtro custom definito
-		handleLiveChange: function(oEvent) {
+		handleLiveChange: function() {
 			
-				var oldValue = oEvent.getParameter("value");
-				var newValue = oEvent.getParameter("value");
-				this.getView().byId('getValue').setText(newValue + " " + oldValue);
 			
+					var Combo1 = sap.ui.getCore().byId("__component0---ListaTicket--combo1-__component0---ListaTicket--CustomFilter-0").getValue();
+					var Combo2 = sap.ui.getCore().byId("__component0---ListaTicket--combo2-__component0---ListaTicket--CustomFilter-0").getValue();
+					var input = sap.ui.getCore().byId("__input0-__component0---ListaTicket--CustomFilter-0").getValue();
+					var input2 = sap.ui.getCore().byId("__input1-__component0---ListaTicket--CustomFilter-0").getValue(); 
+					this.getView().byId('getValue').setText(Combo1);
+	
+					switch (Combo2) {
+						//4 possibilità di definizione di un operatore di confronto
+						case "COMPRESO TRA":
+							sap.ui.getCore().byId("__input1-__component0---ListaTicket--CustomFilter-0").setEnabled(true);
+							fresult = this.getView().byId('getValue').setText("[(" + Combo1 + " > " + input + ")" + " AND " + "(" + Combo1 + " < " + input2 + ")]");
+							break;
+							
+						case "UGUALE":
+							fresult = this.getView().byId('getValue').setText("(" + Combo1 + " = " + input + ")");
+							break;
+							
+						case "DIVERSO DA":
+							fresult = this.getView().byId('getValue').setText("(" + Combo1 + " /= " + input + ")");
+							break;
+						
+						case "CONTIENE":
+							fresult = this.getView().byId('getValue').setText("(" + input + " ∈ " + Combo1 + ")");
+							break;
+						
+						default:
+							break;
+					}
+		
 		},
 	
 		addRowAND : function(){
@@ -126,7 +155,9 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 						            				"Tipo": ["COMPRESO TRA", "UGUALE", "DIVERSO DA", "CONTIENE"]});
 		
 			this.jModel.refresh();	//which will add the new record
-			this.getView().byId('getValue').setText("AND");
+			fresult = this.getView().byId('getValue').getText();
+	 		fresult = this.getView().byId('getValue').setText(fresult + " AND ");
+	 		
 		},
 		
 		addRowOR : function(){
@@ -137,8 +168,11 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 						            				"Tipo": ["COMPRESO TRA", "UGUALE", "DIVERSO DA", "CONTIENE"]});
 		
 			this.jModel.refresh();	//which will add the new record
-			this.getView().byId('getValue').setText("OR");
+			fresult = this.getView().byId('getValue').getText();
+	 		fresult = this.getView().byId('getValue').setText(fresult + " OR ");
+	 		
 		},
+		
 		
 		deleteRow : function(oArg){
 			//Al press del tasto di cancellazione, elimina una riga per la dichiarazione di un filtro custom
@@ -508,7 +542,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			var oTable = this.getView().byId("sap_Responsive_Page_0-content-sap_ui_layout_BlockLayout-1515407526987-content-sap_ui_layout_BlockLayoutRow-2-content-sap_ui_layout_BlockLayoutCell-1-content-build_simple_Table-1515407548335");
 			oTable.getBinding("items").sort(null);
 			oTable.getBinding("items").filter(null);
-			oTable.getBinding("items").order(null);
+
 			
 		},
 		
