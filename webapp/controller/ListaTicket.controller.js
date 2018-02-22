@@ -126,23 +126,32 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 					switch (Combo2) {
 						//4 possibilità di definizione di un operatore di confronto
 						case "COMPRESO TRA":
-							sap.ui.getCore().byId("__input1-__component0---ListaTicket--CustomFilter-0").setEnabled(true);
+							sap.ui.getCore().byId("__input0-__component0---ListaTicket--CustomFilter-0").setPlaceholder("Da");
+							sap.ui.getCore().byId("__input1-__component0---ListaTicket--CustomFilter-0").setEnabled(true).setPlaceholder("A");
 							fresult = this.getView().byId('getValue').setText("[(" + Combo1 + " > " + input + ")" + " AND " + "(" + Combo1 + " < " + input2 + ")]");
 							break;
 							
 						case "UGUALE":
+							sap.ui.getCore().byId("__input0-__component0---ListaTicket--CustomFilter-0").setPlaceholder("Uguale a");
+							sap.ui.getCore().byId("__input1-__component0---ListaTicket--CustomFilter-0").setEnabled(false);
 							fresult = this.getView().byId('getValue').setText("(" + Combo1 + " = " + input + ")");
 							break;
 							
 						case "DIVERSO DA":
+							sap.ui.getCore().byId("__input0-__component0---ListaTicket--CustomFilter-0").setPlaceholder("Diverso da");
+							sap.ui.getCore().byId("__input1-__component0---ListaTicket--CustomFilter-0").setEnabled(false);
 							fresult = this.getView().byId('getValue').setText("(" + Combo1 + " /= " + input + ")");
 							break;
 						
 						case "CONTIENE":
+							sap.ui.getCore().byId("__input0-__component0---ListaTicket--CustomFilter-0").setPlaceholder("Contiene");
+							sap.ui.getCore().byId("__input1-__component0---ListaTicket--CustomFilter-0").setEnabled(false);
 							fresult = this.getView().byId('getValue').setText("(" + input + " ∈ " + Combo1 + ")");
 							break;
 						
 						default:
+							sap.ui.getCore().byId("__input0-__component0---ListaTicket--CustomFilter-0").setPlaceholder("Inserisci valore");
+							sap.ui.getCore().byId("__input1-__component0---ListaTicket--CustomFilter-0").setEnabled(false);
 							break;
 					}
 		
