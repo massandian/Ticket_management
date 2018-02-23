@@ -116,45 +116,49 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 		//Funzione che edita in tempo reale l'espressione matematica del filtro custom definito
 		handleLiveChange: function() {
 			
-			
-					var Combo1 = sap.ui.getCore().byId("__component0---ListaTicket--combo1-__component0---ListaTicket--CustomFilter-0").getValue();
-					var Combo2 = sap.ui.getCore().byId("__component0---ListaTicket--combo2-__component0---ListaTicket--CustomFilter-0").getValue();
-					var input = sap.ui.getCore().byId("__input0-__component0---ListaTicket--CustomFilter-0").getValue();
-					var input2 = sap.ui.getCore().byId("__input1-__component0---ListaTicket--CustomFilter-0").getValue(); 
-					this.getView().byId('getValue').setText(Combo1);
-	
-					switch (Combo2) {
-						//4 possibilità di definizione di un operatore di confronto
-						case "COMPRESO TRA":
-							sap.ui.getCore().byId("__input0-__component0---ListaTicket--CustomFilter-0").setPlaceholder("Da");
-							sap.ui.getCore().byId("__input1-__component0---ListaTicket--CustomFilter-0").setEnabled(true).setPlaceholder("A");
-							fresult = this.getView().byId('getValue').setText("[(" + Combo1 + " > " + input + ")" + " AND " + "(" + Combo1 + " < " + input2 + ")]");
-							break;
-							
-						case "UGUALE":
-							sap.ui.getCore().byId("__input0-__component0---ListaTicket--CustomFilter-0").setPlaceholder("Uguale a");
-							sap.ui.getCore().byId("__input1-__component0---ListaTicket--CustomFilter-0").setEnabled(false);
-							fresult = this.getView().byId('getValue').setText("(" + Combo1 + " = " + input + ")");
-							break;
-							
-						case "DIVERSO DA":
-							sap.ui.getCore().byId("__input0-__component0---ListaTicket--CustomFilter-0").setPlaceholder("Diverso da");
-							sap.ui.getCore().byId("__input1-__component0---ListaTicket--CustomFilter-0").setEnabled(false);
-							fresult = this.getView().byId('getValue').setText("(" + Combo1 + " /= " + input + ")");
-							break;
-						
-						case "CONTIENE":
-							sap.ui.getCore().byId("__input0-__component0---ListaTicket--CustomFilter-0").setPlaceholder("Contiene");
-							sap.ui.getCore().byId("__input1-__component0---ListaTicket--CustomFilter-0").setEnabled(false);
-							fresult = this.getView().byId('getValue').setText("(" + input + " ∈ " + Combo1 + ")");
-							break;
-						
-						default:
-							sap.ui.getCore().byId("__input0-__component0---ListaTicket--CustomFilter-0").setPlaceholder("Inserisci valore");
-							sap.ui.getCore().byId("__input1-__component0---ListaTicket--CustomFilter-0").setEnabled(false);
-							break;
-					}
+		fresult = sap.ui.getCore().byId("__component0---ListaTicket--getValue").getText();//Trovare il modo di far ciclare anche gli id di tutte le strutture dati del filtro custom
+
+			for (var i=0; i<=this._data.CustomFilterCollection.length ;i++) { //for che cicla finchè l'utente continua a definire nuove righe di filtro custom
 		
+				var Combo1 = sap.ui.getCore().byId("__component0---ListaTicket--combo1-__component0---ListaTicket--CustomFilter-0").getValue();
+				var Combo2 = sap.ui.getCore().byId("__component0---ListaTicket--combo2-__component0---ListaTicket--CustomFilter-0").getValue();
+				var input = sap.ui.getCore().byId("__input0-__component0---ListaTicket--CustomFilter-0").getValue();
+				var input2 = sap.ui.getCore().byId("__input1-__component0---ListaTicket--CustomFilter-0").getValue(); 
+				this.getView().byId('getValue').setText(Combo1);
+				 
+				switch (Combo2) {
+					//4 possibilità di definizione di un operatore di confronto
+					case "COMPRESO TRA":
+						sap.ui.getCore().byId("__input0-__component0---ListaTicket--CustomFilter-0").setPlaceholder("Da");
+						sap.ui.getCore().byId("__input1-__component0---ListaTicket--CustomFilter-0").setEnabled(true).setPlaceholder("A");
+						fresult = this.getView().byId('getValue').setText("[(" + Combo1 + " > " + input + ")" + " AND " + "(" + Combo1 + " < " + input2 + ")]");
+						break;
+								
+					case "UGUALE":
+						sap.ui.getCore().byId("__input0-__component0---ListaTicket--CustomFilter-0").setPlaceholder("Uguale a");
+						sap.ui.getCore().byId("__input1-__component0---ListaTicket--CustomFilter-0").setEnabled(false);
+						fresult = this.getView().byId('getValue').setText("(" + Combo1 + " = " + input + ")");
+						break;
+								
+					case "DIVERSO DA":
+						sap.ui.getCore().byId("__input0-__component0---ListaTicket--CustomFilter-0").setPlaceholder("Diverso da");
+						sap.ui.getCore().byId("__input1-__component0---ListaTicket--CustomFilter-0").setEnabled(false);
+						fresult = this.getView().byId('getValue').setText("(" + Combo1 + " /= " + input + ")");
+						break;
+							
+					case "CONTIENE":
+						sap.ui.getCore().byId("__input0-__component0---ListaTicket--CustomFilter-0").setPlaceholder("Contiene");
+						sap.ui.getCore().byId("__input1-__component0---ListaTicket--CustomFilter-0").setEnabled(false);
+						fresult = this.getView().byId('getValue').setText("(" + input + " ∈ " + Combo1 + ")");
+						break;
+							
+					default:
+						sap.ui.getCore().byId("__input0-__component0---ListaTicket--CustomFilter-0").setPlaceholder("Inserisci valore");
+						sap.ui.getCore().byId("__input1-__component0---ListaTicket--CustomFilter-0").setEnabled(false);
+						break;
+				}
+		
+			}
 		},
 	
 		addRowAND : function(){
@@ -163,10 +167,9 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			this._data.CustomFilterCollection.push({"Nome" : ['ID', 'Titolo', 'Descrizione', 'Stato', 'Priorita', 'Owner', 'Categoria', 'Assigned_to'],
 						            				"Tipo": ["COMPRESO TRA", "UGUALE", "DIVERSO DA", "CONTIENE"]});
 		
-			this.jModel.refresh();	//which will add the new record
+			this.jModel.refresh();	//Al refresh del model viene visualizzato il nuovo record in tabella
 			fresult = this.getView().byId('getValue').getText();
-	 		fresult = this.getView().byId('getValue').setText(fresult + " AND ");
-	 		
+	 		fresult = this.getView().byId('getValue').setText(fresult + " AND " );
 		},
 		
 		addRowOR : function(){
@@ -175,10 +178,10 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			
 			this._data.CustomFilterCollection.push({"Nome" : ['ID', 'Titolo', 'Descrizione', 'Stato', 'Priorita', 'Owner', 'Categoria', 'Assigned_to'],
 						            				"Tipo": ["COMPRESO TRA", "UGUALE", "DIVERSO DA", "CONTIENE"]});
-		
-			this.jModel.refresh();	//which will add the new record
+			
+			this.jModel.refresh();	//Al refresh del model viene visualizzato il nuovo record in tabella
 			fresult = this.getView().byId('getValue').getText();
-	 		fresult = this.getView().byId('getValue').setText(fresult + " OR ");
+	 		fresult = this.getView().byId('getValue').setText(fresult + " OR " );
 	 		
 		},
 		
@@ -190,7 +193,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 				if (this._data.CustomFilterCollection[i] === deleteRecord )
 					{
 					//	pop this._data.CustomFilter[i] 
-						this._data.CustomFilterCollection.splice(i,1); //rimuove un record dalla tabella in tempo reale
+						this._data.CustomFilterCollection.splice(i , 1); //rimuove un record dalla tabella in tempo reale
 						this.jModel.refresh();
 						break;//esci dal loop
 					}
@@ -263,7 +266,22 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			sOrientation = "Vertical";
 			this.getView().byId("SplitContainer").setOrientation(sOrientation);
 			oSplitContainer.setShowSecondaryContent(!oSplitContainer.getShowSecondaryContent());
+			//sap.ui.getCore().byId("__component0---ListaTicket--SecondaryContent").setEnabled(false);
+			this.SetSecondaryContent();
+		},
+		
+		//Nasconde il secondary content di sinistra con i filtri preferiti, quando l'utente apre il menu di filtro personalizzato 
+		SetSecondaryContent: function () {
 			
+			var value = this.getView().byId("SplitContainer").getShowSecondaryContent();
+			if (value===false) {
+				
+				sap.ui.getCore().byId("__component0---ListaTicket--SecondaryContent").setEnabled(true);
+			} else {
+				
+				sap.ui.getCore().byId("__component0---ListaTicket--SecondaryContent").setEnabled(false);
+				this.getView().byId("mySplitContainer").setShowSecondaryContent(false);
+			}
 		},
 		
 		//Apertura confirm box e salvataggio del custom filter appena creato
@@ -605,34 +623,6 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			
 		},
 		
-		
-		//Funzioni implementate per la gestione dei custom filter lato frontend (non ancora utilizzate)
-		getCustomFilter: function(sPath, vValueLT, vValueGT) {
-			if (vValueLT !== "" && vValueGT !== "") {
-				return new sap.ui.model.Filter([
-					new sap.ui.model.Filter(sPath, sap.ui.model.FilterOperator.GT, vValueGT),
-					new sap.ui.model.Filter(sPath, sap.ui.model.FilterOperator.LT, vValueLT)
-				], true);
-			}
-			if (vValueLT !== "") {
-				return new sap.ui.model.Filter(sPath, sap.ui.model.FilterOperator.LT, vValueLT);
-			}
-			return new sap.ui.model.Filter(sPath, sap.ui.model.FilterOperator.GT, vValueGT);
-
-		},
-		
-		getCustomFilterString: function(bIsNumber, sPath, sOperator, vValueLT, vValueGT) {
-			switch (sOperator) {
-				case sap.ui.model.FilterOperator.LT:
-					return sPath + (bIsNumber ? ' (Less than ' : ' (Before ') + vValueLT + ')';
-				case sap.ui.model.FilterOperator.BT:
-					return sPath + ' (Between ' + vValueGT + ' and ' + vValueLT + ')';
-				case sap.ui.model.FilterOperator.GT:
-					return sPath + (bIsNumber ? ' (More than ' : ' (After ') + vValueGT + ')';
-		
-			}
-
-		},
 		
 		filterCountFormatter: function(sValue1, sValue2) {
 			return sValue1 !== "" || sValue2 !== "" ? 1 : 0;
