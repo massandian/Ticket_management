@@ -77,7 +77,17 @@
 									</contentLeft>
 								</Bar>
 								<ToolbarSpacer/>
-		                        <Text id="getValue"/>
+		                        <Text id="getValue0"/><Text id="conn0"/>
+		                		<Text id="getValue1"/><Text id="conn1"/>
+		                        <Text id="getValue2"/><Text id="conn2"/>
+		                        <Text id="getValue3"/><Text id="conn3"/>
+		                        <Text id="getValue4"/><Text id="conn4"/>
+		                        <Text id="getValue5"/><Text id="conn5"/>
+		                        <Text id="getValue6"/><Text id="conn6"/>
+		                        <Text id="getValue7"/><Text id="conn7"/>
+		                        <Text id="getValue8"/><Text id="conn8"/>
+		                        <Text id="getValue9"/><Text id="conn9"/>
+		                        <Text id="getValue10"/>
 		                    </IconTabFilter>
 		                    <IconTabSeparator icon="sap-icon://open-command-field" iconDensityAware="false"/>
 		                    <IconTabFilter icon="sap-icon://sort" iconColor="Neutral" text="Ordina" count="" design="Vertical" showAll="false" textDirection="Inherit" enabled="true" visible="true" iconDensityAware="false">
@@ -88,7 +98,7 @@
 		                                        <layout:content>
 		                                            <layout:BlockLayoutCell width="2" title="" titleAlignment="Begin" titleLevel="Auto">
 		                                                <layout:content>
-		                                                    <Table id="ordinaSet" items="{/OrdinaCollection}" width="auto" noDataText="No data" mode="None" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true">
+		                                                    <Table id="ordinaSet" items="{/OrdinatiCollection}" width="auto" noDataText="No data" mode="None" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true">
 		                                                        <infoToolbar>
 		                                                            <Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
 		                                                                <content>
@@ -114,7 +124,7 @@
 		                                                        <items>
 		                                                            <ColumnListItem type="Active">
 		                                                                <cells>
-		                                                                    <ObjectIdentifier title="" text="Campo" titleActive="false" visible="true"/>
+		                                                                    <ObjectIdentifier title="" text="{Nome}" titleActive="false" visible="true"/>
 		                                                                    <SegmentedButton selectedKey="SBYes">
 																				<items>
 																					<SegmentedButtonItem text="" icon="sap-icon://sort-ascending" key="SBYes" />
@@ -128,8 +138,8 @@
 		                                                </layout:content>
 		                                            </layout:BlockLayoutCell>
 		                                            <layout:BlockLayoutCell >
-		                                        		<Button text="Move right" press="" icon="sap-icon://open-command-field" type="Default" iconFirst="true" width="80%" enabled="true" visible="true" iconDensityAware="false"/>
-		                                            	<Button text="Move left" type="Default" icon="sap-icon://close-command-field" iconFirst="true" width="80%" enabled="true" visible="true" iconDensityAware="false"/>
+		                                        		<Button text="Move right" press="onMoveRight" icon="sap-icon://open-command-field" type="Default" iconFirst="true" width="80%" enabled="true" visible="true" iconDensityAware="false"/>
+		                                            	<Button text="Move left" press="onMoveLeft" type="Default" icon="sap-icon://close-command-field" iconFirst="true" width="80%" enabled="true" visible="true" iconDensityAware="false"/>
 		                                            </layout:BlockLayoutCell>
 		                                            <layout:BlockLayoutCell width="2" title="" titleAlignment="End" titleLevel="Auto">
 		                                                <layout:content>

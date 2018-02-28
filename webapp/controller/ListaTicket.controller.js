@@ -88,7 +88,8 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 										{Nome:"Assigned_to", ID:"7"},
 										{Nome:"Categoria", ID:"8"}
 						
-						]
+						],
+					OrdinatiCollection :[]
 					
 			};
 			
@@ -115,50 +116,50 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 		
 		//Funzione che edita in tempo reale l'espressione matematica del filtro custom definito
 		handleLiveChange: function() {
-			
-		fresult = sap.ui.getCore().byId("__component0---ListaTicket--getValue").getText();//Trovare il modo di far ciclare anche gli id di tutte le strutture dati del filtro custom
-
-			for (var i=0; i<=this._data.CustomFilterCollection.length ;i++) { //for che cicla finchè l'utente continua a definire nuove righe di filtro custom
 		
-				var Combo1 = sap.ui.getCore().byId("__component0---ListaTicket--combo1-__component0---ListaTicket--CustomFilter-0").getValue();
-				var Combo2 = sap.ui.getCore().byId("__component0---ListaTicket--combo2-__component0---ListaTicket--CustomFilter-0").getValue();
-				var input = sap.ui.getCore().byId("__input0-__component0---ListaTicket--CustomFilter-0").getValue();
-				var input2 = sap.ui.getCore().byId("__input1-__component0---ListaTicket--CustomFilter-0").getValue(); 
-				this.getView().byId('getValue').setText(Combo1);
-				 
+			
+			for (var i=0; i<=this._data.CustomFilterCollection.length ;i++) { //for che cicla finchè l'utente continua a definire nuove righe di filtro custom
+				
+				var Combo1 = sap.ui.getCore().byId("__component0---ListaTicket--combo1-__component0---ListaTicket--CustomFilter-" + i).getValue();
+				var Combo2 = sap.ui.getCore().byId("__component0---ListaTicket--combo2-__component0---ListaTicket--CustomFilter-" + i).getValue();
+				var input = sap.ui.getCore().byId("__input0-__component0---ListaTicket--CustomFilter-" + i).getValue();
+				var input2 = sap.ui.getCore().byId("__input1-__component0---ListaTicket--CustomFilter-" + i).getValue(); 
+				this.getView().byId('getValue'+i).setText(Combo1);
+				
 				switch (Combo2) {
 					//4 possibilità di definizione di un operatore di confronto
 					case "COMPRESO TRA":
-						sap.ui.getCore().byId("__input0-__component0---ListaTicket--CustomFilter-0").setPlaceholder("Da");
-						sap.ui.getCore().byId("__input1-__component0---ListaTicket--CustomFilter-0").setEnabled(true).setPlaceholder("A");
-						fresult = this.getView().byId('getValue').setText("[(" + Combo1 + " > " + input + ")" + " AND " + "(" + Combo1 + " < " + input2 + ")]");
+						sap.ui.getCore().byId("__input0-__component0---ListaTicket--CustomFilter-" + i).setPlaceholder("Da");
+						sap.ui.getCore().byId("__input1-__component0---ListaTicket--CustomFilter-" + i).setEnabled(true).setPlaceholder("A");
+						this.getView().byId('getValue' + i).setText("[(" + Combo1 + " > " + input + ")" + " AND " + "(" + Combo1 + " < " + input2 + ")]");
 						break;
 								
 					case "UGUALE":
-						sap.ui.getCore().byId("__input0-__component0---ListaTicket--CustomFilter-0").setPlaceholder("Uguale a");
-						sap.ui.getCore().byId("__input1-__component0---ListaTicket--CustomFilter-0").setEnabled(false);
-						fresult = this.getView().byId('getValue').setText("(" + Combo1 + " = " + input + ")");
+						sap.ui.getCore().byId("__input0-__component0---ListaTicket--CustomFilter-" + i).setPlaceholder("Uguale a");
+						sap.ui.getCore().byId("__input1-__component0---ListaTicket--CustomFilter-" + i).setEnabled(false);
+						this.getView().byId('getValue'+i).setText("(" + Combo1 + " = " + input + ")");
 						break;
 								
 					case "DIVERSO DA":
-						sap.ui.getCore().byId("__input0-__component0---ListaTicket--CustomFilter-0").setPlaceholder("Diverso da");
-						sap.ui.getCore().byId("__input1-__component0---ListaTicket--CustomFilter-0").setEnabled(false);
-						fresult = this.getView().byId('getValue').setText("(" + Combo1 + " /= " + input + ")");
+						sap.ui.getCore().byId("__input0-__component0---ListaTicket--CustomFilter-" + i).setPlaceholder("Diverso da");
+						sap.ui.getCore().byId("__input1-__component0---ListaTicket--CustomFilter-" + i).setEnabled(false);
+						this.getView().byId('getValue'+i).setText("(" + Combo1 + " /= " + input + ")");
 						break;
 							
 					case "CONTIENE":
-						sap.ui.getCore().byId("__input0-__component0---ListaTicket--CustomFilter-0").setPlaceholder("Contiene");
-						sap.ui.getCore().byId("__input1-__component0---ListaTicket--CustomFilter-0").setEnabled(false);
-						fresult = this.getView().byId('getValue').setText("(" + input + " ∈ " + Combo1 + ")");
+						sap.ui.getCore().byId("__input0-__component0---ListaTicket--CustomFilter-" + i).setPlaceholder("Contiene");
+						sap.ui.getCore().byId("__input1-__component0---ListaTicket--CustomFilter-" + i).setEnabled(false);
+						this.getView().byId('getValue'+i).setText("(" + input + " ∈ " + Combo1 + ")");
 						break;
 							
 					default:
-						sap.ui.getCore().byId("__input0-__component0---ListaTicket--CustomFilter-0").setPlaceholder("Inserisci valore");
-						sap.ui.getCore().byId("__input1-__component0---ListaTicket--CustomFilter-0").setEnabled(false);
+						sap.ui.getCore().byId("__input0-__component0---ListaTicket--CustomFilter-" + i).setPlaceholder("Inserisci valore");
+						sap.ui.getCore().byId("__input1-__component0---ListaTicket--CustomFilter-" + i).setEnabled(false);
 						break;
 				}
-		
+			
 			}
+			return fresult;
 		},
 	
 		addRowAND : function(){
@@ -167,9 +168,15 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			this._data.CustomFilterCollection.push({"Nome" : ['ID', 'Titolo', 'Descrizione', 'Stato', 'Priorita', 'Owner', 'Categoria', 'Assigned_to'],
 						            				"Tipo": ["COMPRESO TRA", "UGUALE", "DIVERSO DA", "CONTIENE"]});
 		
-			this.jModel.refresh();	//Al refresh del model viene visualizzato il nuovo record in tabella
-			fresult = this.getView().byId('getValue').getText();
-	 		fresult = this.getView().byId('getValue').setText(fresult + " AND " );
+			this.jModel.refresh();	//Al refresh del model  viene visualizzato il nuovo record in tabella
+			
+			for (var i=0; i<=this._data.CustomFilterCollection.length ;i++) {
+				
+				fresult = this.getView().byId('getValue'+i).getText();
+		 		fresult = this.getView().byId('getValue'+i).setText(fresult + " AND ");
+		 		break;
+			}
+			return fresult;
 		},
 		
 		addRowOR : function(){
@@ -180,27 +187,59 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 						            				"Tipo": ["COMPRESO TRA", "UGUALE", "DIVERSO DA", "CONTIENE"]});
 			
 			this.jModel.refresh();	//Al refresh del model viene visualizzato il nuovo record in tabella
-			fresult = this.getView().byId('getValue').getText();
-	 		fresult = this.getView().byId('getValue').setText(fresult + " OR " );
-	 		
+			
+			for (var i=0; i<=this._data.CustomFilterCollection.length ;i++) {
+			
+				fresult = this.getView().byId('getValue'+i).getText();
+		 		fresult = this.getView().byId('getValue'+i).setText(fresult + " OR ");
+		 		break;
+			}
+			return fresult;
 		},
 		
 		
 		deleteRow : function(oArg){
 			//Al press del tasto di cancellazione, elimina una riga per la dichiarazione di un filtro custom
 			var deleteRecord = oArg.getSource().getBindingContext().getObject();
-			for(var i=1 ; i<this._data.CustomFilterCollection.length ; i++){
-				if (this._data.CustomFilterCollection[i] === deleteRecord )
+			for(var i=0 ; i<this._data.CustomFilterCollection.length ; i++){  //inserire ciclo for decrementante
+				if (this._data.CustomFilterCollection[i] === deleteRecord && i>0 )
 					{
 					//	pop this._data.CustomFilter[i] 
 						this._data.CustomFilterCollection.splice(i , 1); //rimuove un record dalla tabella in tempo reale
 						this.jModel.refresh();
-						break;//esci dal loop
+						break; //esce dal loop
+						
+					} else if (this._data.CustomFilterCollection[i] === deleteRecord && i===0) {
+						
+						sap.ui.getCore().byId("__component0---ListaTicket--combo1-__component0---ListaTicket--CustomFilter-0").setValue();
+						sap.ui.getCore().byId("__component0---ListaTicket--combo2-__component0---ListaTicket--CustomFilter-0").setValue();
+						sap.ui.getCore().byId("__input0-__component0---ListaTicket--CustomFilter-0").setValue();
+						sap.ui.getCore().byId("__input1-__component0---ListaTicket--CustomFilter-0").setValue(); 
 					}
 			}
-			this.getView().byId('getValue').setText();
 		},
 		
+		onMoveRight: function () {
+		
+			
+		},
+		
+		onMoveLeft: function (oArg) {
+			
+			var deleteRecord = oArg.getSource().getBindingContext().getObject();
+		
+			for (var i=0; i<=this._data.OrdinaCollection.length; i++) {
+					
+				if (this._data.OrdinaCollection[i] === deleteRecord ) {
+						
+					sap.ui.getCore().byId("__item6-__clone" + i);
+					this._data.OrdinaCollection.splice(i, 1); //cancella riga dalla tabella di destra
+					this._data.OrdinatiCollection.push(); //aggiunge riga alla tablella di sinistra
+					this.jModel.refresh();
+				}
+				
+			}
+		},
 		
 		//Funzioni che applicano i temi belize o high contrast black 
 		ApplyThemeHcb: function () {
