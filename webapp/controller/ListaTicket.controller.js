@@ -13,9 +13,9 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 
 ], function(BaseController, MessageBox, Utilities, History, jQuery, JSONModel, DemoPersoService, Formatter, TablePersoController, Filter, Sorter, MessageToast) {
 	"use strict";
-	
+
 	var fresult;
-	
+
 	return BaseController.extend("com.sap.build.standard.ticketManagement.controller.ListaTicket", {
 		
 		onInit: function() {
@@ -116,7 +116,6 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 		
 		//Funzione che edita in tempo reale l'espressione matematica del filtro custom definito
 		handleLiveChange: function() {
-		
 			
 			for (var i=0; i<=this._data.CustomFilterCollection.length ;i++) { //for che cicla finchè l'utente continua a definire nuove righe di filtro custom
 				
@@ -157,65 +156,70 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 						sap.ui.getCore().byId("__input1-__component0---ListaTicket--CustomFilter-" + i).setEnabled(false);
 						break;
 				}
-			
 			}
-			return fresult;
 		},
 	
-		addRowAND : function(){
+		addRowAND : function(oArg){
 			//Inserisce una nuova riga all'interno dei filtri custom per stabilire una nuova regola
+			var andRecord = oArg.getSource().getBindingContext().getObject();
 			
 			this._data.CustomFilterCollection.push({"Nome" : ['ID', 'Titolo', 'Descrizione', 'Stato', 'Priorita', 'Owner', 'Categoria', 'Assigned_to'],
 						            				"Tipo": ["COMPRESO TRA", "UGUALE", "DIVERSO DA", "CONTIENE"]});
 		
 			this.jModel.refresh();	//Al refresh del model  viene visualizzato il nuovo record in tabella
 			
-			for (var i=0; i<=this._data.CustomFilterCollection.length ;i++) {
-				
-				fresult = this.getView().byId('getValue'+i).getText();
-		 		fresult = this.getView().byId('getValue'+i).setText(fresult + " AND ");
-		 		break;
-			}
-			return fresult;
+			for(var i=0 ; i<this._data.CustomFilterCollection.length ; i++){ // Viene inserito in append all'espressione matematica di filtro, il connettivo logico AND
+		 		if (this._data.CustomFilterCollection[i] === andRecord){
+					this.getView().byId('conn' + i).setText(" AND ");
+					break;
+		 		}
+		 	}
 		},
 		
-		addRowOR : function(){
+		addRowOR : function(oArg){
 			
 			//Inserisce una nuova riga all'interno dei filtri custom per stabilire una nuova regola
+			var orRecord = oArg.getSource().getBindingContext().getObject();
 			
 			this._data.CustomFilterCollection.push({"Nome" : ['ID', 'Titolo', 'Descrizione', 'Stato', 'Priorita', 'Owner', 'Categoria', 'Assigned_to'],
 						            				"Tipo": ["COMPRESO TRA", "UGUALE", "DIVERSO DA", "CONTIENE"]});
 			
 			this.jModel.refresh();	//Al refresh del model viene visualizzato il nuovo record in tabella
 			
-			for (var i=0; i<=this._data.CustomFilterCollection.length ;i++) {
-			
-				fresult = this.getView().byId('getValue'+i).getText();
-		 		fresult = this.getView().byId('getValue'+i).setText(fresult + " OR ");
-		 		break;
-			}
-			return fresult;
+		 	for(var i=0 ; i<this._data.CustomFilterCollection.length ; i++){ // Viene inserito in append all'espressione matematica di filtro, il connettivo logico OR
+		 		if (this._data.CustomFilterCollection[i] === orRecord){
+					this.getView().byId('conn' + i).setText(" OR ");
+					break;
+		 		}
+		 	}
 		},
 		
 		
 		deleteRow : function(oArg){
+			
 			//Al press del tasto di cancellazione, elimina una riga per la dichiarazione di un filtro custom
 			var deleteRecord = oArg.getSource().getBindingContext().getObject();
-			for(var i=0 ; i<this._data.CustomFilterCollection.length ; i++){  //inserire ciclo for decrementante
-				if (this._data.CustomFilterCollection[i] === deleteRecord && i>0 )
-					{
-					//	pop this._data.CustomFilter[i] 
-						this._data.CustomFilterCollection.splice(i , 1); //rimuove un record dalla tabella in tempo reale
+			
+			for(var i=0 ; i<this._data.CustomFilterCollection.length ; i++){ 
+				
+				if (this._data.CustomFilterCollection[i] === deleteRecord && i>0) {
+						
+						this._data.CustomFilterCollection.splice(i, 1); //rimuove il record selezionato dalla tabella in tempo reale
 						this.jModel.refresh();
+						this.getView().byId('getValue' + i).setText(); //cancella l'elemento eliminato dall'espressione matematica
+						this.getView().byId('conn' + i).setText();
 						break; //esce dal loop
-						
-					} else if (this._data.CustomFilterCollection[i] === deleteRecord && i===0) {
-						
+							
+				} else if (this._data.CustomFilterCollection[i] === deleteRecord && i===0) { //al press del pulsante delete sulla prima riga vengono azzerati i campi
+																							//npn viene effettuato lo splice della riga in questo caso
 						sap.ui.getCore().byId("__component0---ListaTicket--combo1-__component0---ListaTicket--CustomFilter-0").setValue();
 						sap.ui.getCore().byId("__component0---ListaTicket--combo2-__component0---ListaTicket--CustomFilter-0").setValue();
 						sap.ui.getCore().byId("__input0-__component0---ListaTicket--CustomFilter-0").setValue();
 						sap.ui.getCore().byId("__input1-__component0---ListaTicket--CustomFilter-0").setValue(); 
-					}
+		 				this.getView().byId('getValue0').setText();
+		 				this.getView().byId('conn' + i).setText();
+		 				break;
+				}
 			}
 		},
 		
@@ -227,12 +231,12 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 		onMoveLeft: function (oArg) {
 			
 			var deleteRecord = oArg.getSource().getBindingContext().getObject();
-		
 			for (var i=0; i<=this._data.OrdinaCollection.length; i++) {
 					
 				if (this._data.OrdinaCollection[i] === deleteRecord ) {
 						
-					sap.ui.getCore().byId("__item6-__clone" + i);
+					var selected = new Array();
+					selected = sap.ui.getCore().byId("__item6-__clone" + i);
 					this._data.OrdinaCollection.splice(i, 1); //cancella riga dalla tabella di destra
 					this._data.OrdinatiCollection.push(); //aggiunge riga alla tablella di sinistra
 					this.jModel.refresh();
