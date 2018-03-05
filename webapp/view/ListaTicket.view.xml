@@ -31,9 +31,16 @@
 		                <items>
 		                    <IconTabFilter icon="sap-icon://add-filter" iconColor="Neutral" text="Filtro personale" count="" design="Vertical" showAll="false" textDirection="Inherit" enabled="true" visible="true" iconDensityAware="false">
 		                        <content>
+		                        	<MessageStrip
+										text="E' possibile inserire al massimo 10 regole di filtro contemporaneamente"
+										type="Warning"
+										showIcon="true"
+										showCloseButton="true"
+										class="sapUiMediumMarginBottom">
+									</MessageStrip>
 		                        	<Bar>
 		                        		<contentLeft>
-		                        			<Title text="Regole di creazione filtro:" level="Auto"/>
+		                        			<Title text="Regole di creazione filtro: " level="Auto"/>
 		                        		</contentLeft>
 		                        	</Bar>
 		                            <Table items="{/CustomFilterCollection}" id="CustomFilter" width="100%" noDataText="No data" selectionMode="MultiToggle" >
@@ -98,7 +105,7 @@
 		                                        <layout:content>
 		                                            <layout:BlockLayoutCell width="2" title="" titleAlignment="Begin" titleLevel="Auto">
 		                                                <layout:content>
-		                                                    <Table id="ordinaSet" items="{/OrdinatiCollection}" width="auto" noDataText="No data" mode="None" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true">
+		                                                    <Table id="ordinatiCampi" class="target-table" items="{/OrdinatiCollection}" width="auto" noDataText="No data" mode="None" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true">
 		                                                        <infoToolbar>
 		                                                            <Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
 		                                                                <content>
@@ -122,7 +129,7 @@
 		                                                            </Column>
 		                                                        </columns>
 		                                                        <items>
-		                                                            <ColumnListItem type="Active">
+		                                                            <ColumnListItem type="Active" valign="center">
 		                                                                <cells>
 		                                                                    <ObjectIdentifier title="" text="{Nome}" titleActive="false" visible="true"/>
 		                                                                    <SegmentedButton selectedKey="SBYes">
@@ -138,12 +145,12 @@
 		                                                </layout:content>
 		                                            </layout:BlockLayoutCell>
 		                                            <layout:BlockLayoutCell >
-		                                        		<Button text="Move right" press="onMoveRight" icon="sap-icon://open-command-field" type="Default" iconFirst="true" width="80%" enabled="true" visible="true" iconDensityAware="false"/>
-		                                            	<Button text="Move left" press="onMoveLeft" type="Default" icon="sap-icon://close-command-field" iconFirst="true" width="80%" enabled="true" visible="true" iconDensityAware="false"/>
+		                                        		<Button text="Refresh" id="mvRight" press="onRefresh" icon="sap-icon://refresh" type="Default" iconFirst="true" width="80%" enabled="true" visible="true" iconDensityAware="false"/>
+		                                            	<Button text="Move left" id="mvLeft" press="onMoveLeft" type="Default" icon="sap-icon://close-command-field" iconFirst="true" width="80%" enabled="true" visible="true" iconDensityAware="false"/>
 		                                            </layout:BlockLayoutCell>
 		                                            <layout:BlockLayoutCell width="2" title="" titleAlignment="End" titleLevel="Auto">
 		                                                <layout:content>
-		                                                    <Table id="OrdinaCampi" items="{/OrdinaCollection}" width="auto" noDataText="No data" mode="MultiSelect" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true">
+		                                                    <Table id="OrdinaCampi" class="src-table" items="{/OrdinaCollection}" width="auto" noDataText="No data" mode="MultiSelect" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true">
 		                                                        <infoToolbar>
 		                                                            <Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
 		                                                                <content>
@@ -161,9 +168,9 @@
 		                                                            </Column>
 		                                                        </columns>
 		                                                        <items>
-		                                                            <ColumnListItem type="Active">
+		                                                            <ColumnListItem type="Active" valign="center">
 		                                                                <cells>
-		                                                                    <ObjectIdentifier title="" text="{Nome}" titleActive="false" visible="true"/>       
+		                                                                    <ObjectIdentifier title="" text="{Nome}" titleActive="false" visible="true" />       
 		                                                                </cells>
 		                                                            </ColumnListItem>
 		                                                        </items>

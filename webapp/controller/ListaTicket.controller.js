@@ -71,7 +71,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 				}
 			};
 			
-			//Dichiarato oggetto che contiene le regole per la definizione dei filtri custom
+			//Dichiarato oggetto che contiene le regole per la definizione dei filtri custom, e gli oggetti per l'ordinamento custom
 			this._data = {      
 					CustomFilterCollection : [
 						            	{"Nome" : ['ID', 'Titolo', 'Descrizione', 'Stato', 'Priorita', 'Owner', 'Categoria', 'Assigned_to'],
@@ -89,8 +89,8 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 										{Nome:"Categoria", ID:"8"}
 						
 						],
-					OrdinatiCollection :[]
-					
+					OrdinatiCollection :[
+						]
 			};
 			
 			this.jModel = new sap.ui.model.json.JSONModel();
@@ -103,6 +103,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 		
 			this.byId('CustomFilter').setModel(this.jModel);
 			this.byId('OrdinaCampi').setModel(this.jModel);
+			this.byId('ordinatiCampi').setModel(this.jModel);
 		
 		},
 		
@@ -110,6 +111,8 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 		
 			//data will be in this._data.Custom filter
 			console.log(this._data.CustomFilterCollection);
+			console.log(this._data.OrdinaCollection);
+			console.log(this._data.OrdinatiCollection);
 		
 		},
 		
@@ -123,7 +126,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 				var Combo2 = sap.ui.getCore().byId("__component0---ListaTicket--combo2-__component0---ListaTicket--CustomFilter-" + i).getValue();
 				var input = sap.ui.getCore().byId("__input0-__component0---ListaTicket--CustomFilter-" + i).getValue();
 				var input2 = sap.ui.getCore().byId("__input1-__component0---ListaTicket--CustomFilter-" + i).getValue(); 
-				this.getView().byId('getValue'+i).setText(Combo1);
+				this.getView().byId('getValue' + i).setText(Combo1);
 				
 				switch (Combo2) {
 					//4 possibilità di definizione di un operatore di confronto
@@ -136,19 +139,19 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 					case "UGUALE":
 						sap.ui.getCore().byId("__input0-__component0---ListaTicket--CustomFilter-" + i).setPlaceholder("Uguale a");
 						sap.ui.getCore().byId("__input1-__component0---ListaTicket--CustomFilter-" + i).setEnabled(false);
-						this.getView().byId('getValue'+i).setText("(" + Combo1 + " = " + input + ")");
+						this.getView().byId('getValue' + i).setText("(" + Combo1 + " = " + input + ")");
 						break;
 								
 					case "DIVERSO DA":
 						sap.ui.getCore().byId("__input0-__component0---ListaTicket--CustomFilter-" + i).setPlaceholder("Diverso da");
 						sap.ui.getCore().byId("__input1-__component0---ListaTicket--CustomFilter-" + i).setEnabled(false);
-						this.getView().byId('getValue'+i).setText("(" + Combo1 + " /= " + input + ")");
+						this.getView().byId('getValue' + i).setText("(" + Combo1 + " /= " + input + ")");
 						break;
 							
 					case "CONTIENE":
 						sap.ui.getCore().byId("__input0-__component0---ListaTicket--CustomFilter-" + i).setPlaceholder("Contiene");
 						sap.ui.getCore().byId("__input1-__component0---ListaTicket--CustomFilter-" + i).setEnabled(false);
-						this.getView().byId('getValue'+i).setText("(" + input + " ∈ " + Combo1 + ")");
+						this.getView().byId('getValue' + i).setText("(" + input + " ∈ " + Combo1 + ")");
 						break;
 							
 					default:
@@ -223,27 +226,49 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			}
 		},
 		
-		onMoveRight: function () {
-		
+		//Questa funzione, associata al tasto refresh, elimina tutti i campi che si erano selezionati per l'ordinamento custom
+		onRefresh: function () {
+			
+			for (var i=0; i<=this._data.OrdinatiCollection.length; i++) {
+				
+				this._data.OrdinatiCollection.splice(i, 10);
+				this.jModel.refresh();
+				break;
+			}
+			for (var j=0; j<=this._data.OrdinaCollection.length; j++) {
+				
+				sap.ui.getCore().byId("__component0---ListaTicket--OrdinaCampi-sa").setEnabled(true);
+				sap.ui.getCore().byId("__item6-__clone" + j + "-selectMulti").setSelected(false).setEnabled(true);
+				sap.ui.getCore().byId("__item6-__clone" + j).setSelected(false);
+				this.jModel.refresh();
+				MessageToast.show("Ordinamento azzerato");
+			}
 			
 		},
 		
-		onMoveLeft: function (oArg) {
+		//Questa funzione muove nella tabella di sinistra i campi selezionati dall'utente per la definizione dell'ordinamento custom
+		onMoveLeft: function () {
 			
-			var deleteRecord = oArg.getSource().getBindingContext().getObject();
+			
 			for (var i=0; i<=this._data.OrdinaCollection.length; i++) {
-					
-				if (this._data.OrdinaCollection[i] === deleteRecord ) {
-						
-					var selected = new Array();
-					selected = sap.ui.getCore().byId("__item6-__clone" + i);
-					this._data.OrdinaCollection.splice(i, 1); //cancella riga dalla tabella di destra
-					this._data.OrdinatiCollection.push(); //aggiunge riga alla tablella di sinistra
-					this.jModel.refresh();
-				}
+			
+				var checked = sap.ui.getCore().byId("__item6-__clone" + i + "-selectMulti").getSelected();
+				var campo = sap.ui.getCore().byId("__identifier1-__clone" + i).getText();
+				var selId = sap.ui.getCore().byId("__identifier1-__clone" + i).getId();
 				
+				while (checked === true) {
+
+						this._data.OrdinatiCollection.push({ID: selId, Nome: campo});
+						sap.ui.getCore().byId("__item6-__clone" + i + "-selectMulti").setEnabled(false);
+						sap.ui.getCore().byId("__item6-__clone" + i).setSelected(false);
+						sap.ui.getCore().byId("__component0---ListaTicket--OrdinaCampi-sa").setEnabled(false);
+						this.jModel.refresh();
+						break;
+				}
+				MessageToast.show("Definisci il tipo di ordinamento per i campi selezionati");
 			}
 		},
+		
 		
 		//Funzioni che applicano i temi belize o high contrast black 
 		ApplyThemeHcb: function () {
@@ -309,7 +334,6 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			sOrientation = "Vertical";
 			this.getView().byId("SplitContainer").setOrientation(sOrientation);
 			oSplitContainer.setShowSecondaryContent(!oSplitContainer.getShowSecondaryContent());
-			//sap.ui.getCore().byId("__component0---ListaTicket--SecondaryContent").setEnabled(false);
 			this.SetSecondaryContent();
 		},
 		
@@ -401,6 +425,8 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 						MessageBox.error(err.message);
 					}
 				});
+			
+			
 				
 		},
 		
