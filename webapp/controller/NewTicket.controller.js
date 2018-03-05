@@ -117,24 +117,14 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			MessageToast.show("Il formato file inserito non è supportato");
 		},
 	
+		// Upload del ticket appena inserito dall'utente	
 		onStartUpload : function(oEvent) {
+			
 			var oUploadCollection = this.getView().byId("UploadCollection");
-			var oTextArea = this.getView().byId("TextArea");
 			var cFiles = oUploadCollection.getItems().length;
-			var uploadInfo = "";
-
 			oUploadCollection.upload();
-
-			uploadInfo = cFiles + " file(s)";
-			if (oTextArea.getValue().length === 0) {
-				uploadInfo = uploadInfo + "without notes";
-			} else {
-				uploadInfo = uploadInfo + "with notes";
-			}
-
-			MessageToast.show("Method Upload is called (" + uploadInfo + ")");
-			sap.m.MessageBox.information("Uploaded " + uploadInfo);
-			oTextArea.setValue("");
+			
+		
 		},
 
 		onBeforeUploadStarts : function(oEvent) {
@@ -144,6 +134,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 				value : oEvent.getParameter("fileName")
 			});
 			oEvent.getParameters().addHeaderParameter(oCustomerHeaderSlug);
+			
 			setTimeout(function() {
 				MessageToast.show("Upload ticket in corso");
 			}, 4000);
@@ -164,6 +155,17 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 				// delay the success message in order to see other messages before
 				MessageToast.show("Upload ticket completato");
 			}.bind(this), 8000);
+			
+			var oBindingContext = oEvent.getSource().getBindingContext();
+
+			return new Promise(function(fnResolve) {
+
+				this.doNavigate("HomeUser", oBindingContext, fnResolve, "");
+			}.bind(this)).catch(function(err) {
+				if (err !== undefined) {
+					MessageBox.error(err.message);
+				}
+			});
 		},
 
 		onSelectChange : function(oEvent) {

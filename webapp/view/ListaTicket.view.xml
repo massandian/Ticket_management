@@ -252,8 +252,8 @@
 			<u:SplitContainer id="mySplitContainer" showSecondaryContent="false">
 				<u:secondaryContent>
 					<Panel expandable="true" expanded="true" headerText="Filtri preferiti" width="auto" class="sapUiResponsiveMargin" backgroundDesign="Solid">
-						 <List mode="SingleSelectLeft" width="auto" headerText="" footerText="" backgroundDesign="Solid" showSeparators="All"
-							growing="true" growingThreshold="30" growingScrollToLoad="true" items="{/FiltroCollection}">
+						 <List id="FiltriSalvati" mode="SingleSelectLeft" width="auto" headerText="" footerText="" backgroundDesign="Solid" showSeparators="All"
+							growing="true" growingThreshold="30" growingScrollToLoad="true" items="{/FiltriSalvatiCollection}">
 							<infoToolbar>
 								<Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
 									<content>

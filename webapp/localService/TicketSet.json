@@ -101,26 +101,6 @@
 		"Valutazione": ""
 	}],
 	
-	"FiltroCollection" : [{
-		"Campo": "ID",
-		"ID": "1",
-		"Nome": "filtro personale",
-		"Tipologia": "between",
-		"Estensione": "and",
-		"valore1": "1",
-		"valore2": "3",
-		"preferiti": true
-	}, {
-		"ID": "2",
-		"Nome": "filtro fantastico",
-		"Campo": "Categoria",
-		"Tipologia": "equal",
-		"Estensione": "",
-		"valore1": "hardware",
-		"valore2": "",
-		"preferiti": true
-	}],
-	
 	
 	"ChatCollection" : [{
 		"ID" : "1",

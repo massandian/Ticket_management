@@ -88,22 +88,30 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 										{Nome:"Assigned_to", ID:"7"},
 										{Nome:"Categoria", ID:"8"}
 						
-						],
+										],
 					OrdinatiCollection :[
-						]
+										],
+					FiltriSalvatiCollection: [{
+												"Campo": "ID",
+												"ID": "1",
+												"Nome": "filtro personale"
+											}, {
+												"ID": "2",
+												"Nome": "filtro figo",
+												"Campo": "Categoria"
+											}]
 			};
 			
 			this.jModel = new sap.ui.model.json.JSONModel();
 			this.jModel.setData(this._data);
-			
 		},
-		
 		
 		onBeforeRendering: function() {
 		
 			this.byId('CustomFilter').setModel(this.jModel);
 			this.byId('OrdinaCampi').setModel(this.jModel);
 			this.byId('ordinatiCampi').setModel(this.jModel);
+			this.byId('FiltriSalvati').setModel(this.jModel);
 		
 		},
 		
@@ -113,6 +121,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			console.log(this._data.CustomFilterCollection);
 			console.log(this._data.OrdinaCollection);
 			console.log(this._data.OrdinatiCollection);
+			console.log(this._data.FiltriSalvatiCollection);
 		
 		},
 		
@@ -203,26 +212,28 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			//Al press del tasto di cancellazione, elimina una riga per la dichiarazione di un filtro custom
 			var deleteRecord = oArg.getSource().getBindingContext().getObject();
 			
-			for(var i=0 ; i<this._data.CustomFilterCollection.length ; i++){ 
+			for (var i=0; i<=this._data.CustomFilterCollection.length; i++){ 
 				
 				if (this._data.CustomFilterCollection[i] === deleteRecord && i>0) {
 						
-						this._data.CustomFilterCollection.splice(i, 1); //rimuove il record selezionato dalla tabella in tempo reale
-						this.jModel.refresh();
-						this.getView().byId('getValue' + i).setText(); //cancella l'elemento eliminato dall'espressione matematica
-						this.getView().byId('conn' + i).setText();
-						break; //esce dal loop
-							
+					this._data.CustomFilterCollection.splice(i, 1); //rimuove il record selezionato dalla tabella in tempo reale
+					this.jModel.refresh();
+					this.getView().byId('getValue' + i).setText(); //cancella l'elemento eliminato dall'espressione matematica
+					this.getView().byId('conn' + i).setText();	//cancella il connettivo logico corrispondente
+					break; //esce dal loop
+					
 				} else if (this._data.CustomFilterCollection[i] === deleteRecord && i===0) { //al press del pulsante delete sulla prima riga vengono azzerati i campi
 																							//npn viene effettuato lo splice della riga in questo caso
-						sap.ui.getCore().byId("__component0---ListaTicket--combo1-__component0---ListaTicket--CustomFilter-0").setValue();
-						sap.ui.getCore().byId("__component0---ListaTicket--combo2-__component0---ListaTicket--CustomFilter-0").setValue();
-						sap.ui.getCore().byId("__input0-__component0---ListaTicket--CustomFilter-0").setValue();
-						sap.ui.getCore().byId("__input1-__component0---ListaTicket--CustomFilter-0").setValue(); 
-		 				this.getView().byId('getValue0').setText();
-		 				this.getView().byId('conn' + i).setText();
-		 				break;
+					sap.ui.getCore().byId("__component0---ListaTicket--combo1-__component0---ListaTicket--CustomFilter-0").setValue();
+					sap.ui.getCore().byId("__component0---ListaTicket--combo2-__component0---ListaTicket--CustomFilter-0").setValue();
+					sap.ui.getCore().byId("__input0-__component0---ListaTicket--CustomFilter-0").setValue();
+					sap.ui.getCore().byId("__input1-__component0---ListaTicket--CustomFilter-0").setValue(); 
+		 			this.jModel.refresh();
+		 			this.getView().byId('getValue0').setText();
+		 			this.getView().byId('conn' + i).setText();
+		 			break;
 				}
+		
 			}
 		},
 		
@@ -354,6 +365,14 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 		//Apertura confirm box e salvataggio del custom filter appena creato
 		_onButtonPress5: function(oEvent) {
 
+			for (var i=0; i<=this._data.FiltriSalvatiCollection.length; i++) {
+		
+				var NomeFiltro = sap.ui.getCore().byId("__input2").getValue();
+				this._data.FiltriSalvatiCollection.push({Nome: NomeFiltro, ID:i});
+				this.jModel.refresh();
+				break;
+			}
+
 			this.ToggleSecondaryContent();
 			oEvent = jQuery.extend(true, {}, oEvent);
 			return new Promise(function(fnResolve) {
@@ -425,8 +444,6 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 						MessageBox.error(err.message);
 					}
 				});
-			
-			
 				
 		},
 		
