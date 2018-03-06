@@ -14,8 +14,6 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 ], function(BaseController, MessageBox, Utilities, History, jQuery, JSONModel, DemoPersoService, Formatter, TablePersoController, Filter, Sorter, MessageToast) {
 	"use strict";
 
-	var fresult;
-
 	return BaseController.extend("com.sap.build.standard.ticketManagement.controller.ListaTicket", {
 		
 		onInit: function() {
@@ -211,16 +209,17 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			
 			//Al press del tasto di cancellazione, elimina una riga per la dichiarazione di un filtro custom
 			var deleteRecord = oArg.getSource().getBindingContext().getObject();
-			
+		
 			for (var i=0; i<=this._data.CustomFilterCollection.length; i++){ 
 				
 				if (this._data.CustomFilterCollection[i] === deleteRecord && i>0) {
-						
-					this._data.CustomFilterCollection.splice(i, 1); //rimuove il record selezionato dalla tabella in tempo reale
-					this.jModel.refresh();
+					
+				    this._data.CustomFilterCollection.splice(i,1);
 					this.getView().byId('getValue' + i).setText(); //cancella l'elemento eliminato dall'espressione matematica
 					this.getView().byId('conn' + i).setText();	//cancella il connettivo logico corrispondente
+					this.jModel.refresh();
 					break; //esce dal loop
+					
 					
 				} else if (this._data.CustomFilterCollection[i] === deleteRecord && i===0) { //al press del pulsante delete sulla prima riga vengono azzerati i campi
 																							//npn viene effettuato lo splice della riga in questo caso
@@ -366,11 +365,25 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 		_onButtonPress5: function(oEvent) {
 
 			for (var i=0; i<=this._data.FiltriSalvatiCollection.length; i++) {
-		
+				var preferito = sap.ui.getCore().byId("__box1").getSelected();
 				var NomeFiltro = sap.ui.getCore().byId("__input2").getValue();
-				this._data.FiltriSalvatiCollection.push({Nome: NomeFiltro, ID:i});
-				this.jModel.refresh();
-				break;
+				
+				if (preferito === true && NomeFiltro!=="") {
+	
+					this._data.FiltriSalvatiCollection.push({Nome: NomeFiltro, ID:i});
+					this.jModel.refresh();
+					break;
+				}
+				if (NomeFiltro=== "") {
+					var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
+					MessageBox.warning(
+						"Non hai specificato nessun nome per il tuo filtro custom",
+						{
+							styleClass: bCompact ? "sapUiSizeCompact" : ""
+						}
+					);
+				return;
+				}
 			}
 
 			this.ToggleSecondaryContent();
@@ -429,7 +442,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 						return false;
 					} else {
 						return new Promise(function(fnResolve) {
-							sap.m.MessageBox.confirm("Il filtro custom sarà salvato nel sistema", {
+							sap.m.MessageBox.confirm("Le regole custom definite saranno applicate alla lista ticket", {
 								title: "Filtro Custom",
 								actions: ["OK", "Annulla"],
 								onClose: function(sActionClicked) {
@@ -746,6 +759,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 
 		},
 	
+		//Contrassegna come verificati i ticket selezionati all'interno della lista
 		_onButtonPress16: function() {
 			return new Promise(function(fnResolve) {
 				sap.m.MessageBox.confirm("I ticket selezionati saranno contrassegnati come verificati", {
