@@ -14,6 +14,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 ], function(BaseController, MessageBox, Utilities, History, jQuery, JSONModel, DemoPersoService, Formatter, TablePersoController, Filter, Sorter, MessageToast) {
 	"use strict";
 
+
 	return BaseController.extend("com.sap.build.standard.ticketManagement.controller.ListaTicket", {
 		
 		onInit: function() {
@@ -276,6 +277,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 						break;
 				}
 				MessageToast.show("Definisci il tipo di ordinamento per i campi selezionati");
+				
 			}
 		},
 		
@@ -733,13 +735,13 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 				
 				sap.n =  {};
 				sap.n.oTicketId = oEvent.getSource().getBindingContext().getProperty("ID");
-				sap.n.oChatID = oEvent.getSource().getBindingContext().getProperty("ID");
+				sap.n.oChatId = oEvent.getSource().getBindingContext().getProperty("ID");
 				
 				//Press item of the ticket table
 				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			    oRouter.navTo("TicketDetail", {
 					oTicketId:oEvent.getSource().getBindingContext().getProperty("ID"),
-					oChatID:oEvent.getSource().getBindingContext().getProperty("ID")
+					oChatId:oEvent.getSource().getBindingContext().getProperty("ID")
 			    });
 		},
 		
@@ -759,22 +761,64 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 
 		},
 	
-		//Contrassegna come verificati i ticket selezionati all'interno della lista
+		//Contrassegna come verificati i ticket selezionati all'interno della lista (se ci sono ticket in stato "da verificare")
 		_onButtonPress16: function() {
-			return new Promise(function(fnResolve) {
-				sap.m.MessageBox.confirm("I ticket selezionati saranno contrassegnati come verificati", {
-					title: "Conferma",
-					actions: ["OK", "ANNULLA"],
-					onClose: function(sActionClicked) {
-						fnResolve(sActionClicked === "OK");
-					}
-				});
-			}).catch(function(err) {
-				if (err !== undefined) {
-					MessageBox.error(err);
+			
+			var data = this.getView().getModel().getData();
+			for (var i=0; i<=data.TicketCollection.length; i++) {
+				
+				var checked = sap.ui.getCore().byId("__item8-__clone1" + i + "-selectMulti").getSelected();
+				var status = sap.ui.getCore().byId("__status1-__clone1" + i).getText();
+				
+				if (checked===false && status==="da verificare") { 
+					
+						var cCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
+						MessageBox.warning(
+							"Non hai selezionato nessun ticket da contrassegnare come VERIFICATO !!",
+							{
+								styleClass: cCompact ? "sapUiSizeCompact" : ""
+							}
+						);
+						this.oModel.refresh();
+						
+				} else if (checked===false && status!=="da verificare") {
+					
+						var dCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
+						MessageBox.warning(
+							"Non hai selezionato nessun ticket da contrassegnare come VERIFICATO !!",
+							{
+								styleClass: dCompact ? "sapUiSizeCompact" : ""
+							}
+						);
+						this.oModel.refresh();
+					
+				} else if (checked===true && status==="da verificare") {   //ticket da verificare presenti e correttamente selezionati
+						
+						var aCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
+						MessageBox.success(
+							"I ticket selezionati saranno contrassegnati come verificati",
+							{
+								styleClass: aCompact ? "sapUiSizeCompact" : ""
+							}
+						);
+						
+						this.data.TicketCollection.splice(i, 1);
+						this.oModel.refresh();
+					
+				} else if (checked===true && status!=="da verificare") {	 //i ticket selezionati non sono in stato "da verificare"
+					
+						var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
+						MessageBox.warning(
+							"Hai selezionato ticket che sono ancora in fase di risoluzione!!",
+							{
+								styleClass: bCompact ? "sapUiSizeCompact" : ""
+							}
+						);
+						sap.ui.getCore().byId("__item8-__clone1" + i + "-selectMulti").setSelected(false);
+						sap.ui.getCore().byId("__item8-__clone1" + i).setSelected(false);
+						this.oModel.refresh();
 				}
-			});
-
+			}
 		}
 	});
 }, /* bExport= */ true);

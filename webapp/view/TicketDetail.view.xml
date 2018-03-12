@@ -18,7 +18,7 @@
 									<Carousel id="screenshot1" height="50%" width="50%" loop="true" showPageIndicator="false" pageIndicatorPlacement="Bottom" visible="true"
 										class="sapUiContentPadding centerScreenshot" pages="{/TicketCollection}">
 										<pages>
-											<Image src="{Screenshot}" alt="Screnshoot" height="auto" width="auto" densityAware="false"/>
+											<Image id="screen1" src="{Screenshot}" alt="Screnshoot" height="auto" width="auto" densityAware="false"/>
 										</pages>
 									</Carousel>
 									<Bar design="footer">
@@ -53,7 +53,7 @@
 									<Carousel id="screenshot" height="50%" width="50%" loop="true" showPageIndicator="false" pageIndicatorPlacement="Bottom" visible="true"
 										class="sapUiContentPadding centerScreenshot" pages="{/TicketCollection}">
 										<pages>
-											<Image src="{Screenshot}" height="auto" width="auto" densityAware="false"/>
+											<Image id="screen2" src="{Screenshot}" height="auto" width="auto" densityAware="false"/>
 										</pages>
 									</Carousel>
 									<Bar design="footer">

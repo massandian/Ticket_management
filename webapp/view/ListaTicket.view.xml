@@ -99,11 +99,18 @@
 		                    <IconTabSeparator icon="sap-icon://open-command-field" iconDensityAware="false"/>
 		                    <IconTabFilter icon="sap-icon://sort" iconColor="Neutral" text="Ordina" count="" design="Vertical" showAll="false" textDirection="Inherit" enabled="true" visible="true" iconDensityAware="false">
 		                        <content>
+		                        	<MessageStrip
+										text="Selezionare i campi che si desiderano ordinare, e poi cliccare su Move left"
+										type="Information"
+										showIcon="true"
+										showCloseButton="true"
+										class="sapUiMediumMarginBottom">
+									</MessageStrip>
 		                            <layout:BlockLayout background="Default">
 		                                <layout:content>
 		                                    <layout:BlockLayoutRow scrollable="false">
 		                                        <layout:content>
-		                                            <layout:BlockLayoutCell width="2" title="" titleAlignment="Begin" titleLevel="Auto">
+		                                            <layout:BlockLayoutCell width="2">
 		                                                <layout:content>
 		                                                    <Table id="ordinatiCampi" class="target-table" items="{/OrdinatiCollection}" width="auto" noDataText="No data" mode="None" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true">
 		                                                        <infoToolbar>
@@ -144,7 +151,7 @@
 		                                                    </Table>
 		                                                </layout:content>
 		                                            </layout:BlockLayoutCell>
-		                                            <layout:BlockLayoutCell >
+		                                            <layout:BlockLayoutCell>
 		                                        		<Button text="Refresh" id="mvRight" press="onRefresh" icon="sap-icon://refresh" type="Default" iconFirst="true" width="80%" enabled="true" visible="true" iconDensityAware="false"/>
 		                                            	<Button text="Move left" id="mvLeft" press="onMoveLeft" type="Default" icon="sap-icon://close-command-field" iconFirst="true" width="80%" enabled="true" visible="true" iconDensityAware="false"/>
 		                                            </layout:BlockLayoutCell>
@@ -185,9 +192,16 @@
 		                    </IconTabFilter>
 		                    <IconTabSeparator icon="sap-icon://open-command-field" iconDensityAware="false"/>
 		        			<IconTabFilter icon="sap-icon://table-chart" iconColor="Neutral" text="Personalizza" count="" design="Vertical" showAll="false" textDirection="Inherit" enabled="true" visible="true" iconDensityAware="false">
-		                		<CheckBox text="Raggruppa" select="onTableGrouping" width="auto"/>
+		                		<MessageStrip
+										text="Cliccando su Edita tabella, si possono selezionare i campi da visualizzare ed in che ordine visualizzarli"
+										type="Information"
+										showIcon="true"
+										showCloseButton="true"
+										class="sapUiMediumMarginBottom">
+								</MessageStrip>
 		                		<ToolbarSpacer/>
-								<Button icon="sap-icon://table-chart" press="onPersoButtonPressed" text="Edita tabella" >
+		                		<CheckBox text="Raggruppa" select="onTableGrouping" width="130px"/>
+								<Button icon="sap-icon://table-chart" press="onPersoButtonPressed" text="Edita tabella" width="auto">
 								<layoutData>
 									<OverflowToolbarLayoutData priority="NeverOverflow" />
 								</layoutData>
