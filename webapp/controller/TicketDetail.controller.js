@@ -24,6 +24,20 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			var oModel = new JSONModel(sPath);
 			this.getView().setModel(oModel);
 			
+			// set the possible screen sizes
+			var oCarouselContainer = {
+				screenSizes : [
+					"350px",
+					"420px",
+					"555px",
+					"743px",
+					"908px"
+				]
+			};
+			var oScreenSizesModel = new JSONModel(oCarouselContainer);
+			this.getView().setModel(oScreenSizesModel, "ScreenSizesModel");
+
+			
 		},
 		
 		
@@ -102,6 +116,32 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
     	    }
 		},
 		
+		
+		//slider per lo zoom degli screenshot nella pagina di dettaglio
+		onSliderMoved: function (oEvent) {
+			var origingalHeight = 650;
+
+			var screenSizesJSON = this.getView().getModel("ScreenSizesModel").getData();
+			var iValue = oEvent.getParameter("value");
+			var screenWidth = screenSizesJSON.screenSizes[Number(iValue) - 1];
+			var oCarouselContainer = this.getView().byId("screenshot1");
+			oCarouselContainer.setWidth(screenWidth);
+			var screenHeight = origingalHeight * parseFloat(screenWidth) / 1000;
+			oCarouselContainer.setHeight(screenHeight + 'px');
+		},
+		
+		onSliderMoved2: function (oEvent) {
+			var origingalHeight = 650;
+
+			var screenSizesJSON = this.getView().getModel("ScreenSizesModel").getData();
+			var iValue = oEvent.getParameter("value");
+			var screenWidth = screenSizesJSON.screenSizes[Number(iValue) - 1];
+			var oCarouselContainer = this.getView().byId("screenshot");
+			oCarouselContainer.setWidth(screenWidth);
+			var screenHeight = origingalHeight * parseFloat(screenWidth) / 1000;
+			oCarouselContainer.setHeight(screenHeight + 'px');
+		},
+		
 		onFilterTicketScreenshot: function () {
 			
 			//Filtra il ticket selezionato nella tabella e produce4 i risultati nella pagina di dettaglio (screenshot pagina dettaglio)
@@ -121,7 +161,8 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 				var listDetailTicket = this.getView().byId("__component0---TicketDetail--screenshot1");
 				var oFilterByTicketId = new sap.ui.model.Filter("ID", sap.ui.model.FilterOperator.EQ, oTicketId);
 			    listDetailTicket.getBinding("pages").filter(oFilterByTicketId);
-    	    }
+
+			}
 		},
 	
 		

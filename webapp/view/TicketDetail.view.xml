@@ -14,11 +14,19 @@
 										<contentMiddle>
 											<Title text="Screenshot" level="H1"/>
 										</contentMiddle>
+										<contentLeft>
+												<Slider value="4"
+													liveChange="onSliderMoved"
+													width="320px"
+													step="1"
+													min="1"
+													max="5"/>	
+										</contentLeft>
 									</Bar>
 									<Carousel id="screenshot1" height="50%" width="50%" loop="true" showPageIndicator="false" pageIndicatorPlacement="Bottom" visible="true"
 										class="sapUiContentPadding centerScreenshot" pages="{/TicketCollection}">
 										<pages>
-											<Image id="screen1" src="{Screenshot}" alt="Screnshoot" height="auto" width="auto" densityAware="false"/>
+											<Image src="{Screenshot}" alt="Screnshoot" height="auto" width="auto" densityAware="false"/>
 										</pages>
 									</Carousel>
 									<Bar design="footer">
@@ -49,6 +57,14 @@
 										<contentMiddle>
 											<Title text="Screenshot" level="H1"/>
 										</contentMiddle>
+										<contentLeft>
+												<Slider value="4"
+													liveChange="onSliderMoved2"
+													width="320px"
+													step="1"
+													min="1"
+													max="5"/>	
+										</contentLeft>
 									</Bar>
 									<Carousel id="screenshot" height="50%" width="50%" loop="true" showPageIndicator="false" pageIndicatorPlacement="Bottom" visible="true"
 										class="sapUiContentPadding centerScreenshot" pages="{/TicketCollection}">
@@ -61,7 +77,6 @@
 											<Title text="Informazioni ticket" level="H1"/>
 										</contentMiddle>
 									</Bar>
-									<Panel expandable="true" expanded="true" headerText="Dettaglio" width="auto" class="sapUiResponsiveMargin">
 										<List id="listDetailTicket" items="{/TicketCollection}" width="auto" growing="true" growingThreshold="20" growingScrollToLoad="false" backgroundDesign="Solid">
 											<items>
 												<CustomListItem> 
@@ -141,7 +156,6 @@
 												</CustomListItem>
 											</items>	
 										</List>
-									</Panel>
 								</content>
 							</ScrollContainer>
 						</content>
